@@ -1,6 +1,8 @@
 {
   "name": "drop",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular",
   "id": "0e98877c"
 }
