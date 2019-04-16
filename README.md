@@ -15,7 +15,7 @@
 6. `cd drop`
 7. `npm install`
 8. `ionic cordova prepare`
-9. `ionic serve --devapp`
+9. `ionic serve --devapp` on Win or `ionic serve --c` on Mac
 10. `ionic login`
     1. E-Mail: `herzogdergrosse@gmail.com`
     2. PW: `#IonicPW#`
