@@ -11,7 +11,7 @@ import { NavController, LoadingController } from '@ionic/angular';
 export class TodoDetailsPage implements OnInit {
 
   todo: Todo = {
-    task: 'test',
+    task: 'Test123',
     createdAt: new Date().getTime(),
     priority: 2
   };
@@ -29,7 +29,7 @@ export class TodoDetailsPage implements OnInit {
 
   async loadTodo() {
     const loading = await this.loadingController.create({
-      message: 'Loading Todo..'
+      message: 'Laden der Todos ...'
     });
     await loading.present();
 
@@ -42,7 +42,7 @@ export class TodoDetailsPage implements OnInit {
   async saveTodo() {
 
     const loading = await this.loadingController.create({
-      message: 'Saving Todo..'
+      message: 'Speichern des Todos ...'
     });
     await loading.present();
 
