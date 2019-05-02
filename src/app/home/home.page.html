@@ -1,41 +1,14 @@
 <ion-header>
   <ion-toolbar color="primary">
     <ion-title>
-        Meine Drops
+      Home
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
 
-  <ion-list>
-
-    <ng-container *ngIf="!todos || todos.length == 0">
-      <div *ngFor="let n of [0,1,2]" padding>
-        <ion-skeleton-text></ion-skeleton-text>
-        <p>
-          <ion-skeleton-text class="fake-skeleton"></ion-skeleton-text>
-        </p>
-      </div>
-    </ng-container>
-
-    <ion-item-sliding *ngFor="let item of todos">
-      <ion-item lines="inset" button [routerLink]="['/details', item.id]">
-        <ion-label>
-          {{ item.task }}
-        </ion-label>
-        <ion-note slot="end" color="primary">{{ item.priority }}</ion-note>
-      </ion-item>
-
-      <ion-item-options side="end">
-        <ion-item-option (click)="remove(item)" color="danger">
-          Delete
-          <ion-icon name="trash" slot="end"></ion-icon>
-        </ion-item-option>
-      </ion-item-options>
-    </ion-item-sliding>
-
-  </ion-list>
+  Streetmap Comming Soon
 
   <ion-fab id="addButton" vertical="bottom" horizontal="start" slot="fixed">
     <ion-fab-button routerLink="/details" routerDirection="forward">
@@ -44,9 +17,14 @@
   </ion-fab>
 
     <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-        <ion-fab-button routerLink="/details" routerDirection="forward">
+        <ion-fab-button routerLink="/account" routerDirection="forward">
             <ion-icon name="person"></ion-icon>
         </ion-fab-button>
     </ion-fab>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button routerLink="/account" routerDirection="forward">
+      <ion-icon name="person"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 
 </ion-content>
