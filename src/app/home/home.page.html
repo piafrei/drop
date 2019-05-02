@@ -23,7 +23,6 @@
       <ion-item lines="inset" button [routerLink]="['/details', item.id]">
         <ion-label>
           {{ item.task }}
-          <p>{{ item.createdAt | date:'short' }}</p>
         </ion-label>
         <ion-note slot="end" color="primary">{{ item.priority }}</ion-note>
       </ion-item>
