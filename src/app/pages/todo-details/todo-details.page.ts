@@ -40,7 +40,7 @@ export class TodoDetailsPage implements OnInit {
     });
   }
 
-  async saveTodo() {
+  async saveDrop() {
 
     const loading = await this.loadingController.create({
       message: 'Speichern des Drops ...'

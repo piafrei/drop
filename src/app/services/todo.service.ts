@@ -28,7 +28,9 @@ export class TodoService {
           return actions.map(a => {
             const data = a.payload.doc.data();
             const id = a.payload.doc.id;
-            return { id, ...data };
+             if ((new Date().getDate() - a.payload.doc.data().createdAt)  < 518400000) {
+                return { id, ...data };
+             }
           });
         })
     );
