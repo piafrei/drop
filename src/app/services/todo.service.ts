@@ -5,8 +5,6 @@ import { map } from 'rxjs/operators';
 
 export interface Drop {
   id?: string;
-  task: string;
-  priority: number;
   createdAt: number;
   description: string;
   coordinate: number;
@@ -20,12 +18,12 @@ export interface Drop {
 export class TodoService {
   private dropsCollection: AngularFirestoreCollection<Drop>;
 
-  private todos: Observable<Drop[]>;
+  private drops: Observable<Drop[]>;
 
   constructor(db: AngularFirestore) {
-    this.dropsCollection = db.collection<Drop>('todos');
+    this.dropsCollection = db.collection<Drop>('drops');
 
-    this.todos = this.dropsCollection.snapshotChanges().pipe(
+    this.drops = this.dropsCollection.snapshotChanges().pipe(
         map(actions => {
           return actions.map(a => {
             const data = a.payload.doc.data();
@@ -37,19 +35,19 @@ export class TodoService {
   }
 
   getDrops() {
-    return this.todos;
+    return this.drops;
   }
 
   getDrop(id) {
     return this.dropsCollection.doc<Drop>(id).valueChanges();
   }
 
-  updateDrop(todo: Drop, id: string) {
-    return this.dropsCollection.doc(id).update(todo);
+  updateDrop(drop: Drop, id: string) {
+    return this.dropsCollection.doc(id).update(drop);
   }
 
-  addDrop(todo: Drop) {
-    return this.dropsCollection.add(todo);
+  addDrop(drop: Drop) {
+    return this.dropsCollection.add(drop);
   }
 
   removeDrop(id) {

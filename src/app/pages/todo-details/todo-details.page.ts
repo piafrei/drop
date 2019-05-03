@@ -11,12 +11,10 @@ import { NavController, LoadingController } from '@ionic/angular';
 export class TodoDetailsPage implements OnInit {
 
   todo: Drop = {
-    task: 'Test123',
     createdAt: new Date().getTime(),
-    priority: 2,
-    description: 'halloTest',
-    coordinate: 22234,
-    score: 250
+    description: '',
+    coordinate: 0,
+    score: 0
   };
 
   todoId = null;
