@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Drop, TodoService } from '../services/todo.service';
 
+
 @Component({
   selector: 'app-account',
   templateUrl: './account.page.html',
@@ -18,7 +19,6 @@ export class AccountPage implements OnInit {
   }
 
   remove(item) {
-        this.todoService.removeDrop(item.id);
+      this.todoService.removeDrop(item.id);
   }
-
 }

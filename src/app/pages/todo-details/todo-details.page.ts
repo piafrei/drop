@@ -2,6 +2,7 @@ import { Drop, TodoService } from '../../services/todo.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NavController, LoadingController } from '@ionic/angular';
+import {Device} from '@ionic-native/device/ngx';
 
 @Component({
   selector: 'app-todo-details',
@@ -14,12 +15,13 @@ export class TodoDetailsPage implements OnInit {
     createdAt: new Date().getTime(),
     description: '',
     coordinate: 0,
-    score: 0
+    score: 0,
+    deviceID: this.getInfo()
   };
 
   todoId = null;
 
-  constructor(private route: ActivatedRoute, private nav: NavController, private todoService: TodoService, private loadingController: LoadingController) { }
+  constructor(private route: ActivatedRoute, private nav: NavController, private todoService: TodoService, private loadingController: LoadingController, private device: Device) { }
 
   ngOnInit() {
     this.todoId = this.route.snapshot.params['id'];
@@ -27,6 +29,10 @@ export class TodoDetailsPage implements OnInit {
       this.loadDrop();
     }
   }
+
+  getInfo() {
+        return this.device.uuid;
+    }
 
   async loadDrop() {
     const loading = await this.loadingController.create({
@@ -59,5 +65,4 @@ export class TodoDetailsPage implements OnInit {
       });
     }
   }
-
 }

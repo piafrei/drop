@@ -9,6 +9,7 @@ export interface Drop {
   description: string;
   coordinate: number;
   score: number;
+  deviceID: string;
 }
 
 @Injectable({
