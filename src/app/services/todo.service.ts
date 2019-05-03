@@ -3,11 +3,14 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/fire
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-export interface Todo {
+export interface Drop {
   id?: string;
   task: string;
   priority: number;
   createdAt: number;
+  description: string;
+  coordinate: number;
+  score: number;
 }
 
 @Injectable({
@@ -15,14 +18,14 @@ export interface Todo {
 })
 
 export class TodoService {
-  private todosCollection: AngularFirestoreCollection<Todo>;
+  private dropsCollection: AngularFirestoreCollection<Drop>;
 
-  private todos: Observable<Todo[]>;
+  private todos: Observable<Drop[]>;
 
   constructor(db: AngularFirestore) {
-    this.todosCollection = db.collection<Todo>('todos');
+    this.dropsCollection = db.collection<Drop>('todos');
 
-    this.todos = this.todosCollection.snapshotChanges().pipe(
+    this.todos = this.dropsCollection.snapshotChanges().pipe(
         map(actions => {
           return actions.map(a => {
             const data = a.payload.doc.data();
@@ -33,23 +36,23 @@ export class TodoService {
     );
   }
 
-  getTodos() {
+  getDrops() {
     return this.todos;
   }
 
-  getTodo(id) {
-    return this.todosCollection.doc<Todo>(id).valueChanges();
+  getDrop(id) {
+    return this.dropsCollection.doc<Drop>(id).valueChanges();
   }
 
-  updateTodo(todo: Todo, id: string) {
-    return this.todosCollection.doc(id).update(todo);
+  updateDrop(todo: Drop, id: string) {
+    return this.dropsCollection.doc(id).update(todo);
   }
 
-  addTodo(todo: Todo) {
-    return this.todosCollection.add(todo);
+  addDrop(todo: Drop) {
+    return this.dropsCollection.add(todo);
   }
 
-  removeTodo(id) {
-    return this.todosCollection.doc(id).delete();
+  removeDrop(id) {
+    return this.dropsCollection.doc(id).delete();
   }
 }

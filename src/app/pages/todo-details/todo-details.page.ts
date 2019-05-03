@@ -1,4 +1,4 @@
-import { Todo, TodoService } from '../../services/todo.service';
+import { Drop, TodoService } from '../../services/todo.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NavController, LoadingController } from '@ionic/angular';
@@ -10,10 +10,13 @@ import { NavController, LoadingController } from '@ionic/angular';
 })
 export class TodoDetailsPage implements OnInit {
 
-  todo: Todo = {
+  todo: Drop = {
     task: 'Test123',
     createdAt: new Date().getTime(),
-    priority: 2
+    priority: 2,
+    description: 'halloTest',
+    coordinate: 22234,
+    score: 250
   };
 
   todoId = null;
@@ -23,17 +26,17 @@ export class TodoDetailsPage implements OnInit {
   ngOnInit() {
     this.todoId = this.route.snapshot.params['id'];
     if (this.todoId)  {
-      this.loadTodo();
+      this.loadDrop();
     }
   }
 
-  async loadTodo() {
+  async loadDrop() {
     const loading = await this.loadingController.create({
-      message: 'Laden der Todos ...'
+      message: 'Laden des Drops ...'
     });
     await loading.present();
 
-    this.todoService.getTodo(this.todoId).subscribe(res => {
+    this.todoService.getDrop(this.todoId).subscribe(res => {
       loading.dismiss();
       this.todo = res;
     });
@@ -47,12 +50,12 @@ export class TodoDetailsPage implements OnInit {
     await loading.present();
 
     if (this.todoId) {
-      this.todoService.updateTodo(this.todo, this.todoId).then(() => {
+      this.todoService.updateDrop(this.todo, this.todoId).then(() => {
         loading.dismiss();
         this.nav.back();
       });
     } else {
-      this.todoService.addTodo(this.todo).then(() => {
+      this.todoService.addDrop(this.todo).then(() => {
         loading.dismiss();
         this.nav.back();
       });

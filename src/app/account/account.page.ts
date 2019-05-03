@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Todo, TodoService } from '../services/todo.service';
+import { Drop, TodoService } from '../services/todo.service';
 
 @Component({
   selector: 'app-account',
@@ -7,18 +7,18 @@ import { Todo, TodoService } from '../services/todo.service';
   styleUrls: ['./account.page.scss'],
 })
 export class AccountPage implements OnInit {
-  todos: Todo[];
+  todos: Drop[];
 
   constructor(private todoService: TodoService) { }
 
   ngOnInit() {
-      this.todoService.getTodos().subscribe(res => {
+      this.todoService.getDrops().subscribe(res => {
           this.todos = res;
       });
   }
 
   remove(item) {
-        this.todoService.removeTodo(item.id);
+        this.todoService.removeDrop(item.id);
   }
 
 }
