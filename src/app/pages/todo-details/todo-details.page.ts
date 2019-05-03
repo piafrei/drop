@@ -42,7 +42,7 @@ export class TodoDetailsPage implements OnInit {
   async saveTodo() {
 
     const loading = await this.loadingController.create({
-      message: 'Speichern des Todos ...'
+      message: 'Speichern des Drops ...'
     });
     await loading.present();
 
