@@ -7,8 +7,9 @@
 </ion-header>
 
 <ion-content>
-
   Streetmap Comming Soon
+
+  <app-map *ngIf="coordinates$ | async as coords" [coords]="coords"> </app-map>
 
   <ion-fab id="addButton" vertical="bottom" horizontal="start" slot="fixed">
     <ion-fab-button routerLink="/details" routerDirection="forward">
@@ -16,15 +17,16 @@
     </ion-fab-button>
   </ion-fab>
 
-    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-        <ion-fab-button routerLink="/account" routerDirection="forward">
-            <ion-icon name="person"></ion-icon>
-        </ion-fab-button>
-    </ion-fab>
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button routerLink="/account" routerDirection="forward">
       <ion-icon name="person"></ion-icon>
     </ion-fab-button>
   </ion-fab>
-
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button routerLink="/account" routerDirection="forward">
+      <ion-icon name="person"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA9J8cisDajD-a-iafwmvr4SLmEfw34hBg&callback=initMap"></script>
