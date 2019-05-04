@@ -8,14 +8,14 @@ import { Drop, TodoService } from '../services/todo.service';
   styleUrls: ['./account.page.scss'],
 })
 export class AccountPage implements OnInit {
-  todos: Drop[];
+  allDrops: Drop[];
   myDrops: Drop[];
 
     constructor(private todoService: TodoService) { }
 
   ngOnInit() {
       this.todoService.getDrops().subscribe(res => {
-          this.todos = res;
+          this.allDrops = res;
       });
 
       this.todoService.getMyDrops().subscribe(res => {

@@ -25,16 +25,17 @@ export class TodoService {
   private myDrops: Observable<Drop[]>;
 
     constructor(db: AngularFirestore, private device: Device) {
-    this.dropsCollection = db.collection<Drop>('drops');
+    const currentTime = new Date().getTime();
+    const validPastTimeMillis = 540000000;
+    const validMinTime = currentTime - validPastTimeMillis;
 
+    this.dropsCollection = db.collection('drops', ref => ref.where('createdAt', '>=', validMinTime));
     this.drops = this.dropsCollection.snapshotChanges().pipe(
         map(actions => {
           return actions.map(a => {
             const data = a.payload.doc.data();
             const id = a.payload.doc.id;
-             if ((new Date().getDate() - data.createdAt) < 518400000) {
-                return { id, ...data };
-             }
+            return { id, ...data };
           });
         })
     );
