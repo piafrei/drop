@@ -9,12 +9,17 @@ import { Drop, TodoService } from '../services/todo.service';
 })
 export class AccountPage implements OnInit {
   todos: Drop[];
+  myDrops: Drop[];
 
-  constructor(private todoService: TodoService) { }
+    constructor(private todoService: TodoService) { }
 
   ngOnInit() {
       this.todoService.getDrops().subscribe(res => {
           this.todos = res;
+      });
+
+      this.todoService.getMyDrops().subscribe(res => {
+          this.myDrops = res;
       });
   }
 

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import {Device} from '@ionic-native/device/ngx';
 
 export interface Drop {
   id?: string;
@@ -18,10 +19,12 @@ export interface Drop {
 
 export class TodoService {
   private dropsCollection: AngularFirestoreCollection<Drop>;
+  private myDropsCollection: AngularFirestoreCollection<Drop>;
 
   private drops: Observable<Drop[]>;
+  private myDrops: Observable<Drop[]>;
 
-  constructor(db: AngularFirestore) {
+    constructor(db: AngularFirestore, private device: Device) {
     this.dropsCollection = db.collection<Drop>('drops');
 
     this.drops = this.dropsCollection.snapshotChanges().pipe(
@@ -29,16 +32,31 @@ export class TodoService {
           return actions.map(a => {
             const data = a.payload.doc.data();
             const id = a.payload.doc.id;
-             if ((new Date().getDate() - a.payload.doc.data().createdAt)  < 518400000) {
+             if ((new Date().getDate() - data.createdAt) < 518400000) {
                 return { id, ...data };
              }
           });
         })
     );
-  }
+
+    this.myDropsCollection = db.collection('drops', ref => ref.where('deviceID', '==', this.device.uuid));
+    this.myDrops = this.myDropsCollection.snapshotChanges().pipe(
+        map(actions => {
+            return actions.map(a => {
+                const data = a.payload.doc.data();
+                const id = a.payload.doc.id;
+                return { id, ...data };
+            });
+        })
+    );
+    }
 
   getDrops() {
     return this.drops;
+  }
+
+  getMyDrops() {
+      return this.myDrops;
   }
 
   getDrop(id) {

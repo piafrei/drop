@@ -13,7 +13,6 @@ import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { Device } from '@ionic-native/device/ngx';
-import {InformationService} from './services/device/information.service';
 
 @NgModule({
   declarations: [AppComponent],
