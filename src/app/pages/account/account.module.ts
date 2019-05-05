@@ -7,17 +7,17 @@ import { RouterModule} from '@angular/router';
 import { AccountPage } from './account.page';
 
 @NgModule({
-    imports: [
-        CommonModule,
-        FormsModule,
-        IonicModule,
-        RouterModule.forChild([
-            {
-                path: '',
-                component: AccountPage
-            }
-        ])
-    ],
+  imports: [
+    CommonModule,
+    FormsModule,
+    IonicModule,
+    RouterModule.forChild([
+      {
+        path: '',
+        component: AccountPage
+      }
+    ])
+  ],
   declarations: [AccountPage]
 })
 export class AccountPageModule {}

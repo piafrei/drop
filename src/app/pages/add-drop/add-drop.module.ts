@@ -5,13 +5,13 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { TodoDetailsPage } from './todo-details.page';
+import { AddDropPage } from './add-drop.page';
 import {Device} from '@ionic-native/device/ngx';
 
 const routes: Routes = [
   {
     path: '',
-    component: TodoDetailsPage
+    component: AddDropPage
   }
 ];
 
@@ -22,9 +22,9 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-    providers: [
-        Device
-    ],
-  declarations: [TodoDetailsPage]
+  providers: [
+    Device
+  ],
+  declarations: [AddDropPage]
 })
-export class TodoDetailsPageModule {}
+export class AddDropPageModule {}

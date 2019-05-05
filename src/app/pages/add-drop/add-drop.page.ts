@@ -1,17 +1,17 @@
-import { Drop, TodoService } from '../../services/todo.service';
+import { Drop, DropService } from '../../services/drop.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NavController, LoadingController } from '@ionic/angular';
 import {Device} from '@ionic-native/device/ngx';
 
 @Component({
-  selector: 'app-todo-details',
-  templateUrl: './todo-details.page.html',
-  styleUrls: ['./todo-details.page.scss'],
+  selector: 'app-add-drop',
+  templateUrl: './add-drop.page.html',
+  styleUrls: ['./add-drop.page.scss'],
 })
-export class TodoDetailsPage implements OnInit {
+export class AddDropPage implements OnInit {
 
-  todo: Drop = {
+  drop: Drop = {
     createdAt: new Date().getTime(),
     description: '',
     coordinate: 0,
@@ -19,20 +19,20 @@ export class TodoDetailsPage implements OnInit {
     deviceID: this.getInfo()
   };
 
-  todoId = null;
+  dropId = null;
 
-  constructor(private route: ActivatedRoute, private nav: NavController, private todoService: TodoService, private loadingController: LoadingController, private device: Device) { }
+  constructor(private route: ActivatedRoute, private nav: NavController, private dropService: DropService, private loadingController: LoadingController, private device: Device) { }
 
   ngOnInit() {
-    this.todoId = this.route.snapshot.params['id'];
-    if (this.todoId)  {
+    this.dropId = this.route.snapshot.params['id'];
+    if (this.dropId)  {
       this.loadDrop();
     }
   }
 
   getInfo() {
-        return this.device.uuid;
-    }
+    return this.device.uuid;
+  }
 
   async loadDrop() {
     const loading = await this.loadingController.create({
@@ -40,9 +40,9 @@ export class TodoDetailsPage implements OnInit {
     });
     await loading.present();
 
-    this.todoService.getDrop(this.todoId).subscribe(res => {
+    this.dropService.getDrop(this.dropId).subscribe(res => {
       loading.dismiss();
-      this.todo = res;
+      this.drop = res;
     });
   }
 
@@ -53,13 +53,13 @@ export class TodoDetailsPage implements OnInit {
     });
     await loading.present();
 
-    if (this.todoId) {
-      this.todoService.updateDrop(this.todo, this.todoId).then(() => {
+    if (this.dropId) {
+      this.dropService.updateDrop(this.drop, this.dropId).then(() => {
         loading.dismiss();
         this.nav.back();
       });
     } else {
-      this.todoService.addDrop(this.todo).then(() => {
+      this.dropService.addDrop(this.drop).then(() => {
         loading.dismiss();
         this.nav.back();
       });

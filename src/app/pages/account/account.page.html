@@ -1,12 +1,12 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-title>
-      Mein Account
-    </ion-title>
+    <ion-buttons slot="end" routerLink="/home">
+      <ion-icon name="close" class="header-close"></ion-icon>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content padding>
   <ion-list>
     Meine Drops:
     <ng-container *ngIf="!myDrops || myDrops.length == 0">
@@ -35,16 +35,5 @@
     </ion-item-sliding>
 
   </ion-list>
-
-  <ion-fab id="addButton" vertical="bottom" horizontal="start" slot="fixed">
-    <ion-fab-button routerLink="/details" routerDirection="forward">
-      <ion-icon name="add"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button routerLink="/home" routerDirection="forward">
-      <ion-icon name="home"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
 
 </ion-content>

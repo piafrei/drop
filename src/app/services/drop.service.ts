@@ -17,7 +17,7 @@ export interface Drop {
   providedIn: 'root'
 })
 
-export class TodoService {
+export class DropService {
   private dropsCollection: AngularFirestoreCollection<Drop>;
   private myDropsCollection: AngularFirestoreCollection<Drop>;
 
