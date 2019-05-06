@@ -1,0 +1,41 @@
+.fake-skeleton {
+  width: 80%;
+}
+* {
+  --border-width: 0!important;
+  font: {
+    family: 'Nunito', sans-serif;
+    size: 20px;
+  }
+}
+
+ion-badge {
+  font-size: 10px;
+}
+
+ion-toolbar {
+  text-align: center;
+}
+
+.drop-button {
+  padding: 10px 30px;
+  border-radius: 99em;
+  @include gradient-horizontal($primary, $quaternary);
+  color: #fff;
+  margin: 0 0 20px 0;
+}
+
+.score-headline {
+  text-align: center;
+  margin-bottom: 40px;
+  font: {
+    size: 30px;
+  }
+  .score {
+    font: {
+      size: 100px;
+    }
+    color: $secondary;
+    display: block;
+  }
+}

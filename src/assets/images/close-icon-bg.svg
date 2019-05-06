@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="238" height="73" viewBox="0 0 238 73">
+  <defs>
+    <clipPath id="clip-path">
+      <rect id="Rechteck_18" data-name="Rechteck 18" width="238" height="73" transform="translate(137)" fill="#fff" stroke="#707070" stroke-width="1"/>
+    </clipPath>
+    <linearGradient id="linear-gradient" y1="0.5" x2="1" y2="0.5" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#8633ff"/>
+      <stop offset="1" stop-color="#2e78e8"/>
+    </linearGradient>
+  </defs>
+  <g id="close-icon-bg" transform="translate(-137)" clip-path="url(#clip-path)">
+    <path id="Pfad_53" data-name="Pfad 53" d="M12.482-1145.457c-35.64,32.825-62.764,96.027-23.591,136.258,32.376,33.25,78.1,16.048,104.567,61.733,24.437,42.182,20.256,60.59,73.1,80.115,40.761,15.061,96.016,14.118,130.857-14.731,71.146-58.911,30.868-184.289-20.339-242.007C216.363-1192.525,86.6-1213.718,12.482-1145.457Z" transform="translate(580.562 931.989) rotate(-24)" fill="url(#linear-gradient)"/>
+  </g>
+</svg>

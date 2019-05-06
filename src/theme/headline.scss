@@ -1,5 +1,55 @@
 .header-close {
-  width: 30px;
+  height: 80px;
+  contain: none;
+  ion-icon {
+    width: 30px;
+    height: 30px;
+    padding: 10px;
+    color: #fff;
+  }
+
+  .close-icon-bg {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    width: auto;
+  }
+}
+
+#drop-logo {
   height: 30px;
-  padding: 10px;
+  width: auto;
+  margin: 20px;
+}
+
+.header-md{
+  &:after {
+    display: none;
+  }
+}
+
+.header-ios ion-toolbar:last-child {
+  --border-width: 0;
+}
+
+.toolbar-background {
+  display: none;
+}
+
+.headline {
+  background: none;
+  border-width: 0;
+  border: none !important;
+}
+
+#header-bg {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  z-index: -1;
 }

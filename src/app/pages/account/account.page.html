@@ -1,14 +1,23 @@
 <ion-header>
-  <ion-toolbar color="primary">
+  <ion-toolbar class="header-close">
     <ion-buttons slot="end" routerLink="/home">
-      <ion-icon name="close" class="header-close"></ion-icon>
+      <ion-icon name="close"></ion-icon>
     </ion-buttons>
+    <img src="assets/images/close-icon-bg.svg" alt="Close Icon Background" class="close-icon-bg">
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
+
+  <div class="score-headline">
+    Dein Score
+    <span class="score">500</span>
+  </div>
+
+
+
   <ion-list>
-    Meine Drops:
+
     <ng-container *ngIf="!myDrops || myDrops.length == 0">
       <div *ngFor="let n of [0,1,2]" padding>
         <ion-skeleton-text></ion-skeleton-text>
