@@ -15,8 +15,8 @@ export class AccountPage implements OnInit {
 
   ngOnInit() {
     this.dropService.getDrops().subscribe(res => {
-      this.allDrops = res;
-    });
+          this.allDrops = res;
+      });
 
     this.dropService.getMyDrops().subscribe(res => {
       this.myDrops = res;
