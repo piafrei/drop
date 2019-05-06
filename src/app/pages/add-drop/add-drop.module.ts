@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { AddDropPage } from './add-drop.page';
 import {Device} from '@ionic-native/device/ngx';
+import {AppComponent} from '../../app.component';
 
 const routes: Routes = [
   {
@@ -23,7 +24,8 @@ const routes: Routes = [
     RouterModule.forChild(routes)
   ],
   providers: [
-    Device
+    Device,
+    AppComponent
   ],
   declarations: [AddDropPage]
 })
