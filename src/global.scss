@@ -1,3 +1,6 @@
+//@import "theme/fonts";
+@import "theme/variables";
+
 // http://ionicframework.com/docs/theming/
 @import '~@ionic/angular/css/core.css';
 @import '~@ionic/angular/css/normalize.css';
@@ -11,6 +14,10 @@
 @import '~@ionic/angular/css/flex-utils.css';
 
 
+//Custom mixins
+@import "theme/mixins/gradiant";
+
 //Custom styles
-@import "theme/variables";
+@import "theme/base";
 @import "theme/headline";
+@import "theme/tabbar";
