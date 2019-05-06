@@ -1,40 +1,50 @@
 <ion-header>
   <ion-toolbar class="headline">
-    <img src="assets/images/drop-logo.svg" alt="Logo Drop" id="drop-logo">
-    <img src="assets/images/headline-bg.svg" alt="Drop Background" id="header-bg">
+    <img src="assets/images/drop-logo.svg" alt="Logo Drop" id="drop-logo" />
+    <img
+      src="assets/images/headline-bg.svg"
+      alt="Drop Background"
+      id="header-bg"
+    />
   </ion-toolbar>
+  <link
+    href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
+    rel="stylesheet"
+  />
 </ion-header>
 
-<ion-content padding>
-  Streetmap Comming Soon
+<ion-content>
+  <div id="map"></div>
 </ion-content>
 
 <ion-tabs>
   <ion-tab-bar slot="bottom">
     <ion-tab-button tab="filter" routerLink="/filter">
-      <img src="assets/icon/filter-icon.svg" alt="Filter Icon">
+      <img src="assets/icon/filter-icon.svg" alt="Filter Icon" />
       <ion-badge>2</ion-badge>
     </ion-tab-button>
 
     <ion-tab-button tab="notification" routerLink="/notifications">
-      <img src="assets/icon/notification-icon.svg" alt="Filter Icon">
+      <img src="assets/icon/notification-icon.svg" alt="Filter Icon" />
       <ion-badge>6</ion-badge>
     </ion-tab-button>
 
     <ion-tab-button tab="add" routerLink="/new-drop" class="add-drop">
-      <img src="assets/icon/add-drop-icon.svg" alt="Filter Icon">
+      <img src="assets/icon/add-drop-icon.svg" alt="Filter Icon" />
     </ion-tab-button>
 
     <ion-tab-button tab="profile" routerLink="/account">
-      <img src="assets/icon/profile-icon.svg" alt="Filter Icon">
+      <img src="assets/icon/profile-icon.svg" alt="Filter Icon" />
     </ion-tab-button>
 
     <ion-tab-button tab="settings" routerLink="/settings">
-      <img src="assets/icon/settings-icon.svg" alt="Filter Icon">
+      <img src="assets/icon/settings-icon.svg" alt="Filter Icon" />
     </ion-tab-button>
   </ion-tab-bar>
 </ion-tabs>
 
-<img src="assets/images/tabbar-bg.svg" alt="Tabbar Background" class="tabbar-bg">
-
-
+<img
+  src="assets/images/tabbar-bg.svg"
+  alt="Tabbar Background"
+  class="tabbar-bg"
+/>
