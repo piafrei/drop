@@ -51,7 +51,6 @@ export class HomePage {
   loadMarkers() {
      this.dropService.getDrops().subscribe((drops: any) => {
           drops.forEach((singledrop) => {
-              alert('foreach triggered with ' + singledrop.description + ' in lat. ' + singledrop.latitude + ' lon. ' + singledrop.longitude);
               let dropGroup = leaflet.featureGroup();
               let drop: any = leaflet.marker([singledrop.latitude, singledrop.longitude])
                   .on('click', () => {
@@ -59,7 +58,6 @@ export class HomePage {
                   });
               dropGroup.addLayer(drop);
               this.map.addLayer(dropGroup);
-              alert('everything triggered');
           }
           );
      });
