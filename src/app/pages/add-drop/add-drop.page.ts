@@ -10,18 +10,30 @@ import {Device} from '@ionic-native/device/ngx';
   styleUrls: ['./add-drop.page.scss'],
 })
 export class AddDropPage implements OnInit {
+  dropId = null;
+  latitude = 0;
+  longitude = 0;
 
   drop: Drop = {
     createdAt: new Date().getTime(),
     description: '',
-    coordinate: 0,
+    latitude: this.getLatitude(),
+    longitude: this.getLongitude(),
     score: 0,
-    deviceID: this.getInfo()
+    deviceID: this.getInfo(),
   };
 
-  dropId = null;
 
-  constructor(private route: ActivatedRoute, private nav: NavController, private dropService: DropService, private loadingController: LoadingController, private device: Device) { }
+  constructor(private route: ActivatedRoute, private nav: NavController, private dropService: DropService, private loadingController: LoadingController, private device: Device) {
+  }
+
+  getLatitude() {
+    return this.latitude;
+  }
+
+  getLongitude() {
+    return this.longitude;
+  }
 
   ngOnInit() {
     this.dropId = this.route.snapshot.params['id'];

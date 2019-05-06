@@ -8,7 +8,8 @@ export interface Drop {
   id?: string;
   createdAt: number;
   description: string;
-  coordinate: number;
+  latitude: number;
+  longitude: number;
   score: number;
   deviceID: string;
 }
