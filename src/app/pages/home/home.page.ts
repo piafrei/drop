@@ -32,7 +32,7 @@ export class HomePage {
       });
     this.map = leaflet.map('map').fitWorld();
     leaflet
-      .tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      .tileLayer('https://api.maptiler.com/maps/positron/{z}/{x}/{y}.png?key=JrASdfPCkNw3CYBKAD6E', {
         attributions:
           'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
         maxZoom: 18

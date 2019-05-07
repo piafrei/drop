@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="33" height="48.298" viewBox="0 0 33 48.298">
+  <defs>
+    <filter id="Pfad_2" x="0" y="0" width="33" height="26" filterUnits="userSpaceOnUse">
+      <feOffset dx="2" dy="5" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="2.5" result="blur"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Pfad_3" x="0" y="10.298" width="33" height="38" filterUnits="userSpaceOnUse">
+      <feOffset dx="2" dy="5" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="2.5" result="blur-2"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-2"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="Gruppe_87" data-name="Gruppe 87" transform="translate(5.971 1.5)">
+    <g id="Gruppe_86" data-name="Gruppe 86">
+      <g transform="matrix(1, 0, 0, 1, -5.97, -1.5)" filter="url(#Pfad_2)">
+        <path id="Pfad_2-2" data-name="Pfad 2" d="M20.219,2.579,19.7,4.415h0a.287.287,0,0,1-.012.055l-1.724,6.156a.312.312,0,0,1-.219.215.352.352,0,0,1-.315-.06,9.967,9.967,0,0,0-6.138-2.074,9.655,9.655,0,0,0-6.205,2.2.351.351,0,0,1-.317.066.313.313,0,0,1-.223-.216L3.8,8.064a.329.329,0,0,1-.043-.089l-1.512-5.4A.325.325,0,0,1,2.4,2.217a.4.4,0,0,1,.426.013l1.135.8L7.213,5.341,7.608.4V.305a.349.349,0,0,1,.275-.3.389.389,0,0,1,.4.136h.006l2.933,4.021L14.165.139A.359.359,0,0,1,14.256.05.4.4,0,0,1,14.6.009a.352.352,0,0,1,.232.23A.307.307,0,0,1,14.839.3l.4,5.036L18.7,2.884l.929-.654a.4.4,0,0,1,.432-.019A.325.325,0,0,1,20.219,2.579Z" transform="translate(3.27 2.51)" fill="#8633ff"/>
+      </g>
+      <g transform="matrix(1, 0, 0, 1, -5.97, -1.5)" filter="url(#Pfad_3)">
+        <path id="Pfad_3-2" data-name="Pfad 3" d="M10.31,214.587a1.7,1.7,0,0,1-2.643,0S0,208.226,0,201.227a9.118,9.118,0,0,1,9-9.008,9.118,9.118,0,0,1,9,9.008C18,208.178,10.31,214.587,10.31,214.587Z" transform="translate(5.5 -179.42)" fill="#472ee8"/>
+      </g>
+    </g>
+  </g>
+</svg>

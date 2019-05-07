@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="45" height="45" viewBox="0 0 45 45">
+  <defs>
+    <filter id="Ellipse_3" x="0" y="0" width="45" height="45" filterUnits="userSpaceOnUse">
+      <feOffset dx="2" dy="5" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="2.5" result="blur"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="Gruppe_7" data-name="Gruppe 7" transform="translate(195.5 -482.5)">
+    <g transform="matrix(1, 0, 0, 1, -195.5, 482.5)" filter="url(#Ellipse_3)">
+      <circle id="Ellipse_3-2" data-name="Ellipse 3" cx="15" cy="15" r="15" transform="translate(5.5 2.5)" fill="#8633ff" opacity="0.5"/>
+    </g>
+    <circle id="Ellipse_2" data-name="Ellipse 2" cx="7" cy="7" r="7" transform="translate(-182 493)" fill="#8633ff"/>
+  </g>
+</svg>
