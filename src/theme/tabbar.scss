@@ -5,9 +5,11 @@ ion-tab-bar, ion-tab-button {
   contain: none;
 }
 
-ion-tabs {
-  z-index: 10;
-  overflow: visible;
+.tab-wrapper {
+  z-index: 200;
+  height: auto !important;
+  top: auto !important;
+  contain: none !important;
 }
 
 .add-drop {
@@ -23,7 +25,7 @@ ion-tabs {
   right: 0;
   width: 100%;
   height: auto;
-  z-index: 1;
+  z-index: 150;
 }
 
 .tabbar-icon {
