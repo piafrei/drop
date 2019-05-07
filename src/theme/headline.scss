@@ -1,3 +1,11 @@
+ion-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 200;
+}
+
 .header-close {
   height: 80px;
   contain: none;
@@ -33,8 +41,16 @@
   --border-width: 0;
 }
 
+.header {
+  ion-toolbar {
+    text-align: left;
+  }
+
+}
+
 .toolbar-background {
   display: none;
+  background: transparent;
 }
 
 .headline {

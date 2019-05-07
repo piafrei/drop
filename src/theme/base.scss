@@ -39,3 +39,9 @@ ion-toolbar {
     display: block;
   }
 }
+
+.maincontent {
+  position: relative;
+  z-index: 100;
+  --padding-top: 100px;
+}
