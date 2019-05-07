@@ -21,11 +21,11 @@ export class HomePage {
   }
   loadmap() {
       let positionIcon = leaflet.icon({
-          iconUrl: '../../../assets/icon/position.svg',
+          iconUrl: '../../../assets/icon/position.png',
           shadowUrl: '../../../assets/icon/position-shadow.svg',
 
-          iconSize:     [50, 50], // size of the icon
-          shadowSize:   [50, 50], // size of the shadow
+          iconSize:     [30, 30], // size of the icon
+          shadowSize:   [30, 30], // size of the shadow
           iconAnchor:   [0, 0], // point of the icon which will correspond to marker's location
           shadowAnchor: [2, -2],  // the same for the shadow
           popupAnchor:  [0, 0]  // point from which the popup should open relative to the iconAnchor
@@ -60,11 +60,11 @@ export class HomePage {
   }
   loadMarkers() {
       let dropIcon = leaflet.icon({
-          iconUrl: '../../../assets/icon/colored-drop.svg',
+          iconUrl: '../../../assets/icon/colored-drop.png',
           shadowUrl: '../../../assets/icon/drop-shadow.svg',
 
-          iconSize:     [45, 57], // size of the icon
-          shadowSize:   [45, 57], // size of the shadow
+          iconSize:     [25, 30], // size of the icon
+          shadowSize:   [25, 30], // size of the shadow
           iconAnchor:   [0, 0], // point of the icon which will correspond to marker's location
           shadowAnchor: [2, -2],  // the same for the shadow
           popupAnchor:  [-3, -5] // point from which the popup should open relative to the iconAnchor

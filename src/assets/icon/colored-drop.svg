@@ -1,14 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="33.482" height="38" viewBox="0 0 33.482 38">
-  <defs>
-    <filter id="Pfad_1" x="0" y="0" width="33.482" height="38" filterUnits="userSpaceOnUse">
-      <feOffset dx="2" dy="5" input="SourceAlpha"/>
-      <feGaussianBlur stdDeviation="2.5" result="blur"/>
-      <feFlood flood-opacity="0.161"/>
-      <feComposite operator="in" in2="blur"/>
-      <feComposite in="SourceGraphic"/>
-    </filter>
-  </defs>
-  <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#Pfad_1)">
-    <path id="Pfad_1-2" data-name="Pfad 1" d="M10.586,22.368a1.773,1.773,0,0,1-2.714,0S0,16.007,0,9.008a9.244,9.244,0,0,1,18.482,0C18.482,15.953,10.586,22.368,10.586,22.368Z" transform="translate(5.5 2.5)" fill="#472ee8"/>
-  </g>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="433.335" height="535.611" viewBox="0 0 433.335 535.611"><defs><filter id="a" x="0" y="0" width="433.335" height="535.611" filterUnits="userSpaceOnUse"><feOffset dx="2" dy="5" input="SourceAlpha"/><feGaussianBlur stdDeviation="2.5" result="b"/><feFlood flood-opacity="0.161"/><feComposite operator="in" in2="b"/><feComposite in="SourceGraphic"/></filter></defs><g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#a)"><path d="M239.613,506.308c-22.2,19.071-38.142,19.071-61.436,0C178.177,506.308,0,362.322,0,203.9,2.9,90.456,95.69,0,209.168,0S415.44,90.456,418.335,203.9C418.335,361.1,239.613,506.308,239.613,506.308Z" transform="translate(5.5 2.5)" fill="#472ee8"/></g></svg>
