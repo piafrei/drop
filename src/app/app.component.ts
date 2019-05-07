@@ -3,16 +3,21 @@ import { Component } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
 
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html'
 })
 export class AppComponent {
-  constructor(
+  private _latitude: number;
+  private _longitude: number;
+
+    constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
-    private statusBar: StatusBar
+    private statusBar: StatusBar,
+    private geolocation: Geolocation
   ) {
     this.initializeApp();
   }
@@ -22,5 +27,17 @@ export class AppComponent {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
+
+      const watchLocation = this.geolocation.watchPosition();
+      watchLocation.subscribe((data) => {
+          this._latitude = data.coords.latitude;
+          this._longitude = data.coords.longitude;
+      });
   }
+    get longitude(): number {
+        return this._longitude;
+    }
+    get latitude(): number {
+        return this._latitude;
+    }
 }

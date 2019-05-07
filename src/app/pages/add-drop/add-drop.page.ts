@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NavController, LoadingController } from '@ionic/angular';
 import {Device} from '@ionic-native/device/ngx';
+import {AppComponent} from '../../app.component';
 
 @Component({
   selector: 'app-add-drop',
@@ -11,29 +12,17 @@ import {Device} from '@ionic-native/device/ngx';
 })
 export class AddDropPage implements OnInit {
   dropId = null;
-  latitude = 0;
-  longitude = 0;
 
+  constructor(private route: ActivatedRoute, private nav: NavController, private dropService: DropService, private loadingController: LoadingController, private device: Device, private appComponent: AppComponent) {
+  }
   drop: Drop = {
     createdAt: new Date().getTime(),
     description: '',
-    latitude: this.getLatitude(),
-    longitude: this.getLongitude(),
+    latitude: this.appComponent.latitude,
+    longitude: this.appComponent.longitude,
     score: 0,
     deviceID: this.getInfo(),
   };
-
-
-  constructor(private route: ActivatedRoute, private nav: NavController, private dropService: DropService, private loadingController: LoadingController, private device: Device) {
-  }
-
-  getLatitude() {
-    return this.latitude;
-  }
-
-  getLongitude() {
-    return this.longitude;
-  }
 
   ngOnInit() {
     this.dropId = this.route.snapshot.params['id'];
