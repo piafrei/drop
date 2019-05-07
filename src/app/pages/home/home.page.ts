@@ -20,6 +20,16 @@ export class HomePage {
     this.loadmap();
   }
   loadmap() {
+      let positionIcon = leaflet.icon({
+          iconUrl: '../../../assets/icon/position.svg',
+          shadowUrl: '../../../assets/icon/position-shadow.svg',
+
+          iconSize:     [50, 50], // size of the icon
+          shadowSize:   [50, 50], // size of the shadow
+          iconAnchor:   [0, 0], // point of the icon which will correspond to marker's location
+          shadowAnchor: [2, -2],  // the same for the shadow
+          popupAnchor:  [0, 0]  // point from which the popup should open relative to the iconAnchor
+      });
     this.map = leaflet.map('map').fitWorld();
     leaflet
       .tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -36,7 +46,7 @@ export class HomePage {
       .on('locationfound', e => {
         let markerGroup = leaflet.featureGroup();
         let marker: any = leaflet
-          .marker([e.latitude, e.longitude])
+          .marker([e.latitude, e.longitude], {icon: positionIcon})
           .on('click', () => {
             alert('Marker clicked');
           });
@@ -49,10 +59,21 @@ export class HomePage {
     this.loadMarkers();
   }
   loadMarkers() {
+      let dropIcon = leaflet.icon({
+          iconUrl: '../../../assets/icon/colored-drop.svg',
+          shadowUrl: '../../../assets/icon/drop-shadow.svg',
+
+          iconSize:     [45, 57], // size of the icon
+          shadowSize:   [45, 57], // size of the shadow
+          iconAnchor:   [0, 0], // point of the icon which will correspond to marker's location
+          shadowAnchor: [2, -2],  // the same for the shadow
+          popupAnchor:  [-3, -5] // point from which the popup should open relative to the iconAnchor
+      });
+
      this.dropService.getDrops().subscribe((drops: any) => {
           drops.forEach((singledrop) => {
               let dropGroup = leaflet.featureGroup();
-              let drop: any = leaflet.marker([singledrop.latitude, singledrop.longitude])
+              let drop: any = leaflet.marker([singledrop.latitude, singledrop.longitude], {icon: dropIcon})
                   .on('click', () => {
                       // Open drop if enabled for user
                   });
