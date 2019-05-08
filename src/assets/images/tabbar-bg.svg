@@ -1,1 +1,10 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="375" height="80" viewBox="0 0 375 80"><defs><style>.a{fill:#fff;stroke:#707070;}.b{clip-path:url(#a);}.c{fill:#fefefe;}.d{filter:url(#b);}</style><clipPath id="a"><rect class="a" width="375" height="80" transform="translate(0 587)"/></clipPath><filter id="b" x="-15" y="4.781" width="406.809" height="110.219" filterUnits="userSpaceOnUse"><feOffset dy="-5" input="SourceAlpha"/><feGaussianBlur stdDeviation="5" result="c"/><feFlood flood-opacity="0.161"/><feComposite operator="in" in2="c"/><feComposite in="SourceGraphic"/></filter></defs><g class="b" transform="translate(0 -587)"><g class="d" transform="matrix(1, 0, 0, 1, 0, 587)"><path class="c" d="M619.36,1623v80.219H242.551V1623H351.259c19.543,0,36.346,10.153,48.654,28.12,6.962,10.164,18.6,16.661,30.512,16.661a39.6,39.6,0,0,0,31.512-16.661c12.308-17.967,29.443-28.12,48.986-28.12Z" transform="translate(-242.55 -1598.22)"/></g></g></svg>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="375" height="55" viewBox="0 0 375 55">
+  <defs>
+    <clipPath id="clip-path">
+      <rect id="Rechteck_18" data-name="Rechteck 18" width="375" height="55" transform="translate(0 612)" fill="#fff" stroke="#707070" stroke-width="1"/>
+    </clipPath>
+  </defs>
+  <g id="tabbar-bg" transform="translate(0 -612)" clip-path="url(#clip-path)">
+    <path id="Pfad_59" data-name="Pfad 59" d="M619.36,1623v80.219H242.551V1623H351.259c19.543,0,36.346,10.153,48.654,28.12,6.962,10.164,18.6,16.661,30.512,16.661a39.6,39.6,0,0,0,31.512-16.661c12.308-17.967,29.443-28.12,48.986-28.12Z" transform="translate(-242.551 -1011.219)" fill="#fefefe"/>
+  </g>
+</svg>

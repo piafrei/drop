@@ -20,7 +20,7 @@ export class HomePage {
     this.loadmap();
   }
   loadmap() {
-      let positionIcon = leaflet.icon({
+      const positionIcon = leaflet.icon({
           iconUrl: '../../../assets/icon/position.png',
           shadowUrl: '../../../assets/icon/position-shadow.svg',
 
@@ -44,8 +44,8 @@ export class HomePage {
         maxZoom: 10
       })
       .on('locationfound', e => {
-        let markerGroup = leaflet.featureGroup();
-        let marker: any = leaflet
+        const markerGroup = leaflet.featureGroup();
+        const marker: any = leaflet
           .marker([e.latitude, e.longitude], {icon: positionIcon})
           .on('click', () => {
             alert('Marker clicked');
@@ -59,7 +59,7 @@ export class HomePage {
     this.loadMarkers();
   }
   loadMarkers() {
-      let dropIcon = leaflet.icon({
+      const dropIcon = leaflet.icon({
           iconUrl: '../../../assets/icon/colored-drop.png',
           shadowUrl: '../../../assets/icon/drop-shadow.svg',
 
@@ -72,10 +72,10 @@ export class HomePage {
 
      this.dropService.getDrops().subscribe((drops: any) => {
           drops.forEach((singledrop) => {
-              let dropGroup = leaflet.featureGroup();
-              let drop: any = leaflet.marker([singledrop.latitude, singledrop.longitude], {icon: dropIcon})
+              const dropGroup = leaflet.featureGroup();
+              const drop: any = leaflet.marker([singledrop.latitude, singledrop.longitude], {icon: dropIcon})
                   .on('click', () => {
-                      // Open drop if enabled for user
+                      alert('Marker clicked');
                   });
               dropGroup.addLayer(drop);
               this.map.addLayer(dropGroup);
