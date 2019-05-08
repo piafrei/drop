@@ -45,3 +45,15 @@ ion-toolbar {
   z-index: 100;
   --padding-top: 100px;
 }
+
+.drop-text {
+  &:before {
+    content: "";
+    width: 2px;
+    height: 30px;
+    border-radius: 99em;
+    background: $primary;
+    margin-right: 5px;
+  }
+}
+

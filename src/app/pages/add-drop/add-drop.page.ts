@@ -50,7 +50,7 @@ export class AddDropPage implements OnInit {
   async saveDrop() {
 
     const loading = await this.loadingController.create({
-      message: 'Speichern des Drops ...'
+      message: 'Speichern...'
     });
     await loading.present();
 
