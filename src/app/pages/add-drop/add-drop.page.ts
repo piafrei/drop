@@ -55,10 +55,14 @@ export class AddDropPage implements OnInit {
     await loading.present();
 
     if (this.dropId) {
+      if (this.drop.score <= -10) {
+      this.dropService.removeDrop(this.dropId);
+      } else {
       this.dropService.updateDrop(this.drop, this.dropId).then(() => {
         loading.dismiss();
         this.nav.back();
       });
+      }
     } else {
       this.dropService.addDrop(this.drop).then(() => {
         loading.dismiss();
