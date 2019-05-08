@@ -48,13 +48,13 @@ export class HomePage {
         let marker: any = leaflet
           .marker([e.latitude, e.longitude], {icon: positionIcon})
           .on('click', () => {
-            alert('Marker clicked');
+            console.log('Marker clicked');
           });
         markerGroup.addLayer(marker);
         this.map.addLayer(markerGroup);
       })
       .on('locationerror', err => {
-        alert(err.message);
+        console.log(err.message);
       });
     this.loadMarkers();
   }
