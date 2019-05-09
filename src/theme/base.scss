@@ -57,3 +57,14 @@ ion-toolbar {
   }
 }
 
+.voting {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  button {
+    padding: 10px 30px;
+    background: $primary;
+    border-radius: 99em;
+    color: $white;
+  }
+}
