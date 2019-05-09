@@ -3,7 +3,7 @@ import { Component, ViewChild, ElementRef } from '@angular/core';
 import leaflet from 'leaflet';
 import { NavController } from '@ionic/angular';
 import { Drop, DropService } from '../../services/drop.service';
-import { AddDropPage } from '../add-drop/add-drop.page';
+// import { AddDropPage } from '../add-drop/add-drop.page';
 
 @Component({
   selector: 'app-home',
@@ -16,7 +16,7 @@ export class HomePage {
   constructor(
       public navCtrl: NavController,
       public dropService: DropService,
-      public loadDrop: AddDropPage,
+      // public loadDrop: AddDropPage,
   ) {}
   ionViewDidEnter() {
     this.loadmap();
@@ -78,8 +78,8 @@ export class HomePage {
               const dropGroup = leaflet.featureGroup();
               const drop: any = leaflet.marker([singledrop.latitude, singledrop.longitude], {icon: dropIcon})
                   .on('click', () => {
-                      this.loadDrop.loadDrop();
-                      // console.log('test');
+                      // this.loadDrop.loadDrop();
+                      console.log('test');
                   });
               dropGroup.addLayer(drop);
               this.map.addLayer(dropGroup);
