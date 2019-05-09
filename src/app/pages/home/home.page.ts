@@ -1,4 +1,5 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
+import { Geofence } from '@ionic-native/geofence/ngx';
 
 import leaflet from 'leaflet';
 import { NavController } from '@ionic/angular';
@@ -14,8 +15,14 @@ export class HomePage {
   map: any;
   constructor(
       public navCtrl: NavController,
-      public dropService: DropService
-  ) {}
+      public dropService: DropService,
+      private geofence: Geofence
+  ) {
+      geofence.initialize().then(
+          () => console.log('Geofence Plugin Ready'),
+          (err) => console.log(err)
+      );
+  }
   ionViewDidEnter() {
     this.loadmap();
   }
