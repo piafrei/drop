@@ -3,6 +3,7 @@ import { Component, ViewChild, ElementRef } from '@angular/core';
 import leaflet from 'leaflet';
 import { NavController } from '@ionic/angular';
 import { Drop, DropService } from '../../services/drop.service';
+import { AddDropPage } from '../add-drop/add-drop.page';
 
 @Component({
   selector: 'app-home',
@@ -14,7 +15,8 @@ export class HomePage {
   map: any;
   constructor(
       public navCtrl: NavController,
-      public dropService: DropService
+      public dropService: DropService,
+      public loadDrop: AddDropPage,
   ) {}
   ionViewDidEnter() {
     this.loadmap();
@@ -48,16 +50,17 @@ export class HomePage {
         const marker: any = leaflet
           .marker([e.latitude, e.longitude], {icon: positionIcon})
           .on('click', () => {
-            alert('Marker clicked');
+              console.log('Marker clicked');
           });
         markerGroup.addLayer(marker);
         this.map.addLayer(markerGroup);
       })
       .on('locationerror', err => {
-        alert(err.message);
+          console.log(err.message);
       });
     this.loadMarkers();
   }
+
   loadMarkers() {
       const dropIcon = leaflet.icon({
           iconUrl: '../../../assets/icon/colored-drop.png',
@@ -75,7 +78,8 @@ export class HomePage {
               const dropGroup = leaflet.featureGroup();
               const drop: any = leaflet.marker([singledrop.latitude, singledrop.longitude], {icon: dropIcon})
                   .on('click', () => {
-                      alert('Marker clicked');
+                      this.loadDrop.loadDrop();
+                      // console.log('test');
                   });
               dropGroup.addLayer(drop);
               this.map.addLayer(dropGroup);

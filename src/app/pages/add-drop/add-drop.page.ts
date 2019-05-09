@@ -13,8 +13,14 @@ import {AppComponent} from '../../app.component';
 export class AddDropPage implements OnInit {
   dropId = null;
 
-  constructor(private route: ActivatedRoute, private nav: NavController, private dropService: DropService, private loadingController: LoadingController, private device: Device, private appComponent: AppComponent) {
-  }
+  constructor (
+      private route: ActivatedRoute,
+      private nav: NavController,
+      private dropService: DropService,
+      private loadingController: LoadingController,
+      private device: Device,
+      private appComponent: AppComponent,
+  ) {}
   drop: Drop = {
     createdAt: new Date().getTime(),
     description: '',
@@ -37,7 +43,7 @@ export class AddDropPage implements OnInit {
 
   async loadDrop() {
     const loading = await this.loadingController.create({
-      message: 'Laden des Drops ...'
+      message: 'Lädt...'
     });
     await loading.present();
 

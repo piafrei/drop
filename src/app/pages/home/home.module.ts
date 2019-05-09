@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 
 import { HomePage } from './home.page';
 import { Drop, DropService } from '../../services/drop.service';
+import { AddDropPage } from '../add-drop/add-drop.page';
 
 @NgModule({
   imports: [
@@ -20,7 +21,8 @@ import { Drop, DropService } from '../../services/drop.service';
     ])
   ],
   providers: [
-      DropService
+      DropService,
+      AddDropPage
   ],
   declarations: [HomePage]
 })
