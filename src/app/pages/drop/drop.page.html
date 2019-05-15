@@ -12,7 +12,10 @@
     <div class="text-content">
       {{ drop.description }}
     </div>
-    <ion-icon name="more" class="edit-icon" slot="end"></ion-icon>
+    <ion-select interface="action-sheet">
+      <ion-select-option value="report">Report</ion-select-option>
+      <ion-select-option value="edit">Edit</ion-select-option>
+    </ion-select>
   </div>
   <div class="voting">
     <button><img src="assets/icon/upvote.svg" alt="Upvote Button"></button>
