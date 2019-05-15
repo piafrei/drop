@@ -8,17 +8,38 @@
 </ion-header>
 
 <ion-content class="maincontent" padding>
-  <div class="drop-view">
-    <div class="text-content">
-      {{ drop.description }}
+  <div class="drop">
+    <div class="category">
+      Essen
     </div>
-    <ion-select interface="action-sheet">
-      <ion-select-option value="report">Report</ion-select-option>
-      <ion-select-option value="edit">Edit</ion-select-option>
-    </ion-select>
+    <div class="drop-view">
+      <div class="text-content">
+        {{ drop.description }}
+      </div>
+      <ion-select interface="action-sheet">
+        <ion-select-option value="report">Melden</ion-select-option>
+        <ion-select-option value="edit">Bearbeiten</ion-select-option>
+      </ion-select>
+    </div>
+    <div class="voting">
+      <div class="voting-buttons">
+        <button><img src="assets/icon/upvote.svg" alt="Upvote Button"></button>
+        <button><img src="assets/icon/downvote.svg" alt="Downvote Button"></button>
+      </div>
+      <div class="rating">
+        150
+      </div>
+    </div>
   </div>
-  <div class="voting">
-    <button><img src="assets/icon/upvote.svg" alt="Upvote Button"></button>
-    <button><img src="assets/icon/downvote.svg" alt="Downvote Button"></button>
+  <div class="drop-comments">
+    <div class="comment">
+      <div class="comment-text">
+        Test123
+      </div>
+      <ion-select interface="action-sheet">
+        <ion-select-option value="report">Melden</ion-select-option>
+        <ion-select-option value="edit">Bearbeiten</ion-select-option>
+      </ion-select>
+    </div>
   </div>
 </ion-content>
