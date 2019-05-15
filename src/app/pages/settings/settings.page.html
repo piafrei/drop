@@ -1,12 +1,40 @@
 <ion-header>
   <ion-toolbar class="header-close" color="transparent">
-    <ion-buttons slot="end" routerLink="/home">
+    <ion-buttons slot="end" routerLink="/home" routerDirection="back">
       <ion-icon name="close"></ion-icon>
     </ion-buttons>
-    <img src="assets/images/close-icon-bg.svg" alt="Close Icon Background" class="close-icon-bg">
+    <img
+      src="assets/images/close-icon-bg.svg"
+      alt="Close Icon Background"
+      class="close-icon-bg"
+    />
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding class="maincontent">
+  <!--
+  <ion-tabs>
+    <ion-tab-bar slot="center">
+      <ion-tab-button tab="about">Über drop.</ion-tab-button>
 
+      <ion-tab-button tab="about">Impressum</ion-tab-button>
+
+      <ion-tab-button tab="about">Datenschutz</ion-tab-button>
+
+      <ion-tab-button tab="about">Nutzungsbedingungen</ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs>
+-->
+  <ion-list>
+    <ion-item routerDirection="forward" routerLink="about">Über drop.</ion-item>
+    <ion-item routerDirection="forward" routerLink="impressum"
+      >Impressum</ion-item
+    >
+    <ion-item routerDirection="forward" routerLink="privacy"
+      >Datenschutz</ion-item
+    >
+    <ion-item routerDirection="forward" routerLink="termsofuse"
+      >Nutzungsbedingungen</ion-item
+    >
+  </ion-list>
 </ion-content>
