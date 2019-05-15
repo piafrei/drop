@@ -1,8 +1,10 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
+import * as Geolib from 'geolib';
 
 import leaflet from 'leaflet';
 import { NavController } from '@ionic/angular';
 import { Drop, DropService } from '../../services/drop.service';
+import {AppComponent} from '../../app.component';
 // import { AddDropPage } from '../add-drop/add-drop.page';
 
 @Component({
@@ -14,8 +16,9 @@ export class HomePage {
   @ViewChild('map') mapContainer: ElementRef;
   map: any;
   constructor(
-    public navCtrl: NavController,
-    public dropService: DropService // public loadDrop: AddDropPage,
+      public navCtrl: NavController,
+      public dropService: DropService,
+      public appComponent: AppComponent
   ) {}
   ionViewDidEnter() {
     this.loadmap();
@@ -62,11 +65,10 @@ export class HomePage {
       });
     this.loadMarkers();
   }
-
   loadMarkers() {
-    const dropIcon = leaflet.icon({
-      iconUrl: '../../../assets/icon/colored-drop.png',
-      shadowUrl: '../../../assets/icon/drop-shadow.svg',
+      const greyDropIcon = leaflet.icon({
+          iconUrl: '../../../assets/icon/grey-drop.png',
+          shadowUrl: '../../../assets/icon/drop-shadow.svg',
 
       iconSize: [25, 30], // size of the icon
       shadowSize: [25, 30], // size of the shadow
@@ -75,20 +77,53 @@ export class HomePage {
       popupAnchor: [-3, -5] // point from which the popup should open relative to the iconAnchor
     });
 
-    this.dropService.getDrops().subscribe((drops: any) => {
-      drops.forEach(singledrop => {
-        const dropGroup = leaflet.featureGroup();
-        const drop: any = leaflet
-          .marker([singledrop.latitude, singledrop.longitude], {
-            icon: dropIcon
-          })
-          .on('click', () => {
-            // this.loadDrop.loadDrop();
-            console.log('test');
+     this.dropService.getDrops().subscribe((drops: any) => {
+          drops.forEach((singledrop) => {
+              const dropGroup = leaflet.featureGroup();
+              // check visibleDrops array of user for drops and add them
+              const dist = this.checkDropDistance(singledrop);
+              if (dist < 150) {
+                this.setDropVisible(singledrop);
+              } else {
+                    const drop: any = leaflet.marker([singledrop.latitude, singledrop.longitude], {icon: greyDropIcon})
+                        .on('click', () => {
+                        console.log('Marker clicked');
+                    });
+                    dropGroup.addLayer(drop);
+                    this.map.addLayer(dropGroup);
+              }
           });
-        dropGroup.addLayer(drop);
-        this.map.addLayer(dropGroup);
-      });
+     });
+  }
+  checkDropDistance(drop) {
+    const dist = Geolib.getDistance(
+        {latitude: this.appComponent.latitude, longitude: this.appComponent.longitude},
+        {latitude: drop.latitude, longitude: drop.longitude}
+    );
+    console.log(dist);
+    return dist;
+  }
+  setDropVisible(drop) {
+    // add Drop to visibleDrops array in Firebase
+    this.addVisibleDropToMap(drop);
+  }
+  addVisibleDropToMap(dropParam) {
+    const coloredDropIcon = leaflet.icon({
+      iconUrl: '../../../assets/icon/colored-drop.png',
+      shadowUrl: '../../../assets/icon/drop-shadow.svg',
+
+      iconSize:     [25, 30], // size of the icon
+      shadowSize:   [25, 30], // size of the shadow
+      iconAnchor:   [0, 0], // point of the icon which will correspond to marker's location
+      shadowAnchor: [2, -2],  // the same for the shadow
+      popupAnchor:  [-3, -5] // point from which the popup should open relative to the iconAnchor
     });
+    const dropGroup = leaflet.featureGroup();
+    const drop: any = leaflet.marker([dropParam.latitude, dropParam.longitude], {icon: coloredDropIcon})
+    .on('click', () => {
+      // add link to detail page of this drop
+    });
+    dropGroup.addLayer(drop);
+    this.map.addLayer(dropGroup);
   }
 }
