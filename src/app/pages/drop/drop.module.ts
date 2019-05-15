@@ -5,14 +5,14 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { AddDropPage } from './add-drop.page';
+import { DropPage } from './drop.page';
 import { Device } from '@ionic-native/device/ngx';
 import { AppComponent } from '../../app.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: AddDropPage
+    component: DropPage
   }
 ];
 
@@ -27,6 +27,6 @@ const routes: Routes = [
     Device,
     AppComponent
   ],
-  declarations: [AddDropPage]
+  declarations: [DropPage]
 })
-export class AddDropPageModule {}
+export class DropPageModule {}

@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Drop, DropService } from '../../services/drop.service';
+import { Events, IonSelect, NavController } from '@ionic/angular';
 
 
 @Component({
@@ -11,7 +12,13 @@ export class AccountPage implements OnInit {
   allDrops: Drop[];
   myDrops: Drop[];
 
-  constructor(private dropService: DropService) { }
+  @ViewChild('showSelect') selectRef: IonSelect;
+
+  openSelect() {
+    this.selectRef.open();
+  }
+
+  constructor(private dropService: DropService, public navCtrl: NavController, public events: Events) { }
 
   ngOnInit() {
     this.dropService.getDrops().subscribe(res => {
@@ -24,6 +31,10 @@ export class AccountPage implements OnInit {
   }
 
   remove(item) {
+    this.dropService.removeDrop(item.id);
+  }
+
+  showMore(item) {
     this.dropService.removeDrop(item.id);
   }
 }

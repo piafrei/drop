@@ -9,6 +9,10 @@
   }
 }
 
+#map {
+  background: $white;
+}
+
 ion-badge {
   font-size: 10px;
 }
@@ -18,8 +22,8 @@ ion-toolbar {
 }
 
 .drop-button {
-  padding: 10px 30px;
-  border-radius: 99em;
+  padding: $button-padding;
+  border-radius: $border-radius-rounded;
   @include gradient-horizontal($primary, $quaternary);
   color: #fff;
   margin: 0 0 20px 0;
@@ -51,20 +55,136 @@ ion-toolbar {
     content: "";
     width: 2px;
     height: 30px;
-    border-radius: 99em;
+    border-radius: $border-radius;
     background: $primary;
     margin-right: 5px;
   }
 }
 
+.category {
+  background: $primary;
+  border-radius: $border-radius-rounded;
+  padding: 10px 16px;
+  color: $white;
+  display: inline-block;
+  margin-bottom: 20px;
+  font: {
+    size: 16px;
+  }
+  text-transform: uppercase;
+}
+
 .voting {
+  display: flex;
+  margin-top: 20px;
+  justify-content: space-between;
+  align-items: center;
+  .voting-buttons {
+    display: flex;
+    //justify-content: space-between;
+    //margin: 0 -10px;
+    align-items: center;
+    button {
+      position: relative;
+      width: 50px;
+      height: 50px;
+      background: $primary;
+      border-radius: $border-radius-rounded;
+      color: $white;
+      margin: 0 10px;
+      img {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+    }
+  }
+  .rating {
+
+  }
+}
+
+.drop-comments {
+  margin-top: 50px;
+}
+
+.comment {
+  display: flex;
+  //justify-content: space-between;
+  align-items: center;
+  .comment-text {
+    background: $gray-light;
+    padding: 10px 20px;
+    border-radius: $border-radius;
+  }
+}
+
+.edit-icon {
+  transform: rotate(0);
+}
+
+.drop-view {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  button {
-    padding: 10px 30px;
-    background: $primary;
-    border-radius: 99em;
-    color: $white;
+  .text-content {
+    width: 100%;
   }
+  .edit-icon {
+    padding: 10px;
+  }
+}
+
+.add-comment {
+  position: relative;
+  width: 50px;
+  height: 50px;
+  background: $primary;
+  border-radius: $border-radius-rounded;
+  color: $white;
+  margin-top: 20px;
+  img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 35px;
+    height: auto;
+  }
+}
+
+.text-content {
+  background: $gray-light;
+  padding: 10px 20px;
+  border-radius: $border-radius;
+  width: 100%;
+}
+
+.account-item {
+  display: flex;
+  justify-content: space-between;
+  .account-content {
+    width: 100%;
+  }
+}
+
+.drop-score {
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px;
+  p {
+
+  }
+}
+
+.more-button {
+  border: none;
+}
+.item-inner {
+  border: none !important;
+}
+
+.select-field {
+  display: none;
 }

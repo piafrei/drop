@@ -4,6 +4,8 @@ import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
+import {User, UserService} from './services/user.service';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -17,7 +19,8 @@ export class AppComponent {
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
-    private geolocation: Geolocation
+    private geolocation: Geolocation,
+    private userService: UserService
   ) {
     this.initializeApp();
   }
@@ -33,7 +36,13 @@ export class AppComponent {
           this._latitude = data.coords.latitude;
           this._longitude = data.coords.longitude;
       });
+
+      this.addUser();
   }
+    addUser() {
+      this.userService.addUser();
+    }
+
     get longitude(): number {
         return this._longitude;
     }

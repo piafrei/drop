@@ -13,7 +13,8 @@ import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
 import { AngularFirestoreModule, FirestoreSettingsToken } from '@angular/fire/firestore';
 import { Device } from '@ionic-native/device/ngx';
-import { Geolocation } from '@ionic-native/geolocation/ngx';
+import {Geolocation} from '@ionic-native/geolocation/ngx';
+import {UserService} from './services/user.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -30,6 +31,8 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
     Device,
     SplashScreen,
     Geolocation,
+    UserService,
+    Device,
     { provide: FirestoreSettingsToken, useValue: {} },
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],

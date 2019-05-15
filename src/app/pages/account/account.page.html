@@ -14,8 +14,6 @@
     <span class="score">500</span>
   </div>
 
-
-
   <ion-list>
 
     <ng-container *ngIf="!myDrops || myDrops.length == 0">
@@ -27,21 +25,29 @@
       </div>
     </ng-container>
 
-    <ion-item-sliding *ngFor="let item of myDrops">
-      <ion-item lines="inset" button [routerLink]="['/details', item.id]">
-        <ion-label>
-          {{ item.description }}
-        </ion-label>
-        <ion-note slot="end" color="primary">{{ item.score }}</ion-note>
-      </ion-item>
 
-      <ion-item-options side="end">
-        <ion-item-option (click)="remove(item)" color="danger">
-          Delete
-          <ion-icon name="trash" slot="end"></ion-icon>
-        </ion-item-option>
-      </ion-item-options>
-    </ion-item-sliding>
+    <div class="account-drop-wrapper" *ngFor="let item of myDrops">
+      <div class="account-item">
+        <div class="account-content" [routerLink]="['/drop', item.id]">
+          <div class="text-content">
+            {{ item.description }}
+          </div>
+          <div class="drop-score">
+            <ion-progress-bar color="primary" value="0.5"></ion-progress-bar>
+            <p>{{ item.score }}</p>
+          </div>
+        </div>
+        <ion-item class="more-button">
+          <ion-icon name="more" class="edit-icon" (click)="openSelect()"></ion-icon>
+
+          <ion-select class="select-field" interface="action-sheet" name="showMore" (ionChange)="showMore(item)" #showSelect>
+            <ion-select-option value="delete">Löschen</ion-select-option>
+            <!--(click)="remove(item)"-->
+            <ion-select-option value="edit">Bearbeiten</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </div>
+    </div>
 
   </ion-list>
 
