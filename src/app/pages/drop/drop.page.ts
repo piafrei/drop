@@ -1,16 +1,16 @@
-import { Drop, DropService } from '../../services/drop.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { NavController, LoadingController } from '@ionic/angular';
-import {Device} from '@ionic-native/device/ngx';
-import {AppComponent} from '../../app.component';
+import { LoadingController, NavController } from '@ionic/angular';
+import { Drop, DropService } from '../../services/drop.service';
+import { Device } from '@ionic-native/device/ngx';
+import { AppComponent } from '../../app.component';
 
 @Component({
-  selector: 'app-add-drop',
-  templateUrl: './add-drop.page.html',
-  styleUrls: ['./add-drop.page.scss'],
+  selector: 'app-drop',
+  templateUrl: './drop.page.html',
+  styleUrls: ['./drop.page.scss'],
 })
-export class AddDropPage implements OnInit {
+export class DropPage implements OnInit {
   dropId = null;
 
   constructor (
@@ -62,12 +62,12 @@ export class AddDropPage implements OnInit {
 
     if (this.dropId) {
       if (this.drop.score <= -10) {
-      this.dropService.removeDrop(this.dropId);
+        this.dropService.removeDrop(this.dropId);
       } else {
-      this.dropService.updateDrop(this.drop, this.dropId).then(() => {
-        loading.dismiss();
-        this.nav.back();
-      });
+        this.dropService.updateDrop(this.drop, this.dropId).then(() => {
+          loading.dismiss();
+          this.nav.back();
+        });
       }
     } else {
       this.dropService.addDrop(this.drop).then(() => {

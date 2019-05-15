@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-toolbar class="header-close" color="transparent">
+    <ion-buttons slot="end" routerLink="/home">
+      <ion-icon name="close"></ion-icon>
+    </ion-buttons>
+    <img src="assets/images/close-icon-bg.svg" alt="Close Icon Background" class="close-icon-bg">
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="maincontent" padding>
+  <div class="drop">
+    <div class="category">
+      Essen
+    </div>
+    <div class="drop-view">
+      <div class="text-content">
+        {{ drop.description }}
+      </div>
+      <ion-select interface="action-sheet">
+        <ion-select-option value="report">Melden</ion-select-option>
+        <ion-select-option value="edit">Bearbeiten</ion-select-option>
+      </ion-select>
+    </div>
+    <div class="voting">
+      <div class="voting-buttons">
+        <button><img src="assets/icon/upvote.svg" alt="Upvote Button"></button>
+        <button><img src="assets/icon/downvote.svg" alt="Downvote Button"></button>
+      </div>
+      <div class="rating">
+        150
+      </div>
+    </div>
+  </div>
+  <div class="drop-comments">
+    <div class="comment">
+      <div class="comment-text">
+        Test123
+      </div>
+      <ion-select interface="action-sheet">
+        <ion-select-option value="report">Melden</ion-select-option>
+        <ion-select-option value="edit">Bearbeiten</ion-select-option>
+      </ion-select>
+    </div>
+    <button class="add-comment" routerLink="/add-comment">
+      <img src="assets/icon/add-drop-icon.svg" alt="Kommentar hinzufügen" />
+    </button>
+  </div>
+</ion-content>

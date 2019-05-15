@@ -6,7 +6,9 @@ import { RouterModule } from '@angular/router';
 
 import { HomePage } from './home.page';
 import { Drop, DropService } from '../../services/drop.service';
-import {AppComponent} from "../../app.component";
+import {AppComponent} from '../../app.component';
+import { AddDropPage } from '../add-drop/add-drop.page';
+// import { DropDetailPage } from '../drop-detail/drop-detail.page';
 
 @NgModule({
   imports: [
@@ -22,7 +24,8 @@ import {AppComponent} from "../../app.component";
   ],
   providers: [
       DropService,
-      AppComponent
+      AppComponent,
+      AddDropPage
   ],
   declarations: [HomePage]
 })

@@ -5,6 +5,7 @@ import leaflet from 'leaflet';
 import { NavController } from '@ionic/angular';
 import { Drop, DropService } from '../../services/drop.service';
 import {AppComponent} from '../../app.component';
+// import { AddDropPage } from '../add-drop/add-drop.page';
 
 @Component({
   selector: 'app-home',
@@ -23,33 +24,36 @@ export class HomePage {
     this.loadmap();
   }
   loadmap() {
-      const positionIcon = leaflet.icon({
-          iconUrl: '../../../assets/icon/position.png',
-          shadowUrl: '../../../assets/icon/position-shadow.svg',
+    const positionIcon = leaflet.icon({
+      iconUrl: '../../../assets/icon/position.png',
+      shadowUrl: '../../../assets/icon/position-shadow.svg',
 
-          iconSize:     [30, 30], // size of the icon
-          shadowSize:   [30, 30], // size of the shadow
-          iconAnchor:   [0, 0], // point of the icon which will correspond to marker's location
-          shadowAnchor: [2, -2],  // the same for the shadow
-          popupAnchor:  [0, 0]  // point from which the popup should open relative to the iconAnchor
-      });
+      iconSize: [30, 30], // size of the icon
+      shadowSize: [30, 30], // size of the shadow
+      iconAnchor: [0, 0], // point of the icon which will correspond to marker's location
+      shadowAnchor: [2, -2], // the same for the shadow
+      popupAnchor: [0, 0] // point from which the popup should open relative to the iconAnchor
+    });
     this.map = leaflet.map('map').fitWorld();
     leaflet
-      .tileLayer('https://api.maptiler.com/maps/positron/{z}/{x}/{y}.png?key=JrASdfPCkNw3CYBKAD6E', {
-        attributions:
-          'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
-        maxZoom: 18
-      })
+      .tileLayer(
+        'https://api.maptiler.com/maps/positron/{z}/{x}/{y}.png?key=JrASdfPCkNw3CYBKAD6E',
+        {
+          attributions:
+            'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+          maxZoom: 18
+        }
+      )
       .addTo(this.map);
     this.map
       .locate({
         setView: true,
-        maxZoom: 10
+        maxZoom: 15
       })
       .on('locationfound', e => {
         const markerGroup = leaflet.featureGroup();
         const marker: any = leaflet
-          .marker([e.latitude, e.longitude], {icon: positionIcon})
+          .marker([e.latitude, e.longitude], { icon: positionIcon })
           .on('click', () => {
             console.log('Marker clicked');
           });
@@ -66,12 +70,12 @@ export class HomePage {
           iconUrl: '../../../assets/icon/grey-drop.png',
           shadowUrl: '../../../assets/icon/drop-shadow.svg',
 
-          iconSize:     [25, 30], // size of the icon
-          shadowSize:   [25, 30], // size of the shadow
-          iconAnchor:   [0, 0], // point of the icon which will correspond to marker's location
-          shadowAnchor: [2, -2],  // the same for the shadow
-          popupAnchor:  [-3, -5] // point from which the popup should open relative to the iconAnchor
-      });
+      iconSize: [25, 30], // size of the icon
+      shadowSize: [25, 30], // size of the shadow
+      iconAnchor: [0, 0], // point of the icon which will correspond to marker's location
+      shadowAnchor: [2, -2], // the same for the shadow
+      popupAnchor: [-3, -5] // point from which the popup should open relative to the iconAnchor
+    });
 
      this.dropService.getDrops().subscribe((drops: any) => {
           drops.forEach((singledrop) => {

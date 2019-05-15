@@ -11,7 +11,7 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
-import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFirestoreModule, FirestoreSettingsToken } from '@angular/fire/firestore';
 import { Device } from '@ionic-native/device/ngx';
 import {Geolocation} from '@ionic-native/geolocation/ngx';
 import {UserService} from './services/user.service';
@@ -33,6 +33,7 @@ import {UserService} from './services/user.service';
     Geolocation,
     UserService,
     Device,
+    { provide: FirestoreSettingsToken, useValue: {} },
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
