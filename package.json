@@ -39,7 +39,8 @@
     "es6-promise-plugin": "^4.2.2",
     "leaflet": "^1.4.0",
     "rxjs": "~6.3.3",
-    "zone.js": "~0.8.29"
+    "zone.js": "~0.8.29",
+    "geolib": "latest"
   },
   "devDependencies": {
     "@angular-devkit/architect": "~0.12.3",

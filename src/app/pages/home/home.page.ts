@@ -77,9 +77,9 @@ export class HomePage {
           drops.forEach((singledrop) => {
               const dropGroup = leaflet.featureGroup();
               // check visibleDrops array of user for drops and add them
-              let dist = this.checkDropDistance(singledrop.id);
+              const dist = this.checkDropDistance(singledrop);
               if (dist < 150) {
-                this.setDropVisible(singledrop.id);
+                this.setDropVisible(singledrop);
               } else {
                     const drop: any = leaflet.marker([singledrop.latitude, singledrop.longitude], {icon: greyDropIcon})
                         .on('click', () => {
@@ -91,21 +91,19 @@ export class HomePage {
           });
      });
   }
-  checkDropDistance(id){
-    const singledrop = this.dropService.getDrop(id);
+  checkDropDistance(drop) {
     const dist = Geolib.getDistance(
         {latitude: this.appComponent.latitude, longitude: this.appComponent.longitude},
-        {latitude: singledrop.latitude, longitude: singledrop.longitude}
+        {latitude: drop.latitude, longitude: drop.longitude}
     );
     alert(dist);
     return dist;
   }
-  setDropVisible(id){
+  setDropVisible(drop) {
     // add Drop to visibleDrops array in Firebase
-    this.addVisibleDropToMap(id);
+    this.addVisibleDropToMap(drop);
   }
-  addVisibleDropToMap(id){
-    const singledrop = this.dropService.getDrop(id);
+  addVisibleDropToMap(dropParam) {
     const coloredDropIcon = leaflet.icon({
       iconUrl: '../../../assets/icon/colored-drop.png',
       shadowUrl: '../../../assets/icon/drop-shadow.svg',
@@ -117,7 +115,7 @@ export class HomePage {
       popupAnchor:  [-3, -5] // point from which the popup should open relative to the iconAnchor
     });
     const dropGroup = leaflet.featureGroup();
-    const drop: any = leaflet.marker([singledrop.latitude, singledrop.longitude], {icon: coloredDropIcon})
+    const drop: any = leaflet.marker([dropParam.latitude, dropParam.longitude], {icon: coloredDropIcon})
     .on('click', () => {
       // add link to detail page of this drop
     });
