@@ -34,10 +34,10 @@ export class AppComponent {
           this._longitude = data.coords.longitude;
       });
   }
-    get longitude(): number {
-        return this._longitude;
-    }
-    get latitude(): number {
-        return this._latitude;
-    }
+  get longitude(): number {
+      return this._longitude;
+  }
+  get latitude(): number {
+      return this._latitude;
+  }
 }

@@ -106,7 +106,7 @@ ion-toolbar {
 }
 
 .drop-comments {
-  margin-top: 35px;
+  margin-top: 50px;
 }
 
 .comment {
@@ -121,7 +121,7 @@ ion-toolbar {
 }
 
 .edit-icon {
-  transform: rotate(90deg);
+  transform: rotate(0);
 }
 
 .drop-view {
@@ -159,4 +159,32 @@ ion-toolbar {
   padding: 10px 20px;
   border-radius: $border-radius;
   width: 100%;
+}
+
+.account-item {
+  display: flex;
+  justify-content: space-between;
+  .account-content {
+    width: 100%;
+  }
+}
+
+.drop-score {
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px;
+  p {
+
+  }
+}
+
+.more-button {
+  border: none;
+}
+.item-inner {
+  border: none !important;
+}
+
+.select-field {
+  display: none;
 }

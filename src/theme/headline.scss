@@ -9,6 +9,12 @@ ion-header {
 .header-close {
   height: 80px;
   contain: none;
+
+  .back-button {
+    position: relative;
+    z-index: 250;
+  }
+
   ion-icon {
     width: 30px;
     height: 30px;
