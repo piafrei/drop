@@ -51,13 +51,13 @@ export class HomePage {
         const marker: any = leaflet
           .marker([e.latitude, e.longitude], {icon: positionIcon})
           .on('click', () => {
-            alert('Marker clicked');
+            console.log('Marker clicked');
           });
         markerGroup.addLayer(marker);
         this.map.addLayer(markerGroup);
       })
       .on('locationerror', err => {
-        alert(err.message);
+        console.log(err.message);
       });
     this.loadMarkers();
   }
@@ -83,7 +83,7 @@ export class HomePage {
               } else {
                     const drop: any = leaflet.marker([singledrop.latitude, singledrop.longitude], {icon: greyDropIcon})
                         .on('click', () => {
-                        alert('Marker clicked');
+                        console.log('Marker clicked');
                     });
                     dropGroup.addLayer(drop);
                     this.map.addLayer(dropGroup);
@@ -96,7 +96,7 @@ export class HomePage {
         {latitude: this.appComponent.latitude, longitude: this.appComponent.longitude},
         {latitude: drop.latitude, longitude: drop.longitude}
     );
-    alert(dist);
+    console.log(dist);
     return dist;
   }
   setDropVisible(drop) {
