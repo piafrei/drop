@@ -28,7 +28,7 @@
     </ng-container>
 
     <ion-item-sliding *ngFor="let item of myDrops">
-      <ion-item lines="inset" button [routerLink]="['/details', item.id]">
+      <ion-item lines="inset" button [routerLink]="['/drop', item.id]">
         <ion-label>
           {{ item.description }}
         </ion-label>

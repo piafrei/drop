@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-toolbar class="header-close" color="transparent">
+    <ion-buttons slot="end" routerLink="/home">
+      <ion-icon name="close"></ion-icon>
+    </ion-buttons>
+    <img src="assets/images/close-icon-bg.svg" alt="Close Icon Background" class="close-icon-bg">
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="maincontent" padding>
+  <div class="drop-view">
+    <div class="text-content">
+      {{ drop.description }}
+    </div>
+    <ion-icon name="more" class="edit-icon" slot="end"></ion-icon>
+  </div>
+  <div class="voting">
+    <button><img src="assets/icon/upvote.svg" alt="Upvote Button"></button>
+    <button><img src="assets/icon/downvote.svg" alt="Downvote Button"></button>
+  </div>
+</ion-content>
