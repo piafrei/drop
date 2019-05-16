@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import {Device} from '@ionic-native/device/ngx';
+import { Device } from '@ionic-native/device/ngx';
 
 export interface Drop {
   id?: string;
