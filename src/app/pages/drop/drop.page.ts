@@ -4,6 +4,7 @@ import { LoadingController, NavController } from '@ionic/angular';
 import { Drop, DropService } from '../../services/drop.service';
 import { Device } from '@ionic-native/device/ngx';
 import { AppComponent } from '../../app.component';
+import { userInfo } from 'os';
 
 @Component({
   selector: 'app-drop',
@@ -27,7 +28,8 @@ export class DropPage implements OnInit {
     latitude: this.appComponent.latitude,
     longitude: this.appComponent.longitude,
     score: 0,
-    deviceID: this.getInfo()
+    deviceID: this.getInfo(),
+    votedBy: []
   };
 
   ngOnInit() {
@@ -75,14 +77,41 @@ export class DropPage implements OnInit {
       });
     }
   }
-  voteUp(score) {
-    this.drop.score = score + 1;
-    console.log(score);
-    this.dropService.updateDrop(this.drop, this.dropId);
+  voteUp(score, votedBy) {
+    let allowedtovote = true;
+    let currentUuid = this.device.uuid;
+    votedBy.forEach(function(uuid) {
+      console.log(uuid);
+      if (uuid === currentUuid) {
+        console.log('bereits gevoted');
+        allowedtovote = false;
+      }
+    });
+
+    if (allowedtovote === true) {
+      this.drop.score = score + 1;
+      console.log('new score: ' + score);
+      this.drop.votedBy.push(currentUuid);
+      this.dropService.updateDrop(this.drop, this.dropId);
+    }
   }
-  voteDown(score) {
-    this.drop.score = score - 1;
-    console.log(score);
-    this.dropService.updateDrop(this.drop, this.dropId);
+
+  voteDown(score, votedBy) {
+    let allowedtovote = true;
+    let currentUuid = this.device.uuid;
+    votedBy.forEach(function(uuid) {
+      console.log(uuid);
+      if (uuid === currentUuid) {
+        console.log('bereits gevoted');
+        allowedtovote = false;
+      }
+    });
+
+    if (allowedtovote === true) {
+      this.drop.score = score - 1;
+      console.log('new score: ' + score);
+      this.drop.votedBy.push(currentUuid);
+      this.dropService.updateDrop(this.drop, this.dropId);
+    }
   }
 }

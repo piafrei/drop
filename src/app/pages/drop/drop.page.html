@@ -27,10 +27,10 @@
     </div>
     <div class="voting">
       <div class="voting-buttons">
-        <button (click)="voteUp(drop.score)">
+        <button (click)="voteUp(drop.score, drop.votedBy)">
           <img src="assets/icon/upvote.svg" alt="Upvote Button" />
         </button>
-        <button (click)="voteDown(drop.score)">
+        <button (click)="voteDown(drop.score, drop.votedBy)">
           <img src="assets/icon/downvote.svg" alt="Downvote Button" />
         </button>
       </div>
