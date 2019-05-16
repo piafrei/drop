@@ -16,7 +16,7 @@ const routes: Routes = [
   { path: 'home/settings/about', loadChildren: './pages/settings/about/about.module#AboutPageModule' },
   { path: 'home/settings/impressum', loadChildren: './pages/settings/impressum/impressum.module#ImpressumPageModule' },
   { path: 'home/settings/privacy', loadChildren: './pages/settings/privacy/privacy.module#PrivacyPageModule' },
-  { path: 'home/settings/termsofuse', loadChildren: './pages/settings/termsofuse/termsofuse.module#TermsofusePageModule' }
+  // { path: 'home/settings/termsofuse', loadChildren: './pages/settings/termsofuse/termsofuse.module#TermsofusePageModule' }
 ];
 
 @NgModule({
