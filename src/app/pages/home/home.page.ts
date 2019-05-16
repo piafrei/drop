@@ -5,28 +5,30 @@ import leaflet from 'leaflet';
 import { NavController } from '@ionic/angular';
 import { Drop, DropService } from '../../services/drop.service';
 import {AppComponent} from '../../app.component';
+import { Router } from '@angular/router';
 // import { AddDropPage } from '../add-drop/add-drop.page';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: 'home.page.html',
-  styleUrls: ['home.page.scss']
+    selector: 'app-home',
+    templateUrl: 'home.page.html',
+    styleUrls: ['home.page.scss']
 })
 export class HomePage {
-  @ViewChild('map') mapContainer: ElementRef;
-  map: any;
-  constructor(
-      public navCtrl: NavController,
-      public dropService: DropService,
-      public appComponent: AppComponent
-  ) {}
-  ionViewDidEnter() {
-    this.loadmap();
-  }
-  loadmap() {
-    const positionIcon = leaflet.icon({
-      iconUrl: '../../../assets/icon/position.png',
-      shadowUrl: '../../../assets/icon/position-shadow.svg',
+    @ViewChild('map') mapContainer: ElementRef;
+    map: any;
+    constructor(
+        private router: Router,
+        public navCtrl: NavController,
+        public dropService: DropService,
+        public appComponent: AppComponent
+    ) {}
+    ionViewDidEnter() {
+        this.loadmap();
+    }
+    loadmap() {
+        const positionIcon = leaflet.icon({
+            iconUrl: '../../../assets/icon/position.png',
+            shadowUrl: '../../../assets/icon/position-shadow.svg',
 
       iconSize: [30, 30], // size of the icon
       shadowSize: [30, 30], // size of the shadow
@@ -77,18 +79,18 @@ export class HomePage {
       popupAnchor: [-3, -5] // point from which the popup should open relative to the iconAnchor
     });
 
-     this.dropService.getDrops().subscribe((drops: any) => {
-          drops.forEach((singledrop) => {
-              const dropGroup = leaflet.featureGroup();
-              // check visibleDrops array of user for drops and add them
-              const dist = this.checkDropDistance(singledrop);
-              if (dist < 150) {
-                this.setDropVisible(singledrop);
-              } else {
+        this.dropService.getDrops().subscribe((drops: any) => {
+            drops.forEach((singledrop) => {
+                const dropGroup = leaflet.featureGroup();
+                // check visibleDrops array of user for drops and add them
+                const dist = this.checkDropDistance(singledrop);
+                if (dist < 1500) {
+                    this.setDropVisible(singledrop);
+                } else {
                     const drop: any = leaflet.marker([singledrop.latitude, singledrop.longitude], {icon: greyDropIcon})
                         .on('click', () => {
-                        console.log('Marker clicked');
-                    });
+                            console.log('Marker clicked');
+                        });
                     dropGroup.addLayer(drop);
                     this.map.addLayer(dropGroup);
               }
