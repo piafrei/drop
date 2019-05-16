@@ -1,5 +1,5 @@
-import { NgModule } from "@angular/core";
-import { PreloadAllModules, RouterModule, Routes } from "@angular/router";
+import { NgModule } from '@angular/core';
+import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -13,26 +13,10 @@ const routes: Routes = [
   { path: 'home/settings', loadChildren: './pages/settings/settings.module#SettingsPageModule' },
   { path: 'home/account', loadChildren: './pages/account/account.module#AccountPageModule' },
   { path: 'drop/:id', loadChildren: './pages/drop/drop.module#DropPageModule' },
-
-
-  {
-    path: "home/settings/about",
-    loadChildren: "./pages/settings/about/about.module#AboutPageModule"
-  },
-  {
-    path: "home/settings/impressum",
-    loadChildren:
-      "./pages/settings/impressum/impressum.module#ImpressumPageModule"
-  },
-  {
-    path: "home/settings/privacy",
-    loadChildren: "./pages/settings/privacy/privacy.module#PrivacyPageModule"
-  },
-  {
-    path: "home/settings/termsofuse",
-    loadChildren:
-      "./pages/settings/termsofuse/termsofuse.module#TermsofusePageModule"
-  }
+  { path: 'home/settings/about', loadChildren: './pages/settings/about/about.module#AboutPageModule' },
+  { path: 'home/settings/impressum', loadChildren: './pages/settings/impressum/impressum.module#ImpressumPageModule' },
+  { path: 'home/settings/privacy', loadChildren: './pages/settings/privacy/privacy.module#PrivacyPageModule' },
+  { path: 'home/settings/termsofuse', loadChildren: './pages/settings/termsofuse/termsofuse.module#TermsofusePageModule' }
 ];
 
 @NgModule({

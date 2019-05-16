@@ -40,9 +40,8 @@
         <ion-item class="more-button">
           <ion-icon name="more" class="edit-icon" (click)="openSelect()"></ion-icon>
 
-          <ion-select class="select-field" interface="action-sheet" name="showMore" (ionChange)="showMore(item)" #showSelect>
+          <ion-select class="select-field" interface="action-sheet" (ionChange)="showMore(item, $event)" #showSelect>
             <ion-select-option value="delete">Löschen</ion-select-option>
-            <!--(click)="remove(item)"-->
             <ion-select-option value="edit">Bearbeiten</ion-select-option>
           </ion-select>
         </ion-item>

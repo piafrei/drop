@@ -9,11 +9,18 @@
 
 <ion-content padding class="maincontent">
   <!--<h1>Neuen Drop erstellen</h1>-->
-  <ion-list lines="full">
-    <ion-item class="drop-view">
-      <ion-input class="drop-text" autofocus required type="text" placeholder="Type your drop here." [(ngModel)]="drop.description"></ion-input>
-    </ion-item>
-  </ion-list>
+  <ion-textarea class="drop-text" autofocus required type="text" placeholder="Type your drop here." [(ngModel)]="drop.description" maxlength="250" minlength="10" #dropContent="ngModel"></ion-textarea>
+  <div *ngIf="dropContent.invalid && (dropContent.dirty || dropContent.touched)" class="alert-text">
+    <div *ngIf="dropContent.errors.required">
+      Der Drop darf nicht leer sein.
+    </div>
+    <div *ngIf="dropContent.errors.minlength">
+      Der Drop muss mindestens 10 Zeichen beinhalten.
+    </div>
+    <div *ngIf="dropContent.errors.maxlength">
+      Der Drop darf Maximal 250 Zeichen beinhalten
+    </div>
+  </div>
 </ion-content>
 
 <ion-footer>

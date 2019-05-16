@@ -1,5 +1,5 @@
 import { Drop, DropService } from '../../services/drop.service';
-import { Component, OnInit } from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NavController, LoadingController } from '@ionic/angular';
 import {Device} from '@ionic-native/device/ngx';
@@ -9,6 +9,7 @@ import {AppComponent} from '../../app.component';
   selector: 'app-add-drop',
   templateUrl: './add-drop.page.html',
   styleUrls: ['./add-drop.page.scss'],
+
 })
 export class AddDropPage implements OnInit {
   dropId = null;

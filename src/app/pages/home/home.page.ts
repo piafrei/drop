@@ -100,7 +100,7 @@ export class HomePage {
         {latitude: this.appComponent.latitude, longitude: this.appComponent.longitude},
         {latitude: drop.latitude, longitude: drop.longitude}
     );
-    console.log(dist);
+    // console.log(dist);
     return dist;
   }
   setDropVisible(drop) {

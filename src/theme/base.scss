@@ -1,12 +1,15 @@
+body {
+  font: {
+    family: 'Nunito', sans-serif;
+    size: 20px;
+  }
+}
+
 .fake-skeleton {
   width: 80%;
 }
 * {
   --border-width: 0!important;
-  font: {
-    family: 'Nunito', sans-serif;
-    size: 20px;
-  }
 }
 
 #map {
@@ -124,16 +127,14 @@ ion-toolbar {
   transform: rotate(0);
 }
 
-.drop-view {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  .text-content {
-    width: 100%;
+.drop-text {
+  display: block;
+}
+.alert-text {
+  font: {
+    size: 10px;
   }
-  .edit-icon {
-    padding: 10px;
-  }
+  color: $danger;
 }
 
 .add-comment {
