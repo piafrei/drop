@@ -8,18 +8,18 @@ import { AppComponent } from '../../app.component';
 @Component({
   selector: 'app-drop',
   templateUrl: './drop.page.html',
-  styleUrls: ['./drop.page.scss'],
+  styleUrls: ['./drop.page.scss']
 })
 export class DropPage implements OnInit {
   dropId = null;
 
-  constructor (
-      private route: ActivatedRoute,
-      private nav: NavController,
-      private dropService: DropService,
-      private loadingController: LoadingController,
-      private device: Device,
-      private appComponent: AppComponent,
+  constructor(
+    private route: ActivatedRoute,
+    private nav: NavController,
+    private dropService: DropService,
+    private loadingController: LoadingController,
+    private device: Device,
+    private appComponent: AppComponent
   ) {}
   drop: Drop = {
     createdAt: new Date().getTime(),
@@ -27,12 +27,12 @@ export class DropPage implements OnInit {
     latitude: this.appComponent.latitude,
     longitude: this.appComponent.longitude,
     score: 0,
-    deviceID: this.getInfo(),
+    deviceID: this.getInfo()
   };
 
   ngOnInit() {
     this.dropId = this.route.snapshot.params['id'];
-    if (this.dropId)  {
+    if (this.dropId) {
       this.loadDrop();
     }
   }
@@ -54,7 +54,6 @@ export class DropPage implements OnInit {
   }
 
   async saveDrop() {
-
     const loading = await this.loadingController.create({
       message: 'Speichern...'
     });
@@ -75,5 +74,15 @@ export class DropPage implements OnInit {
         this.nav.back();
       });
     }
+  }
+  voteUp(score) {
+    this.drop.score = score + 1;
+    console.log(score);
+    this.dropService.updateDrop(this.drop, this.dropId);
+  }
+  voteDown(score) {
+    this.drop.score = score - 1;
+    console.log(score);
+    this.dropService.updateDrop(this.drop, this.dropId);
   }
 }

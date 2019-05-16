@@ -3,7 +3,11 @@
     <ion-buttons slot="end" routerLink="/home">
       <ion-icon name="close"></ion-icon>
     </ion-buttons>
-    <img src="assets/images/close-icon-bg.svg" alt="Close Icon Background" class="close-icon-bg">
+    <img
+      src="assets/images/close-icon-bg.svg"
+      alt="Close Icon Background"
+      class="close-icon-bg"
+    />
   </ion-toolbar>
 </ion-header>
 
@@ -23,11 +27,15 @@
     </div>
     <div class="voting">
       <div class="voting-buttons">
-        <button><img src="assets/icon/upvote.svg" alt="Upvote Button"></button>
-        <button><img src="assets/icon/downvote.svg" alt="Downvote Button"></button>
+        <button (click)="voteUp(drop.score)">
+          <img src="assets/icon/upvote.svg" alt="Upvote Button" />
+        </button>
+        <button (click)="voteDown(drop.score)">
+          <img src="assets/icon/downvote.svg" alt="Downvote Button" />
+        </button>
       </div>
       <div class="rating">
-        150
+        {{ drop.score }}
       </div>
     </div>
   </div>
