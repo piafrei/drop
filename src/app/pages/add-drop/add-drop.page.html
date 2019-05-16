@@ -10,14 +10,14 @@
 <ion-content padding class="maincontent">
   <!--<h1>Neuen Drop erstellen</h1>-->
   <ion-textarea class="drop-text" autofocus required type="text" placeholder="Type your drop here." [(ngModel)]="drop.description" maxlength="250" minlength="10" #dropContent="ngModel"></ion-textarea>
-  <div *ngIf="dropContent.invalid && (dropContent.dirty || dropContent.touched)" class="alert-text">
-    <div *ngIf="dropContent.errors.required">
+  <div *ngIf="dropContent.invalid && (dropContent.dirty || dropContent.touched)">
+    <div *ngIf="dropContent.errors.required" class="alert-text">
       Der Drop darf nicht leer sein.
     </div>
-    <div *ngIf="dropContent.errors.minlength">
+    <div *ngIf="dropContent.errors.minlength" class="alert-text">
       Der Drop muss mindestens 10 Zeichen beinhalten.
     </div>
-    <div *ngIf="dropContent.errors.maxlength">
+    <div *ngIf="dropContent.errors.maxlength" class="alert-text">
       Der Drop darf Maximal 250 Zeichen beinhalten
     </div>
   </div>

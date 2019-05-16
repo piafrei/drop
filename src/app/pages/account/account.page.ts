@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import {Component, OnInit, QueryList, ViewChildren} from '@angular/core';
 import { Drop, DropService } from '../../services/drop.service';
 import { Events, IonSelect, NavController } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
@@ -13,10 +13,15 @@ export class AccountPage implements OnInit {
   allDrops: Drop[];
   myDrops: Drop[];
 
-  @ViewChild('showSelect') selectRef: IonSelect;
+  // Now it's a QueryList of IonSelect instances
+  @ViewChildren('showSelect') selectRefs: QueryList<IonSelect>;
 
-  openSelect() {
-    this.selectRef.open();
+  openSelect(item: any) {
+    const targetIndex = this.myDrops.findIndex(someItem => someItem.id === item.id);
+    if (targetIndex > -1) {
+      const targetIonSelect = this.selectRefs.toArray()[targetIndex];
+      targetIonSelect.open();
+    }
   }
 
   constructor(private dropService: DropService, public navCtrl: NavController, public events: Events, public alertController: AlertController) { }
@@ -48,10 +53,7 @@ export class AccountPage implements OnInit {
         {
           text: 'Abbrechen',
           role: 'cancel',
-          cssClass: 'secondary',
-          /*handler: () => {
-            console.log('Confirm Cancel: blah');
-          }*/
+          cssClass: 'secondary'
         }, {
           text: 'Löschen',
           handler: () => {

@@ -1,14 +1,11 @@
-body {
-  font: {
-    family: 'Nunito', sans-serif;
-    size: 20px;
-  }
-}
-
 .fake-skeleton {
   width: 80%;
 }
 * {
+  font: {
+    family: 'Nunito', sans-serif;
+    size: 20px;
+  }
   --border-width: 0!important;
 }
 
