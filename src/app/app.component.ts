@@ -4,8 +4,7 @@ import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
-import {User, UserService} from './services/user.service';
-import {Observable} from 'rxjs';
+import {UserService} from './services/user.service';
 
 @Component({
   selector: 'app-root',
