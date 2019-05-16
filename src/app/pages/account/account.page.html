@@ -37,14 +37,13 @@
             <p>{{ item.score }}</p>
           </div>
         </div>
-        <ion-item class="more-button">
-          <ion-icon name="more" class="edit-icon" (click)="openSelect()"></ion-icon>
-
-          <ion-select class="select-field" interface="action-sheet" (ionChange)="showMore(item, $event)" #showSelect>
-            <ion-select-option value="delete">Löschen</ion-select-option>
-            <ion-select-option value="edit">Bearbeiten</ion-select-option>
-          </ion-select>
-        </ion-item>
+          <ion-item class="more-button">
+            <ion-icon name="more" class="edit-icon" (click)="openSelect()"></ion-icon>
+            <ion-select class="select-field" interface="action-sheet" (ionChange)="showMore(item, $event)" #showSelect>
+              <ion-select-option value="delete">Löschen</ion-select-option>
+              <ion-select-option value="edit">Bearbeiten</ion-select-option>
+            </ion-select>
+          </ion-item>
       </div>
     </div>
 

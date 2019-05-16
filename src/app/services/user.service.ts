@@ -3,61 +3,56 @@ import {AngularFirestore, AngularFirestoreCollection} from '@angular/fire/firest
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {Device} from '@ionic-native/device/ngx';
-import {forEach} from '@angular-devkit/schematics';
-
 export interface User {
     id?: string;
     visibleDrops: Array<string>;
     deviceID: string;
 }
-
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class UserService {
-  private userCollection: AngularFirestoreCollection<User>;
-
-  private user: Observable<User[]>;
-
-  constructor(db: AngularFirestore, private device: Device) {
-   this.userCollection = db.collection('users');
-   this.user = this.userCollection.snapshotChanges().pipe(
-      map(actions => {
-      return actions.map(a => {
-        const data = a.payload.doc.data();
-        const id = a.payload.doc.id;
-        return { id, ...data };
+    private userCollection: AngularFirestoreCollection<User>;
+    private user: Observable<User[]>;
+    constructor(db: AngularFirestore, private device: Device) {
+        this.userCollection = db.collection('users');
+        this.user = this.userCollection.snapshotChanges().pipe(
+            map(actions => {
+                return actions.map(a => {
+                    const data = a.payload.doc.data();
+                    const id = a.payload.doc.id;
+                    return { id, ...data };
+                });
+            })
+        );
+    }
+    getAllUsers() {
+        return this.user;
+    }
+    addUser() {
+        const deviceId = this.device.uuid;
+        const users = this.getAllUsers();
+        let userArray = null;
+        users.subscribe(userElement => {
+            userArray = userElement as User[];
+            console.log('subscribed' + userArray);
         });
-        })
-    );
-  }
-
-  getAllUsers() {
-    return this.user;
-  }
-
-  getUser(id) {
-    return this.userCollection.doc<User>(id).valueChanges();
-  }
-
-  updateUser(user: User, id: string) {
-    return this.userCollection.doc(id).update(user);
-  }
-
-  addUser() {
-    const deviceId = this.device.uuid;
-    const users = this.getAllUsers();
-
-    users.forEach(function (value) {
-    });
-    const user: User = {
-     deviceID: deviceId,
-     visibleDrops: []
-   };
-    this.userCollection.add(user);
-  }
-
-  removeUser(id) {
-     return this.userCollection.doc(id).delete();
-  }
+        let userExists = false;
+        if (users != null) {
+            for (const userElement of userArray) {
+                if (userElement.deviceID === deviceId) {
+                    userExists = true;
+                }
+            }
+            if (userExists === false) {
+                const user: User = {
+                    deviceID: deviceId,
+                    visibleDrops: []
+                };
+                this.userCollection.add(user);
+            }
+        }
+    }
+    saveDrop() {
+    }
 }

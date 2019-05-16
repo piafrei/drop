@@ -48,10 +48,7 @@ export class AccountPage implements OnInit {
         {
           text: 'Abbrechen',
           role: 'cancel',
-          cssClass: 'secondary',
-          /*handler: () => {
-            console.log('Confirm Cancel: blah');
-          }*/
+          cssClass: 'secondary'
         }, {
           text: 'Löschen',
           handler: () => {

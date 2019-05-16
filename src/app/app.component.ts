@@ -37,7 +37,7 @@ export class AppComponent {
           this._longitude = data.coords.longitude;
       });
 
-      this.addUser();
+      // this.addUser();
   }
     addUser() {
       this.userService.addUser();
