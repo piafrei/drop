@@ -4,7 +4,6 @@ import { LoadingController, NavController } from '@ionic/angular';
 import { Drop, DropService } from '../../services/drop.service';
 import { Device } from '@ionic-native/device/ngx';
 import { AppComponent } from '../../app.component';
-import { userInfo } from 'os';
 
 @Component({
   selector: 'app-drop',
