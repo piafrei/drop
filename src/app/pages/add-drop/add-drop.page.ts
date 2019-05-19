@@ -2,8 +2,9 @@ import { Drop, DropService } from '../../services/drop.service';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NavController, LoadingController } from '@ionic/angular';
-import { Device } from '@ionic-native/device/ngx';
-import { AppComponent } from '../../app.component';
+import {Device} from '@ionic-native/device/ngx';
+import {AppComponent} from '../../app.component';
+import { v4 as uuid } from 'uuid';
 
 @Component({
   selector: 'app-add-drop',
@@ -28,7 +29,8 @@ export class AddDropPage implements OnInit {
     longitude: this.appComponent.longitude,
     score: 0,
     deviceID: this.getInfo(),
-    votedBy: []
+    votedBy: [],
+    dropID: uuid()
   };
 
   ngOnInit() {

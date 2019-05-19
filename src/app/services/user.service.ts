@@ -1,12 +1,13 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {AngularFirestore, AngularFirestoreCollection} from '@angular/fire/firestore';
 import {Observable} from 'rxjs';
-import {combineLatest, map} from 'rxjs/operators';
+import {map} from 'rxjs/operators';
 import {Device} from '@ionic-native/device/ngx';
+import {Drop} from './drop.service';
 
 export interface User {
     id?: string;
-    visibleDrops: Array<string>;
+    visibleDrops: Array<number>;
     deviceID: string;
 }
 
@@ -17,8 +18,10 @@ export class UserService {
   private userCollection: AngularFirestoreCollection<User>;
 
   private user: Observable<User[]>;
+  private db;
 
   constructor(db: AngularFirestore, private device: Device) {
+      this.db = db;
    this.userCollection = db.collection('users');
    this.user = this.userCollection.snapshotChanges().pipe(
       map(actions => {
@@ -31,39 +34,40 @@ export class UserService {
     );
   }
 
-  getAllUsers() {
-    return this.user;
-  }
-
   addUser() {
-    const deviceId = this.device.uuid;
-    const users = this.userCollection;
-    let userArray = null;
+    const deviceId = this.getDeviceId();
 
-    let userExists = false;
-    if (users != null) {
-    this.user.subscribe((products) => {
-       userArray = products;
-     });
+    this.db.firestore.doc('/users/' + deviceId).get()
+      .then(docSnapshot => {
+        if (docSnapshot.exists) {
+        console.log('User exists');
+        } else {
+        console.log('User doesnt exist');
+        const user: User = {
+            id: deviceId,
+            visibleDrops: [],
+            deviceID: deviceId
+        };
+        this.db.collection('users').doc(deviceId).set(user);
+        }
+    });
+    }
 
-    if (userArray != null) {
-    for (const userElement of userArray) {
-      if (userElement.deviceID === deviceId) {
-         userExists = true;
+    private getDeviceId() {
+      let deviceID = this.device.uuid;
+      if (deviceID == null) {
+          deviceID = 'DESKTOP';
       }
+      return deviceID;
     }
-    if (userExists === false) {
-      const user: User = {
-       deviceID: deviceId,
-       visibleDrops: []
-      };
-      this.userCollection.add(user);
-    }
-    }
-    }
-  }
 
-    saveDrop() {
-
+    saveDropToVisibleDrops(id: number) {
+     console.log('id to save' + id);
+     const deviceId = this.getDeviceId();
+     const userObservable = this.db.collection('users').doc(deviceId).get();
+     let userData;
+     userObservable.subscribe(val => userData = val.data());
+     return this.userCollection.doc<User>(deviceId).update({
+         visibleDrops: [id]});
     }
 }

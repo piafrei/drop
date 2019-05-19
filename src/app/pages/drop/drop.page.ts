@@ -28,6 +28,7 @@ export class DropPage implements OnInit {
     longitude: this.appComponent.longitude,
     score: 0,
     deviceID: this.getInfo(),
+    dropID: 0,
     votedBy: []
   };
 

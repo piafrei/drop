@@ -1,11 +1,9 @@
 import { Injectable } from '@angular/core';
-import {
-  AngularFirestore,
-  AngularFirestoreCollection
-} from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Device } from '@ionic-native/device/ngx';
+import {Device} from '@ionic-native/device/ngx';
+import {UserService} from './user.service';
 
 export interface Drop {
   id?: string;
@@ -16,11 +14,13 @@ export interface Drop {
   score: number;
   deviceID: string;
   votedBy: Array<string>;
+  dropID: number;
 }
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class DropService {
   private dropsCollection: AngularFirestoreCollection<Drop>;
   private myDropsCollection: AngularFirestoreCollection<Drop>;
@@ -28,7 +28,7 @@ export class DropService {
   private drops: Observable<Drop[]>;
   private myDrops: Observable<Drop[]>;
 
-  constructor(db: AngularFirestore, private device: Device) {
+    constructor(db: AngularFirestore, private device: Device, private userService: UserService) {
     const currentTime = new Date().getTime();
     const validPastTimeMillis = 540000000;
     const validMinTime = currentTime - validPastTimeMillis;
@@ -77,10 +77,14 @@ export class DropService {
   }
 
   addDrop(drop: Drop) {
+    console.log('User Service drop to save' + drop.id);
+    this.userService.saveDropToVisibleDrops(drop.dropID);
     return this.dropsCollection.add(drop);
   }
 
   removeDrop(id) {
     return this.dropsCollection.doc(id).delete();
   }
+
+
 }
