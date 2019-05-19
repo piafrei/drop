@@ -77,7 +77,7 @@ export class DropService {
   }
 
   addDrop(drop: Drop) {
-    console.log('User Service drop to save' + drop.dropID);
+    console.log('Drop Service id to save' + drop.dropID);
     this.userService.saveDropToVisibleDrops(drop.dropID);
     return this.dropsCollection.add(drop);
   }

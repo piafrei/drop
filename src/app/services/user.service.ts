@@ -62,12 +62,17 @@ export class UserService {
     }
 
     saveDropToVisibleDrops(id: number) {
-     console.log('id to save' + id);
+     console.log('User Service Id to save' + id);
      const deviceId = this.getDeviceId();
      const userObservable = this.db.collection('users').doc(deviceId).get();
      let userData;
-     userObservable.subscribe(val => userData = val.data());
-     return this.userCollection.doc<User>(deviceId).update({
-         visibleDrops: [id]});
+     let visibleDrops;
+     userObservable.subscribe(val => {
+       userData = val.data();
+       visibleDrops = userData.visibleDrops;
+       visibleDrops.push(id);
+       this.userCollection.doc<User>(deviceId).update({
+             visibleDrops: visibleDrops});
+     });
     }
 }
