@@ -77,7 +77,7 @@ export class DropService {
   }
 
   addDrop(drop: Drop) {
-    console.log('User Service drop to save' + drop.id);
+    console.log('User Service drop to save' + drop.dropID);
     this.userService.saveDropToVisibleDrops(drop.dropID);
     return this.dropsCollection.add(drop);
   }
@@ -86,5 +86,21 @@ export class DropService {
     return this.dropsCollection.doc(id).delete();
   }
 
+  isDropVisible(drop: Drop) {
+      const currentScore = drop.score;
+      const timeCreated = drop.createdAt;
 
+      let scoreMillis;
+      const currentTime = new Date().getTime();
+      const validPastMillis = 540000000;
+
+      console.log(currentTime);
+      if (currentScore < 0) {
+       scoreMillis = (currentScore * 14.4) * 3600000;
+       return (timeCreated + scoreMillis) > (currentTime - validPastMillis);
+      } else {
+          scoreMillis = currentScore * 3600000;
+          return (timeCreated + scoreMillis) > (currentTime - validPastMillis);
+      }
+    }
 }

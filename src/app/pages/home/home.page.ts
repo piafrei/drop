@@ -84,21 +84,23 @@ export class HomePage {
 
     this.dropService.getDrops().subscribe((drops: any) => {
       drops.forEach(singledrop => {
-        const dropGroup = leaflet.featureGroup();
-        // check visibleDrops array of user for drops and add them
-        const dist = this.checkDropDistance(singledrop);
-        if (dist < 1500) {
-          this.setDropVisible(singledrop);
-        } else {
-          const drop: any = leaflet
-            .marker([singledrop.latitude, singledrop.longitude], {
-              icon: greyDropIcon
-            })
-            .on('click', () => {
-              console.log('Marker clicked, but out of range');
-            });
-          dropGroup.addLayer(drop);
-          this.map.addLayer(dropGroup);
+        if (this.dropService.isDropVisible(singledrop)) {
+            const dropGroup = leaflet.featureGroup();
+            // check visibleDrops array of user for drops and add them
+            const dist = this.checkDropDistance(singledrop);
+            if (dist < 1500) {
+                this.setDropVisible(singledrop);
+            } else {
+                const drop: any = leaflet
+                    .marker([singledrop.latitude, singledrop.longitude], {
+                        icon: greyDropIcon
+                    })
+                    .on('click', () => {
+                        console.log('Marker clicked, but out of range');
+                    });
+                dropGroup.addLayer(drop);
+                this.map.addLayer(dropGroup);
+            }
         }
       });
     });
