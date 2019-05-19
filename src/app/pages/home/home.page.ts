@@ -6,6 +6,7 @@ import { NavController } from '@ionic/angular';
 import { Drop, DropService } from '../../services/drop.service';
 import { AppComponent } from '../../app.component';
 import { Router } from '@angular/router';
+import {UserService} from '../../services/user.service';
 // import { AddDropPage } from '../add-drop/add-drop.page';
 
 @Component({
@@ -20,7 +21,8 @@ export class HomePage {
     private router: Router,
     public navCtrl: NavController,
     public dropService: DropService,
-    public appComponent: AppComponent
+    public appComponent: AppComponent,
+    public userService: UserService
   ) {}
   ionViewDidEnter() {
     this.loadmap();
@@ -117,7 +119,7 @@ export class HomePage {
     return dist;
   }
   setDropVisible(drop) {
-    // add Drop to visibleDrops array in Firebase
+    this.userService.saveDropToVisibleDrops(drop.dropID);
     this.addVisibleDropToMap(drop);
   }
   addVisibleDropToMap(dropParam) {

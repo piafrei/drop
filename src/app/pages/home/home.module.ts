@@ -8,6 +8,7 @@ import { HomePage } from './home.page';
 import { Drop, DropService } from '../../services/drop.service';
 import {AppComponent} from '../../app.component';
 import { AddDropPage } from '../add-drop/add-drop.page';
+import {UserService} from '../../services/user.service';
 // import { DropDetailPage } from '../drop-detail/drop-detail.page';
 
 @NgModule({
@@ -25,7 +26,8 @@ import { AddDropPage } from '../add-drop/add-drop.page';
   providers: [
       DropService,
       AppComponent,
-      AddDropPage
+      AddDropPage,
+      UserService
   ],
   declarations: [HomePage]
 })
