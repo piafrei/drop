@@ -25,6 +25,7 @@ export class AddDropPage implements OnInit {
   drop: Drop = {
     createdAt: new Date().getTime(),
     description: '',
+    category: '',
     latitude: this.appComponent.latitude,
     longitude: this.appComponent.longitude,
     score: 0,

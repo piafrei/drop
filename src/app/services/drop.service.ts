@@ -9,6 +9,7 @@ export interface Drop {
   id?: string;
   createdAt: number;
   description: string;
+  category: string;
   latitude: number;
   longitude: number;
   score: number;
