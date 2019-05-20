@@ -90,9 +90,9 @@ export class HomePage {
             const dropGroup = leaflet.featureGroup();
             // check visibleDrops array of user for drops and add them
             const dist = this.checkDropDistance(singledrop);
-            if (dist < 1500) {
+            if (dist < 1500 && singledrop.score > -10) {
                 this.setDropVisible(singledrop);
-            } else {
+            } else if (singledrop.score > -10) {
                 const drop: any = leaflet
                     .marker([singledrop.latitude, singledrop.longitude], {
                         icon: greyDropIcon
