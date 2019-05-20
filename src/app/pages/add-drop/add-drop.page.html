@@ -9,6 +9,18 @@
 
 <ion-content padding class="maincontent">
   <!--<h1>Neuen Drop erstellen</h1>-->
+  <ion-item>
+    <ion-label>Kategorie</ion-label>
+    <ion-select [(ngModel)]="drop.category">
+      <ion-select-option value="Essen & Trinken">Essen & Trinken</ion-select-option>
+      <ion-select-option value="Kultur/Sehenswürdigkeiten">Kultur/Sehenswürdigkeiten</ion-select-option>
+      <ion-select-option value="Unterhaltung/Spaß">Unterhaltung/Spaß</ion-select-option>
+      <ion-select-option value="Überraschung">Überraschung</ion-select-option>
+      <ion-select-option value="Einkaufen">Einkaufen</ion-select-option>
+      <ion-select-option value="Nice Place">Nice Place</ion-select-option>
+      <ion-select-option value="Hidden Gem">Hidden Gem</ion-select-option>
+    </ion-select>
+  </ion-item>
   <ion-textarea class="drop-text" autofocus required type="text" placeholder="Type your drop here." [(ngModel)]="drop.description" maxlength="250" minlength="10" #dropContent="ngModel"></ion-textarea>
   <div *ngIf="dropContent.invalid && (dropContent.dirty || dropContent.touched)">
     <div *ngIf="dropContent.errors.required" class="alert-text">

@@ -52,7 +52,7 @@ export class HomePage {
     this.map
       .locate({
         setView: true,
-        maxZoom: 10
+        maxZoom: 18
       })
       .on('locationfound', e => {
         const markerGroup = leaflet.featureGroup();
