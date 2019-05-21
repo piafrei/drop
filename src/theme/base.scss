@@ -138,16 +138,16 @@ ion-toolbar {
   position: relative;
   width: 50px;
   height: 50px;
-  background: $primary;
+  background: transparent;
   border-radius: $border-radius-rounded;
-  color: $white;
   margin-top: 20px;
+  padding: 0;
   img {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 35px;
+    width: 50px;
     height: auto;
   }
 }
@@ -185,4 +185,17 @@ ion-toolbar {
 
 .select-field {
   display: none;
+}
+
+.category-select {
+  background: $gray-light;
+  padding: 10px 20px;
+  border-radius: $border-radius;
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  font: {
+    size: 16px;
+    weight: bold;
+  }
 }

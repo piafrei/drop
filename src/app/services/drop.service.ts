@@ -23,32 +23,32 @@ export interface Drop {
 })
 
 export class DropService {
-  private dropsCollection: AngularFirestoreCollection<Drop>;
-  private myDropsCollection: AngularFirestoreCollection<Drop>;
-  private kingdropsCollection: AngularFirestoreCollection<Drop>;
+private dropsCollection: AngularFirestoreCollection<Drop>;
+private myDropsCollection: AngularFirestoreCollection<Drop>;
+private kingdropsCollection: AngularFirestoreCollection<Drop>;
 
-  private drops: Observable<Drop[]>;
-  private myDrops: Observable<Drop[]>;
-  private kingDrops: Observable<Drop[]>;
+private drops: Observable<Drop[]>;
+private myDrops: Observable<Drop[]>;
+private kingDrops: Observable<Drop[]>;
 
-    constructor(db: AngularFirestore, private device: Device, private userService: UserService) {
-    const currentTime = new Date().getTime();
-    const validPastTimeMillis = 540000000;
-    const validMinTime = currentTime - validPastTimeMillis;
+constructor(db: AngularFirestore, private device: Device, private userService: UserService) {
+const currentTime = new Date().getTime();
+const validPastTimeMillis = 540000000;
+const validMinTime = currentTime - validPastTimeMillis;
 
-    this.dropsCollection = db.collection('drops', ref =>
-      ref.where('createdAt', '>=', validMinTime)
-    );
+this.dropsCollection = db.collection('drops', ref =>
+    ref.where('createdAt', '>=', validMinTime)
+);
 
-    this.drops = this.dropsCollection.snapshotChanges().pipe(
-      map(actions => {
+this.drops = this.dropsCollection.snapshotChanges().pipe(
+    map(actions => {
         return actions.map(a => {
-          const data = a.payload.doc.data();
-          const id = a.payload.doc.id;
-          return { id, ...data };
+            const data = a.payload.doc.data();
+            const id = a.payload.doc.id;
+            return { id, ...data };
         });
-      })
-    );
+    })
+);
 
     this.myDropsCollection = db.collection('drops', ref =>
       ref.where('deviceID', '==', this.device.uuid)
@@ -63,7 +63,7 @@ export class DropService {
       })
     );
 
-    const topDrops = 10;
+    const topDrops = 2;
 
     this.kingdropsCollection = db.collection('drops', ref =>
         ref.orderBy('score', 'desc').limit(topDrops)

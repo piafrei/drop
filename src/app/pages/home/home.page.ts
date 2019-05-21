@@ -1,4 +1,4 @@
-import {Component, ElementRef, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import * as Geolib from 'geolib';
 
 import leaflet from 'leaflet';
@@ -7,14 +7,14 @@ import {Drop, DropService} from '../../services/drop.service';
 import {AppComponent} from '../../app.component';
 import {Router} from '@angular/router';
 import {UserService} from '../../services/user.service';
-// import { AddDropPage } from '../add-drop/add-drop.page';
+import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss']
 })
-export class HomePage {
+export class HomePage implements OnInit {
 
     myDrops: Drop[];
 
@@ -27,8 +27,16 @@ export class HomePage {
         public navCtrl: NavController,
         public dropService: DropService,
         public appComponent: AppComponent,
-        public userService: UserService
+        public userService: UserService,
+        private statusBar: StatusBar
     ) {}
+    ngOnInit() {
+        // let status bar overlay webview
+        this.statusBar.overlaysWebView(true);
+
+        // set status bar to white
+        this.statusBar.backgroundColorByHexString('#8633FF');
+    }
     ionViewDidEnter() {
         this.loadmap();
     }
@@ -121,25 +129,7 @@ export class HomePage {
             });
         });
         this.dropService.getKingDrops().subscribe((drops: any) => {
-            drops.forEach(singledrop => {
-                if (this.dropService.isDropVisible(singledrop)) {
-                    const dropGroup = leaflet.featureGroup();
-                    // check visibleDrops array of user for drops and add them
-                    const dist = this.checkDropDistance(singledrop);
-                    if (dist < 1500 && singledrop.score > -10) {
-                        this.setDropVisible(singledrop);
-                    } else if (singledrop.score > -10) {
-                        const drop: any = leaflet.marker([singledrop.latitude, singledrop.longitude], {
-                            icon: KingDropIcon
-                        })
-                            .on('click', () => {
-                                console.log('Marker clicked, but out of range');
-                            });
-                        dropGroup.addLayer(drop);
-                        this.map.addLayer(dropGroup);
-                    }
-                }
-            });
+            console.log('King drops loading');
         });
     }
     checkDropDistance(drop) {
