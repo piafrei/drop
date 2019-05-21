@@ -89,8 +89,6 @@ export class HomePage {
     user.subscribe(val => {
        userData = val.data();
        visibleDropsUser = userData.visibleDrops;
-       console.log(visibleDropsUser);
-       return visibleDropsUser;
       });
     this.dropService.getDrops().subscribe((drops: any) => {
       drops.forEach(singledrop => {
