@@ -25,9 +25,11 @@ export interface Drop {
 export class DropService {
   private dropsCollection: AngularFirestoreCollection<Drop>;
   private myDropsCollection: AngularFirestoreCollection<Drop>;
+  private kingdropsCollection: AngularFirestoreCollection<Drop>;
 
   private drops: Observable<Drop[]>;
   private myDrops: Observable<Drop[]>;
+  private kingDrops: Observable<Drop[]>;
 
     constructor(db: AngularFirestore, private device: Device, private userService: UserService) {
     const currentTime = new Date().getTime();
@@ -37,6 +39,7 @@ export class DropService {
     this.dropsCollection = db.collection('drops', ref =>
       ref.where('createdAt', '>=', validMinTime)
     );
+
     this.drops = this.dropsCollection.snapshotChanges().pipe(
       map(actions => {
         return actions.map(a => {
@@ -59,6 +62,21 @@ export class DropService {
         });
       })
     );
+
+    const topDrops = 10;
+
+    this.kingdropsCollection = db.collection('drops', ref =>
+        ref.orderBy('score', 'desc').limit(topDrops)
+    );
+    this.kingDrops = this.myDropsCollection.snapshotChanges().pipe(
+        map(actions => {
+            return actions.map(a => {
+                const data = a.payload.doc.data();
+                const id = a.payload.doc.id;
+                return { id, ...data };
+            });
+        })
+    );
   }
 
   getDrops() {
@@ -68,6 +86,10 @@ export class DropService {
   getMyDrops() {
     return this.myDrops;
   }
+
+    getKingDrops() {
+        return this.kingDrops;
+    }
 
   getDrop(id) {
     return this.dropsCollection.doc<Drop>(id).valueChanges();
@@ -87,21 +109,21 @@ export class DropService {
     return this.dropsCollection.doc(id).delete();
   }
 
-  isDropVisible(drop: Drop) {
-      const currentScore = drop.score;
-      const timeCreated = drop.createdAt;
+    isDropVisible(drop: Drop) {
+        const currentScore = drop.score;
+        const timeCreated = drop.createdAt;
 
-      let scoreMillis;
-      const currentTime = new Date().getTime();
-      const validPastMillis = 540000000;
+        let scoreMillis;
+        const currentTime = new Date().getTime();
+        const validPastMillis = 540000000;
 
-      console.log(currentTime);
-      if (currentScore < 0) {
-       scoreMillis = (currentScore * 14.4) * 3600000;
-       return (timeCreated + scoreMillis) > (currentTime - validPastMillis);
-      } else {
-          scoreMillis = currentScore * 3600000;
-          return (timeCreated + scoreMillis) > (currentTime - validPastMillis);
-      }
+        // console.log(currentTime);
+        if (currentScore < 0) {
+            scoreMillis = (currentScore * 14.4) * 3600000;
+            return (timeCreated + scoreMillis) > (currentTime - validPastMillis);
+        } else {
+            scoreMillis = currentScore * 3600000;
+            return (timeCreated + scoreMillis) > (currentTime - validPastMillis);
+        }
     }
 }

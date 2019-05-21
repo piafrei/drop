@@ -40,7 +40,7 @@ export class UserService {
     this.db.firestore.doc('/users/' + deviceId).get()
       .then(docSnapshot => {
         if (docSnapshot.exists) {
-        console.log('User exists');
+        // console.log('User exists');
         } else {
         console.log('User doesnt exist');
         const user: User = {
