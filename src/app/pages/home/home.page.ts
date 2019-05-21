@@ -107,29 +107,39 @@ export class HomePage implements OnInit {
             popupAnchor: [-3, -5] // point from which the popup should open relative to the iconAnchor
         });
 
+        const user = this.userService.getUser();
+        let userData;
+        let visibleDropsUser;
+        user.subscribe(val => {
+            userData = val.data();
+            visibleDropsUser = userData.visibleDrops;
+        });
+
         this.dropService.getDrops().subscribe((drops: any) => {
             drops.forEach(singledrop => {
                 if (this.dropService.isDropVisible(singledrop)) {
                     const dropGroup = leaflet.featureGroup();
-                    // check visibleDrops array of user for drops and add them
+                    console.log('Visble User Drops:' + visibleDropsUser);
+                    if (visibleDropsUser.indexOf(singledrop.dropID) > -1) {
+                        this.setDropVisible(singledrop);
+                    }
                     const dist = this.checkDropDistance(singledrop);
                     if (dist < 1500 && singledrop.score > -10) {
+                        this.userService.saveDropToVisibleDrops(singledrop.dropID);
                         this.setDropVisible(singledrop);
                     } else if (singledrop.score > -10) {
-                        const drop: any = leaflet.marker([singledrop.latitude, singledrop.longitude], {
-                            icon: greyDropIcon
-                        })
-                        .on('click', () => {
-                            console.log('Marker clicked, but out of range');
-                        });
+                        const drop: any = leaflet
+                            .marker([singledrop.latitude, singledrop.longitude], {
+                                icon: greyDropIcon
+                            })
+                            .on('click', () => {
+                                console.log('Marker clicked, but out of range');
+                            });
                         dropGroup.addLayer(drop);
                         this.map.addLayer(dropGroup);
                     }
                 }
             });
-        });
-        this.dropService.getKingDrops().subscribe((drops: any) => {
-            console.log('King drops loading');
         });
     }
     checkDropDistance(drop) {

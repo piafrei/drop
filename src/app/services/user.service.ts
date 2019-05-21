@@ -70,9 +70,19 @@ export class UserService {
      userObservable.subscribe(val => {
        userData = val.data();
        visibleDrops = userData.visibleDrops;
-       visibleDrops.push(id);
-       this.userCollection.doc<User>(deviceId).update({
-             visibleDrops: visibleDrops});
-     });
+       if (!(visibleDrops.indexOf(id) > -1)) {
+           visibleDrops.push(id);
+           this.userCollection.doc<User>(deviceId).update({
+               visibleDrops: visibleDrops
+           });
+       }
+       });
+     }
+
+    getUser() {
+       const deviceId = this.getDeviceId();
+       const user = this.db.collection('users').doc(deviceId).get();
+
+       return user;
     }
 }
