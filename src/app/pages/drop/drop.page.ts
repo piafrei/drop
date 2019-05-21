@@ -124,7 +124,7 @@ export class DropPage implements OnInit {
   selectedOption(drop, event){
       if (event.detail.value === 'report') {
           const baseUrl = 'https://us-central1-dropdb-55efa.cloudfunctions.net';
-          const url = baseUrl.concat("/sendMail?dest=reportdropapp@gmail.com&dropId=",drop.dropID, "&reporterId=", this.getInfo(),"&dropDescription=",drop.description,);
+          const url = baseUrl.concat("/sendMail?dest=reportdropapp@gmail.com&dropId=",drop.dropID, "&reporterId=", this.getInfo(),"&dropDescription=",drop.description,"&userId=",drop.deviceId);
           console.log(drop.dropID, drop.deviceId, this.getInfo());
           return this.http.get(url, {observe: 'response'})
               .subscribe(response => {

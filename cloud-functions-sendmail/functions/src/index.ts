@@ -19,6 +19,7 @@ exports.sendMail = functions.https.onRequest((req, res) => {
         const dropId = req.query.dropId;
         const dropDescription = req.query.dropDescription;
         const reporterId = req.query.reporterId;
+        const userId = req.query.deviceId;
 
         const mailOptions = {
             from: 'Drop <reportdropapp@gmail.com>', // Something like: Jane Doe <janedoe@gmail.com>
@@ -31,8 +32,8 @@ exports.sendMail = functions.https.onRequest((req, res) => {
                     <p>Der drop-Nutzer mit der ID `+reporterId+` hat einen drop gemeldet.</p>
                     <p>Dieser drop wurde gemeldet: </p></br>
                     <div style="background-color: #F0F0F0; padding: 20px; border-radius: 10px; width: 50%">
-                    <p><strong>drop-ID</strong> `+dropId+`</p></br>
-                    <p><strong>Inhalt</strong> `+dropDescription+`</p></br></br>
+                    <p><strong>drop-ID</strong> `+dropId+` vom <strong>Nutzer </strong>`+userId+`</p></br>
+                    <p><strong>Inhalt</strong></p><p> `+dropDescription+`</p></br>
                     </div>
                     <p>Der drop soll entfernt werden? Du kannst den drop direkt in Firebase löschen:</p></br></br>
                     <a href="https://console.firebase.google.com/u/0/project/dropdb-55efa/database/firestore/data~2Fdrops"><img src="https://img.icons8.com/color/420/firebase.png" width="50" height="50" title="Link to Firebase" alt="Link to Firebase"></a></br></br>
