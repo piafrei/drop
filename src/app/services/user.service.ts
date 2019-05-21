@@ -72,7 +72,28 @@ export class UserService {
        visibleDrops = userData.visibleDrops;
        visibleDrops.push(id);
        this.userCollection.doc<User>(deviceId).update({
-             visibleDrops: visibleDrops});
+          visibleDrops: visibleDrops});
      });
+    }
+
+    getVisibleDropsForUser() {
+      const deviceId = this.getDeviceId();
+      const user = this.db.collection('users').doc(deviceId).get();
+      let userData;
+      let visibleDrops;
+      user.subscribe(val => {
+        userData = val.data();
+        visibleDrops = userData.visibleDrops;
+        console.log(visibleDrops);
+        return visibleDrops;
+      });
+      console.log('end of method');
+    }
+
+    getUser() {
+       const deviceId = this.getDeviceId();
+       const user = this.db.collection('users').doc(deviceId).get();
+
+       return user;
     }
 }

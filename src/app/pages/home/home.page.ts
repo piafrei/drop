@@ -17,7 +17,7 @@ import {UserService} from '../../services/user.service';
 export class HomePage {
   @ViewChild('map') mapContainer: ElementRef;
   map: any;
-  constructor(
+    constructor(
     private router: Router,
     public navCtrl: NavController,
     public dropService: DropService,
@@ -83,14 +83,26 @@ export class HomePage {
       shadowAnchor: [2, -2], // the same for the shadow
       popupAnchor: [-3, -5] // point from which the popup should open relative to the iconAnchor
     });
-
+    const user = this.userService.getUser();
+    let userData;
+    let visibleDropsUser;
+    user.subscribe(val => {
+       userData = val.data();
+       visibleDropsUser = userData.visibleDrops;
+       console.log(visibleDropsUser);
+       return visibleDropsUser;
+      });
     this.dropService.getDrops().subscribe((drops: any) => {
       drops.forEach(singledrop => {
         if (this.dropService.isDropVisible(singledrop)) {
             const dropGroup = leaflet.featureGroup();
-            // check visibleDrops array of user for drops and add them
+            console.log('Visble User Drops:' + visibleDropsUser);
+            if (visibleDropsUser.indexOf(singledrop.dropID) > -1) {
+                this.setDropVisible(singledrop);
+            }
             const dist = this.checkDropDistance(singledrop);
             if (dist < 1500 && singledrop.score > -10) {
+                this.userService.saveDropToVisibleDrops(singledrop.dropID);
                 this.setDropVisible(singledrop);
             } else if (singledrop.score > -10) {
                 const drop: any = leaflet
@@ -119,7 +131,6 @@ export class HomePage {
     return dist;
   }
   setDropVisible(drop) {
-    this.userService.saveDropToVisibleDrops(drop.dropID);
     this.addVisibleDropToMap(drop);
   }
   addVisibleDropToMap(dropParam) {
