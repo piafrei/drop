@@ -121,22 +121,23 @@ export class HomePage implements OnInit {
         if (this.dropService.isDropVisible(singledrop)) {
             const dropGroup = leaflet.featureGroup();
             if (visibleDropsUser.indexOf(singledrop.dropID) > -1) {
-                this.setDropVisible(singledrop);
-            }
-            const dist = this.checkDropDistance(singledrop);
-            if (dist < 1500 && singledrop.score > -10) {
-                this.userService.saveDropToVisibleDrops(singledrop.dropID);
-                this.setDropVisible(singledrop);
-            } else if (singledrop.score > -10) {
+              this.setDropVisible(singledrop);
+            } else {
+              const dist = this.checkDropDistance(singledrop);
+              if (dist < 1500 && singledrop.score > -10) {
+                 this.userService.saveDropToVisibleDrops(singledrop.dropID);
+                 this.setDropVisible(singledrop);
+              } else if (singledrop.score > -10) {
                 const drop: any = leaflet
                     .marker([singledrop.latitude, singledrop.longitude], {
-                        icon: greyDropIcon
+                      icon: greyDropIcon
                     })
                     .on('click', () => {
-                        console.log('Marker clicked, but out of range');
+                    console.log('Marker clicked, but out of range');
                     });
                 dropGroup.addLayer(drop);
                 this.map.addLayer(dropGroup);
+              }
             }
         }
       });
