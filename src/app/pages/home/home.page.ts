@@ -115,7 +115,7 @@ export class HomePage implements OnInit {
     });
     setTimeout(function() {
       console.log('Timeout triggered');
-    },  750);
+    },  1000);
     this.dropService.getDrops().subscribe((drops: any) => {
       drops.forEach(singledrop => {
         if (this.dropService.isDropVisible(singledrop)) {
