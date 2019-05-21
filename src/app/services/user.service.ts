@@ -70,25 +70,14 @@ export class UserService {
      userObservable.subscribe(val => {
        userData = val.data();
        visibleDrops = userData.visibleDrops;
-       visibleDrops.push(id);
-       this.userCollection.doc<User>(deviceId).update({
-          visibleDrops: visibleDrops});
-     });
-    }
-
-    getVisibleDropsForUser() {
-      const deviceId = this.getDeviceId();
-      const user = this.db.collection('users').doc(deviceId).get();
-      let userData;
-      let visibleDrops;
-      user.subscribe(val => {
-        userData = val.data();
-        visibleDrops = userData.visibleDrops;
-        console.log(visibleDrops);
-        return visibleDrops;
-      });
-      console.log('end of method');
-    }
+       if (!(visibleDrops.indexOf(id) > -1)) {
+           visibleDrops.push(id);
+           this.userCollection.doc<User>(deviceId).update({
+               visibleDrops: visibleDrops
+           });
+       }
+       });
+     }
 
     getUser() {
        const deviceId = this.getDeviceId();
