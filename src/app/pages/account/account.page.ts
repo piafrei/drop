@@ -3,7 +3,6 @@ import { Drop, DropService } from '../../services/drop.service';
 import { Events, IonSelect, NavController } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
 
-
 @Component({
   selector: 'app-account',
   templateUrl: './account.page.html',
@@ -13,7 +12,6 @@ export class AccountPage implements OnInit {
   allDrops: Drop[];
   myDrops: Drop[];
 
-  // Now it's a QueryList of IonSelect instances
   @ViewChildren('showSelect') selectRefs: QueryList<IonSelect>;
 
   openSelect(item: any) {

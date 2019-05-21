@@ -16,10 +16,13 @@
       <div class="text-content">
         {{ drop.description }}
       </div>
-      <ion-select interface="action-sheet">
-        <ion-select-option value="report">Melden</ion-select-option>
-        <ion-select-option value="edit">Bearbeiten</ion-select-option>
-      </ion-select>
+      <ion-item class="more-button">
+        <ion-icon name="more" class="edit-icon" (click)="openSelect(item)"></ion-icon>
+        <ion-select class="select-field" interface="action-sheet" (ionChange)="showMore(item, $event)" #showSelect>
+          <ion-select-option value="delete">Löschen</ion-select-option>
+          <!--<ion-select-option value="edit">Bearbeiten</ion-select-option>-->
+        </ion-select>
+      </ion-item>
     </div>
     <div class="voting">
       <div class="voting-buttons">
@@ -40,13 +43,20 @@
       <div class="comment-text">
         Test123
       </div>
-      <ion-select interface="action-sheet">
-        <ion-select-option value="report">Melden</ion-select-option>
-        <ion-select-option value="edit">Bearbeiten</ion-select-option>
-      </ion-select>
+      <ion-item class="more-button">
+        <ion-icon name="more" class="edit-icon" (click)="openSelect(myDrops)"></ion-icon>
+        <ion-select class="select-field" interface="action-sheet" (ionChange)="showMore(myDrops, $event)" #showSelect>
+          <ion-select-option value="delete">Löschen</ion-select-option>
+          <!--<ion-select-option value="edit">Bearbeiten</ion-select-option>-->
+        </ion-select>
+      </ion-item>
     </div>
     <button class="add-comment" routerLink="/add-comment">
       <img src="assets/icon/add-drop-icon.svg" alt="Kommentar hinzufügen" />
     </button>
   </div>
 </ion-content>
+
+<ion-footer>
+  <ion-progress-bar color="primary" value="0.5"></ion-progress-bar>
+</ion-footer>

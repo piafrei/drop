@@ -7,9 +7,8 @@ ion-header {
 }
 
 .header-close {
-  height: 80px;
+  height: 100px;
   contain: none;
-
   .back-button {
     position: relative;
     z-index: 250;
@@ -34,7 +33,7 @@ ion-header {
 #drop-logo {
   height: 30px;
   width: auto;
-  margin: 20px;
+  margin: 35px 20px 20px;
 }
 
 .header-md{
@@ -48,6 +47,10 @@ ion-header {
 }
 
 .header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
   ion-toolbar {
     text-align: left;
   }
