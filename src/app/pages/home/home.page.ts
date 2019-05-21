@@ -89,12 +89,14 @@ export class HomePage {
     user.subscribe(val => {
        userData = val.data();
        visibleDropsUser = userData.visibleDrops;
-      });
+    });
+    setTimeout(function() {
+      console.log('Timeout triggered');
+    },  750);
     this.dropService.getDrops().subscribe((drops: any) => {
       drops.forEach(singledrop => {
         if (this.dropService.isDropVisible(singledrop)) {
             const dropGroup = leaflet.featureGroup();
-            console.log('Visble User Drops:' + visibleDropsUser);
             if (visibleDropsUser.indexOf(singledrop.dropID) > -1) {
                 this.setDropVisible(singledrop);
             }
