@@ -39,6 +39,8 @@
     "es6-promise-plugin": "^4.2.2",
     "geolib": "^2.0.24",
     "leaflet": "^1.5.1",
+    "request": "^2.88.0",
+    "request-promise-native": "^1.0.7",
     "rxjs": "~6.3.3",
     "zone.js": "~0.8.29"
   },

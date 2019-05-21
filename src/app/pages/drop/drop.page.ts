@@ -4,6 +4,7 @@ import { LoadingController, NavController } from '@ionic/angular';
 import { Drop, DropService } from '../../services/drop.service';
 import { Device } from '@ionic-native/device/ngx';
 import { AppComponent } from '../../app.component';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-drop',
@@ -19,7 +20,8 @@ export class DropPage implements OnInit {
     private dropService: DropService,
     private loadingController: LoadingController,
     private device: Device,
-    private appComponent: AppComponent
+    private appComponent: AppComponent,
+    private http: HttpClient
   ) {}
   drop: Drop = {
     createdAt: new Date().getTime(),
@@ -41,7 +43,11 @@ export class DropPage implements OnInit {
   }
 
   getInfo() {
-    return this.device.uuid;
+    var deviceId = this.device.uuid
+    if (deviceId == null){
+      deviceId = "DESKTOP";
+    }
+    return deviceId;
   }
 
   async loadDrop() {
@@ -114,5 +120,21 @@ export class DropPage implements OnInit {
       this.drop.votedBy.push(currentUuid);
       this.dropService.updateDrop(this.drop, this.dropId);
     }
+  }
+  selectedOption(drop, event){
+      if (event.detail.value === 'report') {
+          const baseUrl = 'https://us-central1-dropdb-55efa.cloudfunctions.net';
+          const url = baseUrl.concat("/sendMail?dest=reportdropapp@gmail.com&dropId=",drop.dropID, "&reporterId=", this.getInfo(),"&dropDescription=",drop.description,);
+          console.log(drop.dropID, drop.deviceId, this.getInfo());
+          return this.http.get(url, {observe: 'response'})
+              .subscribe(response => {
+
+                  // You can access status:
+                  console.log(response.status);
+
+                  // Or any other header:
+                  console.log(response.headers.get('X-Custom-Header'));
+              });
+      }
   }
 }
