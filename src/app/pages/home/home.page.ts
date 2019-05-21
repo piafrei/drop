@@ -7,7 +7,6 @@ import {Drop, DropService} from '../../services/drop.service';
 import {AppComponent} from '../../app.component';
 import {Router} from '@angular/router';
 import {UserService} from '../../services/user.service';
-
 // import { AddDropPage } from '../add-drop/add-drop.page';
 
 @Component({
