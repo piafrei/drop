@@ -121,7 +121,7 @@ this.db = db;
     }
 
     isDropVisible(drop: Drop) {
-        const currentScore = drop.score;
+        let currentScore = drop.score;
         const timeCreated = drop.createdAt;
 
         let scoreMillis;
@@ -133,6 +133,10 @@ this.db = db;
             scoreMillis = (currentScore * 14.4) * 3600000;
             return (timeCreated + scoreMillis) > (currentTime - validPastMillis);
         } else {
+            if (currentScore < 350)
+            {
+                currentScore = 350;
+            }
             scoreMillis = currentScore * 3600000;
             return (timeCreated + scoreMillis) > (currentTime - validPastMillis);
         }

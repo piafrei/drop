@@ -9,19 +9,16 @@
 
 <ion-content padding class="maincontent">
 
-  <form [formGroup]="filterForm">
-    <div *ngFor="let filter of filters">
-      <input type="checkbox" (change)="saveFilterToFilterFormArray(filter.name, $event.target.checked)"> {{filter.name}}<br>
-    </div>
+  <form [formGroup]="filterForm" class="filter">
+    <label *ngFor="let filter of filters">
+      <div class="filterelement">
+        <input type="checkbox" (change)="saveFilterToFilterFormArray(filter.name, $event.target.checked)"><span class="filtertext">{{filter.name}}</span><br>
+      </div>
+    </label>
   </form>
-
-  <button class="drop-button" (click)="submitSelectedFilter()">
-    Anwenden
-  </button>
+  <div class="button-container">
+    <button class="drop-button" (click)="submitSelectedFilter()">
+      Anwenden
+    </button>
+  </div>
 </ion-content>
-
-<ion-footer>
-  <ion-toolbar class="custom-button">
-
-  </ion-toolbar>
-</ion-footer>
