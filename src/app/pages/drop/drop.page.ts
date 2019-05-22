@@ -5,6 +5,7 @@ import { Drop, DropService } from '../../services/drop.service';
 import { Device } from '@ionic-native/device/ngx';
 import { AppComponent } from '../../app.component';
 import { HttpClient } from '@angular/common/http';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-drop',
@@ -21,7 +22,8 @@ export class DropPage implements OnInit {
     private loadingController: LoadingController,
     private device: Device,
     private appComponent: AppComponent,
-    private http: HttpClient
+    private http: HttpClient,
+    public alertController: AlertController
   ) {}
   drop: Drop = {
     createdAt: new Date().getTime(),
@@ -126,6 +128,7 @@ export class DropPage implements OnInit {
           const baseUrl = 'https://us-central1-dropdb-55efa.cloudfunctions.net';
           const url = baseUrl.concat("/sendMail?dest=reportdropapp@gmail.com&dropId=",drop.dropID, "&reporterId=", this.getInfo(),"&dropDescription=",drop.description,"&userId=",drop.deviceId);
           console.log(drop.dropID, drop.deviceId, this.getInfo());
+          this.presentAlert();
           return this.http.get(url, {observe: 'response'})
               .subscribe(response => {
 
@@ -137,4 +140,14 @@ export class DropPage implements OnInit {
               });
       }
   }
+    async presentAlert() {
+        const alert = await this.alertController.create({
+            header: 'Drop wurde gemeldet',
+            message: 'Wir kümmern uns so schnell wie möglich darum den drop zu überprüfen.',
+            buttons: ['OK']
+        });
+
+        await alert.present();
+    }
+
 }
