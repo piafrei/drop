@@ -25,13 +25,13 @@ exports.sendMail = functions.https.onRequest((req, res) => {
             from: 'Drop <reportdropapp@gmail.com>', // Something like: Jane Doe <janedoe@gmail.com>
             to: dest,
             subject: 'Ein drop wurde gemeldet!', // email subject
-            html:   `<div style="font-size: 16px; font-family: 'Lato'; background: linear-gradient(to right, #8633FF, #472EE8); padding: 25px; border-radius: 10px; width: 75%">
-                    <h1 style="font-size: 30px; font-family: 'Nunito'; color: white; padding-top: 5px; padding-bottom: 5px">Gemeldeter drop</h1>
-                    <div style="background-color: white; padding: 25px; border-radius: 10px; width: 94%">
-                    <p style="font-size: 24px; font-family: 'Nunito'">Hallo!</p></br>
+            html:   `<div style="font-size: 16px; font-family: 'Lato', 'San Francisco', sans-serif; background: linear-gradient(to right, #8633FF, #472EE8); padding: 10px; border-radius: 10px; width: 100%">
+                    <h1 style="font-size: 30px; font-family: 'Nunito', 'San Francisco', sans-serif; color: white; padding-top: 5px; padding-bottom: 5px">Gemeldeter drop</h1>
+                    <div style="background-color: white; padding: 10px; border-radius: 10px; width: 95%">
+                    <p style="font-size: 24px; font-family: 'Nunito', 'San Francisco', sans-serif">Hallo!</p></br>
                     <p>Der drop-Nutzer mit der ID `+reporterId+` hat einen drop gemeldet.</p>
                     <p>Dieser drop wurde gemeldet: </p></br>
-                    <div style="background-color: #F0F0F0; padding: 20px; border-radius: 10px; width: 50%">
+                    <div style="background-color: #F0F0F0; padding: 20px; border-radius: 10px; width: 75%">
                     <p><strong>drop-ID</strong> `+dropId+` vom <strong>Nutzer </strong>`+userId+`</p></br>
                     <p><strong>Inhalt</strong></p><p> `+dropDescription+`</p></br>
                     </div>

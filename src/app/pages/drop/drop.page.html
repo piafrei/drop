@@ -19,8 +19,7 @@
       <ion-item class="more-button">
         <ion-icon name="more" class="edit-icon" (click)="openSelect(item)"></ion-icon>
         <ion-select interface="action-sheet" (ionChange)="selectedOption(drop, $event)">
-          <ion-select-option value="report">Melden</ion-select-option>
-          <!--<ion-select-option value="edit">Bearbeiten</ion-select-option>-->
+          <ion-select-option *ngIf="!buttonDisabled" (click)="buttonDisabled = true" value="report">Melden</ion-select-option>
         </ion-select>
       </ion-item>
     </div>
