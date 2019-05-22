@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {Drop} from '../../services/drop.service';
+import {Drop, DropService} from '../../services/drop.service';
 import {FormArray, FormBuilder, FormControl, FormGroup} from '@angular/forms';
+import {HomePage} from '../home/home.page';
+import {AppComponent} from '../../app.component';
+import {el} from '@angular/platform-browser/testing/src/browser_util';
 
 @Component({
   selector: 'app-filter',
@@ -12,8 +15,9 @@ export class FilterPage implements OnInit {
   filters = [{ name: 'EssenTrinken' }, { name: 'KulturSehenswuerdigkeiten' }, { name: 'Einkaufen' }, { name: 'NicePlace' }, { name: 'HiddenGem' }, { name: 'Ueberraschung' }];
   filterForm: FormGroup;
   filterFormArray;
+  private matchingDrops: any[];
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, public homePage: HomePage, private dropService: DropService) {
   }
 
   ngOnInit() {
@@ -33,6 +37,16 @@ export class FilterPage implements OnInit {
   }
 
   submitSelectedFilter() {
-  console.log('Active Filter to submit ' + this.filterFormArray.getRawValue());
+  const rawValue = this.filterFormArray.getRawValue();
+      console.log('Active Filter to submit ' + rawValue);
+
+  this.matchingDrops = [];
+  for (let i = 0; i < this.filterFormArray.length; i++) {
+      const element = this.filterFormArray.at(i);
+      if (element.valid) {
+        this.matchingDrops.push(this.dropService.getDropsByCat(element.value));
+      }
+   }
+  console.log(this.matchingDrops);
   }
 }

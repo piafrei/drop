@@ -6,6 +6,9 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { FilterPage } from './filter.page';
+import {HomePage} from '../home/home.page';
+import {AppComponent} from '../../app.component';
+import {DropService} from '../../services/drop.service';
 
 const routes: Routes = [
   {
@@ -21,6 +24,11 @@ const routes: Routes = [
     IonicModule,
     ReactiveFormsModule,
     RouterModule.forChild(routes)
+  ],
+  providers: [
+    HomePage,
+    DropService,
+    AppComponent
   ],
   declarations: [FilterPage]
 })
