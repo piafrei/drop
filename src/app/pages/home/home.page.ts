@@ -98,9 +98,9 @@ export class HomePage implements OnInit {
            userData = val.data();
            visibleDropsUser = userData.visibleDrops;
         });
-        setTimeout(function() {
+        /*setTimeout(function() {
             // console.log('Timeout triggered');
-        },  1000);
+        },  1000);*/
         this.dropService.getDrops().subscribe((drops: any) => {
             const counter = Math.floor(drops.length * 0.2);
             console.log('Die Anzahl der Kingdrops beträgt ' + counter);
