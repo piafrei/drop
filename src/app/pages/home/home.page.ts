@@ -100,66 +100,70 @@ export class HomePage implements OnInit {
             iconUrl: '../../../assets/icon/colored-kingdrop.png',
             shadowUrl: '../../../assets/icon/drop-shadow.svg',
 
-      iconSize: [25, 30], // size of the icon
-      shadowSize: [25, 30], // size of the shadow
-      iconAnchor: [0, 0], // point of the icon which will correspond to marker's location
-      shadowAnchor: [2, -2], // the same for the shadow
-      popupAnchor: [-3, -5] // point from which the popup should open relative to the iconAnchor
-    });
-    const user = this.userService.getUser();
-    let userData;
-    let visibleDropsUser;
-    user.subscribe(val => {
-       userData = val.data();
-       visibleDropsUser = userData.visibleDrops;
-    });
-    setTimeout(function() {
-      console.log('Timeout triggered');
-    },  750);
-    this.dropService.getDrops().subscribe((drops: any) => {
-      drops.forEach(singledrop => {
-        if (this.dropService.isDropVisible(singledrop)) {
-            const dropGroup = leaflet.featureGroup();
-            if (visibleDropsUser.indexOf(singledrop.dropID) > -1) {
-                this.setDropVisible(singledrop);
+            iconSize: [25, 30], // size of the icon
+            shadowSize: [25, 30], // size of the shadow
+            iconAnchor: [0, 0], // point of the icon which will correspond to marker's location
+            shadowAnchor: [2, -2], // the same for the shadow
+            popupAnchor: [-3, -5] // point from which the popup should open relative to the iconAnchor
+        });
+        const user = this.userService.getUser();
+        let userData;
+        let visibleDropsUser;
+        user.subscribe(val => {
+           userData = val.data();
+           visibleDropsUser = userData.visibleDrops;
+        });
+        setTimeout(function() {
+            // console.log('Timeout triggered');
+        },  750);
+        this.dropService.getDrops().subscribe((drops: any) => {
+            const counter = drops.length * 0.2;
+            console.log('Anzahl der drops ' + counter);
+            drops.forEach((singledrop, index) => {
+                console.log('Schleifendurchläufe ' + index);
+                if (this.dropService.isDropVisible(singledrop)) {
+                    const dropGroup = leaflet.featureGroup();
+                    if (visibleDropsUser.indexOf(singledrop.dropID) > -1) {
+                        this.setDropVisible(singledrop);
+                    }
+                    const dist = this.checkDropDistance(singledrop);
+                    if (dist < 1500 && singledrop.score > -10) {
+                        this.userService.saveDropToVisibleDrops(singledrop.dropID);
+                        this.setDropVisible(singledrop);
+                    } else if (singledrop.score > -10) {
+                        const drop: any = leaflet.marker([singledrop.latitude, singledrop.longitude], {
+                            icon: greyDropIcon
+                        }).on('click', () => {
+                            console.log('Marker clicked, but out of range');
+                        });
+                        dropGroup.addLayer(drop);
+                        this.map.addLayer(dropGroup);
+                    }
+                }
+            });
+        });
+    }
+    checkDropDistance(drop) {
+        const dist = Geolib.getDistance(
+            {
+                latitude: this.appComponent.latitude,
+                longitude: this.appComponent.longitude
+            },
+            {
+                latitude: drop.latitude,
+                longitude: drop.longitude
             }
-            const dist = this.checkDropDistance(singledrop);
-            if (dist < 1500 && singledrop.score > -10) {
-                this.userService.saveDropToVisibleDrops(singledrop.dropID);
-                this.setDropVisible(singledrop);
-            } else if (singledrop.score > -10) {
-                const drop: any = leaflet
-                    .marker([singledrop.latitude, singledrop.longitude], {
-                        icon: greyDropIcon
-                    })
-                    .on('click', () => {
-                        console.log('Marker clicked, but out of range');
-                    });
-                dropGroup.addLayer(drop);
-                this.map.addLayer(dropGroup);
-            }
+        );
+        // console.log(dist);
+        return dist;
         }
-      });
-    });
-  }
-  checkDropDistance(drop) {
-    const dist = Geolib.getDistance(
-      {
-        latitude: this.appComponent.latitude,
-        longitude: this.appComponent.longitude
-      },
-      { latitude: drop.latitude, longitude: drop.longitude }
-    );
-    console.log(dist);
-    return dist;
-  }
-  setDropVisible(drop) {
-    this.addVisibleDropToMap(drop);
-  }
-  addVisibleDropToMap(dropParam) {
-    const coloredDropIcon = leaflet.icon({
-      iconUrl: '../../../assets/icon/faded-drop.png',
-      shadowUrl: '../../../assets/icon/drop-shadow.svg',
+    setDropVisible(drop) {
+        this.addVisibleDropToMap(drop);
+    }
+    addVisibleDropToMap(dropParam) {
+        const coloredDropIcon = leaflet.icon({
+            iconUrl: '../../../assets/icon/faded-drop.png',
+            shadowUrl: '../../../assets/icon/drop-shadow.svg',
 
             iconSize: [25, 30], // size of the icon
             shadowSize: [25, 30], // size of the shadow

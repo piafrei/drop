@@ -6,108 +6,87 @@ import {Device} from '@ionic-native/device/ngx';
 import {UserService} from './user.service';
 
 export interface Drop {
-  id?: string;
-  createdAt: number;
-  description: string;
-  category: string;
-  latitude: number;
-  longitude: number;
-  score: number;
-  deviceID: string;
-  votedBy: Array<string>;
-  dropID: number;
+    id?: string;
+    createdAt: number;
+    description: string;
+    category: string;
+    latitude: number;
+    longitude: number;
+    score: number;
+    deviceID: string;
+    votedBy: Array<string>;
+    dropID: number;
 }
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 
 export class DropService {
-private dropsCollection: AngularFirestoreCollection<Drop>;
-private myDropsCollection: AngularFirestoreCollection<Drop>;
-private kingdropsCollection: AngularFirestoreCollection<Drop>;
+    private dropsCollection: AngularFirestoreCollection<Drop>;
+    private myDropsCollection: AngularFirestoreCollection<Drop>;
 
-private drops: Observable<Drop[]>;
-private myDrops: Observable<Drop[]>;
-private kingDrops: Observable<Drop[]>;
+    private drops: Observable<Drop[]>;
+    private myDrops: Observable<Drop[]>;
 
-constructor(db: AngularFirestore, private device: Device, private userService: UserService) {
-const currentTime = new Date().getTime();
-const validPastTimeMillis = 540000000;
-const validMinTime = currentTime - validPastTimeMillis;
+    constructor(db: AngularFirestore, private device: Device, private userService: UserService) {
+        const currentTime = new Date().getTime();
+        const validPastTimeMillis = 540000000;
+        const validMinTime = currentTime - validPastTimeMillis;
 
-this.dropsCollection = db.collection('drops', ref =>
-    ref.where('createdAt', '>=', validMinTime)
-);
+        this.dropsCollection = db.collection('drops', ref =>
+            ref.where('createdAt', '>=', validMinTime).orderBy('score', 'desc')
+        );
 
-this.drops = this.dropsCollection.snapshotChanges().pipe(
-    map(actions => {
-        return actions.map(a => {
-            const data = a.payload.doc.data();
-            const id = a.payload.doc.id;
-            return { id, ...data };
-        });
-    })
-);
+        this.drops = this.dropsCollection.snapshotChanges().pipe(
+            map(actions => {
+                return actions.map(a => {
+                    const data = a.payload.doc.data();
+                    const id = a.payload.doc.id;
+                    return { id, ...data };
+                });
+            })
+        );
 
-    this.myDropsCollection = db.collection('drops', ref =>
-      ref.where('deviceID', '==', this.device.uuid)
-    );
-    this.myDrops = this.myDropsCollection.snapshotChanges().pipe(
-      map(actions => {
-        return actions.map(a => {
-          const data = a.payload.doc.data();
-          const id = a.payload.doc.id;
-          return { id, ...data };
-        });
-      })
-    );
-
-    const topDrops = 2;
-
-    this.kingdropsCollection = db.collection('drops', ref =>
-        ref.orderBy('score', 'desc').limit(topDrops)
-    );
-    this.kingDrops = this.myDropsCollection.snapshotChanges().pipe(
-        map(actions => {
-            return actions.map(a => {
-                const data = a.payload.doc.data();
-                const id = a.payload.doc.id;
-                return { id, ...data };
-            });
-        })
-    );
-  }
-
-  getDrops() {
-    return this.drops;
-  }
-
-  getMyDrops() {
-    return this.myDrops;
-  }
-
-    getKingDrops() {
-        return this.kingDrops;
+        this.myDropsCollection = db.collection('drops', ref =>
+            ref.where('deviceID', '==', this.device.uuid).orderBy('score', 'desc')
+        );
+        this.myDrops = this.myDropsCollection.snapshotChanges().pipe(
+            map(actions => {
+                return actions.map(a => {
+                    const data = a.payload.doc.data();
+                    const id = a.payload.doc.id;
+                    return { id, ...data };
+                });
+            })
+        );
     }
 
-  getDrop(id) {
-    return this.dropsCollection.doc<Drop>(id).valueChanges();
-  }
+    getDrops() {
+        return this.drops;
+    }
 
-  updateDrop(drop: Drop, id: string) {
-    return this.dropsCollection.doc(id).update(drop);
-  }
+    getMyDrops() {
+        return this.myDrops;
+    }
 
-  addDrop(drop: Drop) {
-    console.log('Drop Service id to save' + drop.dropID);
-    this.userService.saveDropToVisibleDrops(drop.dropID);
-    return this.dropsCollection.add(drop);
-  }
+    getDrop(id) {
+        return this.dropsCollection.doc<Drop>(id).valueChanges();
+    }
 
-  removeDrop(id) {
-    return this.dropsCollection.doc(id).delete();
-  }
+    updateDrop(drop: Drop, id: string) {
+        return this.dropsCollection.doc(id).update(drop);
+    }
+
+    addDrop(drop: Drop) {
+        console.log('Drop Service id to save' + drop.dropID);
+        this.userService.saveDropToVisibleDrops(drop.dropID);
+        return this.dropsCollection.add(drop);
+    }
+
+    removeDrop(id) {
+        return this.dropsCollection.doc(id).delete();
+    }
 
     isDropVisible(drop: Drop) {
         const currentScore = drop.score;
