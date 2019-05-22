@@ -90,16 +90,23 @@ export class DropPage implements OnInit {
   }
   voteUp(score, votedBy) {
     let allowedtovote = true;
-    let currentUuid = this.device.uuid;
+    let mydrop = false;
+    let currentUuid = this.getInfo();
+    let creatorId = this.drop.deviceID;
+
+    if (currentUuid === creatorId) {
+      console.log('eigener drop');
+      mydrop = true;
+    }
+
     votedBy.forEach(function(uuid) {
-      console.log(uuid);
       if (uuid === currentUuid) {
-        console.log('bereits gevoted');
         allowedtovote = false;
+        console.log('bereits gevotet');
       }
     });
 
-    if (allowedtovote === true) {
+    if (allowedtovote === true && mydrop === false) {
       this.drop.score = score + 1;
       this.userService.improveUserScore(1);
       this.userService.improveCreatorsScore(1, this.drop.deviceID);
@@ -111,16 +118,23 @@ export class DropPage implements OnInit {
 
   voteDown(score, votedBy) {
     let allowedtovote = true;
-    let currentUuid = this.device.uuid;
+    let mydrop = false;
+    let currentUuid = this.getInfo();
+    let creatorId = this.drop.deviceID;
+
+    if (currentUuid === creatorId) {
+      console.log('eigener drop');
+      mydrop = true;
+    }
+
     votedBy.forEach(function(uuid) {
-      console.log(uuid);
       if (uuid === currentUuid) {
-        console.log('bereits gevoted');
         allowedtovote = false;
+        console.log('bereits gevotet');
       }
     });
 
-    if (allowedtovote === true) {
+    if (allowedtovote === true && mydrop === false) {
       this.drop.score = score - 1;
       this.userService.improveUserScore(1);
       this.userService.declineCreatorsScore(1, this.drop.deviceID);

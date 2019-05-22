@@ -44,7 +44,11 @@ export class AddDropPage implements OnInit {
   }
 
   getInfo() {
-    return this.device.uuid;
+    var deviceId = this.device.uuid;
+    if (deviceId == null) {
+      deviceId = 'DESKTOP';
+    }
+    return deviceId;
   }
 
   async loadDrop() {
