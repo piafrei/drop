@@ -2,9 +2,10 @@ import { Drop, DropService } from '../../services/drop.service';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NavController, LoadingController } from '@ionic/angular';
-import {Device} from '@ionic-native/device/ngx';
-import {AppComponent} from '../../app.component';
+import { Device } from '@ionic-native/device/ngx';
+import { AppComponent } from '../../app.component';
 import { v4 as uuid } from 'uuid';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-add-drop',
@@ -20,7 +21,8 @@ export class AddDropPage implements OnInit {
     private dropService: DropService,
     private loadingController: LoadingController,
     private device: Device,
-    private appComponent: AppComponent
+    private appComponent: AppComponent,
+    private userService: UserService
   ) {}
   drop: Drop = {
     createdAt: new Date().getTime(),
@@ -73,6 +75,7 @@ export class AddDropPage implements OnInit {
         });
       }
     } else {
+      this.userService.improveUserScore(20);
       this.dropService.addDrop(this.drop).then(() => {
         loading.dismiss();
         this.nav.back();

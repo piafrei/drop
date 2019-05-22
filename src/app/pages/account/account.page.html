@@ -3,28 +3,29 @@
     <ion-buttons slot="end" routerLink="/home">
       <ion-icon name="close"></ion-icon>
     </ion-buttons>
-    <img src="assets/images/close-icon-bg.svg" alt="Close Icon Background" class="close-icon-bg">
+    <img
+      src="assets/images/close-icon-bg.svg"
+      alt="Close Icon Background"
+      class="close-icon-bg"
+    />
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding class="maincontent">
-
   <div class="score-headline">
     Dein Score
-    <span class="score">500</span>
+    <span class="score" *ngIf="userPromise | async">{{ user.score }}</span>
   </div>
 
   <ion-list>
-
     <ng-container *ngIf="!myDrops || myDrops.length == 0">
-      <div *ngFor="let n of [0,1,2]" padding>
+      <div *ngFor="let n of [0, 1, 2]" padding>
         <ion-skeleton-text></ion-skeleton-text>
         <p>
           <ion-skeleton-text class="fake-skeleton"></ion-skeleton-text>
         </p>
       </div>
     </ng-container>
-
 
     <div class="account-drop-wrapper" *ngFor="let item of myDrops">
       <div class="account-item">
@@ -37,16 +38,23 @@
             <p>{{ item.score }}</p>
           </div>
         </div>
-          <ion-item class="more-button">
-            <ion-icon name="more" class="edit-icon" (click)="openSelect(item)"></ion-icon>
-            <ion-select class="select-field" interface="action-sheet" (ionChange)="showMore(item, $event)" #showSelect>
-              <ion-select-option value="delete">Löschen</ion-select-option>
-              <!--<ion-select-option value="edit">Bearbeiten</ion-select-option>-->
-            </ion-select>
-          </ion-item>
+        <ion-item class="more-button">
+          <ion-icon
+            name="more"
+            class="edit-icon"
+            (click)="openSelect(item)"
+          ></ion-icon>
+          <ion-select
+            class="select-field"
+            interface="action-sheet"
+            (ionChange)="showMore(item, $event)"
+            #showSelect
+          >
+            <ion-select-option value="delete">Löschen</ion-select-option>
+            <!--<ion-select-option value="edit">Bearbeiten</ion-select-option>-->
+          </ion-select>
+        </ion-item>
       </div>
     </div>
-
   </ion-list>
-
 </ion-content>

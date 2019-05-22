@@ -6,6 +6,7 @@ import { Device } from '@ionic-native/device/ngx';
 import { AppComponent } from '../../app.component';
 import { HttpClient } from '@angular/common/http';
 import { AlertController } from '@ionic/angular';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-drop',
@@ -23,7 +24,8 @@ export class DropPage implements OnInit {
     private device: Device,
     private appComponent: AppComponent,
     private http: HttpClient,
-    public alertController: AlertController
+    public alertController: AlertController,
+    private userService: UserService
   ) {}
   drop: Drop = {
     createdAt: new Date().getTime(),
@@ -45,9 +47,9 @@ export class DropPage implements OnInit {
   }
 
   getInfo() {
-    var deviceId = this.device.uuid
-    if (deviceId == null){
-      deviceId = "DESKTOP";
+    var deviceId = this.device.uuid;
+    if (deviceId == null) {
+      deviceId = 'DESKTOP';
     }
     return deviceId;
   }
@@ -99,6 +101,8 @@ export class DropPage implements OnInit {
 
     if (allowedtovote === true) {
       this.drop.score = score + 1;
+      this.userService.improveUserScore(1);
+      this.userService.improveCreatorsScore(1, this.drop.deviceID);
       console.log('new score: ' + score);
       this.drop.votedBy.push(currentUuid);
       this.dropService.updateDrop(this.drop, this.dropId);
@@ -118,36 +122,45 @@ export class DropPage implements OnInit {
 
     if (allowedtovote === true) {
       this.drop.score = score - 1;
+      this.userService.improveUserScore(1);
+      this.userService.declineCreatorsScore(1, this.drop.deviceID);
       console.log('new score: ' + score);
       this.drop.votedBy.push(currentUuid);
       this.dropService.updateDrop(this.drop, this.dropId);
     }
   }
-  selectedOption(drop, event){
-      if (event.detail.value === 'report') {
-          const baseUrl = 'https://us-central1-dropdb-55efa.cloudfunctions.net';
-          const url = baseUrl.concat("/sendMail?dest=reportdropapp@gmail.com&dropId=",drop.dropID, "&reporterId=", this.getInfo(),"&dropDescription=",drop.description,"&userId=",drop.deviceId);
-          console.log(drop.dropID, drop.deviceId, this.getInfo());
-          this.presentAlert();
-          return this.http.get(url, {observe: 'response'})
-              .subscribe(response => {
+  selectedOption(drop, event) {
+    if (event.detail.value === 'report') {
+      const baseUrl = 'https://us-central1-dropdb-55efa.cloudfunctions.net';
+      const url = baseUrl.concat(
+        '/sendMail?dest=reportdropapp@gmail.com&dropId=',
+        drop.dropID,
+        '&reporterId=',
+        this.getInfo(),
+        '&dropDescription=',
+        drop.description,
+        '&userId=',
+        drop.deviceId
+      );
+      console.log(drop.dropID, drop.deviceId, this.getInfo());
+      this.presentAlert();
+      return this.http.get(url, { observe: 'response' }).subscribe(response => {
+        // You can access status:
+        console.log(response.status);
 
-                  // You can access status:
-                  console.log(response.status);
-
-                  // Or any other header:
-                  console.log(response.headers.get('X-Custom-Header'));
-              });
-      }
-  }
-    async presentAlert() {
-        const alert = await this.alertController.create({
-            header: 'Drop wurde gemeldet',
-            message: 'Wir kümmern uns so schnell wie möglich darum, den Drop zu überprüfen.',
-            buttons: ['OK']
-        });
-
-        await alert.present();
+        // Or any other header:
+        console.log(response.headers.get('X-Custom-Header'));
+      });
     }
+  }
+  async presentAlert() {
+    const alert = await this.alertController.create({
+      header: 'Drop wurde gemeldet',
+      message:
+        'Wir kümmern uns so schnell wie möglich darum, den Drop zu überprüfen.',
+      buttons: ['OK']
+    });
 
+    await alert.present();
+  }
 }
