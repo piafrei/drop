@@ -12,7 +12,7 @@ import {el} from '@angular/platform-browser/testing/src/browser_util';
 })
 export class FilterPage implements OnInit {
 
-  filters = [{ name: 'EssenTrinken' }, { name: 'KulturSehenswuerdigkeiten' }, { name: 'Einkaufen' }, { name: 'NicePlace' }, { name: 'HiddenGem' }, { name: 'Ueberraschung' }];
+    filters = [{ name: 'Essen/Trinken' }, { name: 'Kultur/Sehenswürdigkeiten' }, { name: 'Einkaufen' }, { name: 'Nice Place' }, { name: 'Hidden Gem' }, { name: 'Überraschung' }];
   filterForm: FormGroup;
   filterFormArray;
   private matchingDrops: any[];
