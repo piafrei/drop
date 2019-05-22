@@ -99,7 +99,7 @@ this.drops = this.dropsCollection.snapshotChanges().pipe(
     return this.dropsCollection.doc<Drop>(id).valueChanges();
   }
 
-  getDropByCat(category) {
+  /*getDropByCat(category) {
     const dropsPerCat = this.db.collection('drops', ref =>
        ref.where('category', '==', category)
     );
@@ -113,7 +113,7 @@ this.drops = this.dropsCollection.snapshotChanges().pipe(
             });
         })
     );
-  }
+  }*/
 
   updateDrop(drop: Drop, id: string) {
     return this.dropsCollection.doc(id).update(drop);
