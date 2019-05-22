@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import {Injectable} from '@angular/core';
+import {AngularFirestore, AngularFirestoreCollection} from '@angular/fire/firestore';
+import {Observable} from 'rxjs';
+import {map} from 'rxjs/operators';
 import {Device} from '@ionic-native/device/ngx';
 import {UserService} from './user.service';
 
@@ -29,13 +29,14 @@ export class DropService {
     private drops: Observable<Drop[]>;
     private myDrops: Observable<Drop[]>;
 
+    private db;
+
     constructor(db: AngularFirestore, private device: Device, private userService: UserService) {
-        const currentTime = new Date().getTime();
-        const validPastTimeMillis = 540000000;
-        const validMinTime = currentTime - validPastTimeMillis;
+
+        this.db = db;
 
         this.dropsCollection = db.collection('drops', ref =>
-            ref.where('createdAt', '>=', validMinTime).orderBy('score', 'desc')
+            ref.orderBy('score', 'desc')
         );
 
         this.drops = this.dropsCollection.snapshotChanges().pipe(
@@ -77,6 +78,22 @@ export class DropService {
     updateDrop(drop: Drop, id: string) {
         return this.dropsCollection.doc(id).update(drop);
     }
+
+    /*getDropByCat(category) {
+        const dropsPerCat = this.db.collection('drops', ref =>
+           ref.where('category', '==', category)
+        );
+
+        return dropsPerCat.snapshotChanges().pipe(
+            map(actions => {
+                return actions.map(a => {
+                    const data = a.payload.doc.data();
+                    const id = a.payload.doc.id;
+                    return {id, ...data};
+                });
+            })
+        );
+    }*/
 
     addDrop(drop: Drop) {
         console.log('Drop Service id to save' + drop.dropID);

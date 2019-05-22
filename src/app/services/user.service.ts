@@ -62,7 +62,7 @@ export class UserService {
     }
 
     saveDropToVisibleDrops(id: number) {
-     console.log('User Service Id to save' + id);
+     // console.log('User Service Id to save' + id);
      const deviceId = this.getDeviceId();
      const userObservable = this.db.collection('users').doc(deviceId).get();
      let userData;

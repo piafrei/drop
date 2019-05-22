@@ -8,6 +8,8 @@ import {AppComponent} from '../../app.component';
 import {Router} from '@angular/router';
 import {UserService} from '../../services/user.service';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { AlertController } from '@ionic/angular';
+
 
 @Component({
   selector: 'app-home',
@@ -28,7 +30,8 @@ export class HomePage implements OnInit {
         public dropService: DropService,
         public appComponent: AppComponent,
         public userService: UserService,
-        private statusBar: StatusBar
+        private statusBar: StatusBar,
+        public alertController: AlertController
     ) {}
     ngOnInit() {
         // let status bar overlay webview
@@ -64,7 +67,7 @@ export class HomePage implements OnInit {
         .addTo(this.map);
         this.map.locate({
             setView: true,
-            maxZoom: 10,
+            maxZoom: 18,
             minZoom: 15
         })
         .on('locationfound', e => {
@@ -86,58 +89,50 @@ export class HomePage implements OnInit {
         this.loadMarkers();
     }
     loadMarkers() {
-        const greyDropIcon = leaflet.icon({
-            iconUrl: '../../../assets/icon/grey-drop.png',
-            shadowUrl: '../../../assets/icon/drop-shadow.svg',
-
-            iconSize: [25, 30], // size of the icon
-            shadowSize: [25, 30], // size of the shadow
-            iconAnchor: [0, 0], // point of the icon which will correspond to marker's location
-            shadowAnchor: [2, -2], // the same for the shadow
-            popupAnchor: [-3, -5] // point from which the popup should open relative to the iconAnchor
-        });
-        const KingDropIcon = leaflet.icon({
-            iconUrl: '../../../assets/icon/colored-kingdrop.png',
-            shadowUrl: '../../../assets/icon/drop-shadow.svg',
-
-            iconSize: [25, 30], // size of the icon
-            shadowSize: [25, 30], // size of the shadow
-            iconAnchor: [0, 0], // point of the icon which will correspond to marker's location
-            shadowAnchor: [2, -2], // the same for the shadow
-            popupAnchor: [-3, -5] // point from which the popup should open relative to the iconAnchor
-        });
         const user = this.userService.getUser();
+
         let userData;
         let visibleDropsUser;
+
         user.subscribe(val => {
            userData = val.data();
            visibleDropsUser = userData.visibleDrops;
         });
         setTimeout(function() {
             // console.log('Timeout triggered');
-        },  750);
+        },  1000);
         this.dropService.getDrops().subscribe((drops: any) => {
-            const counter = drops.length * 0.2;
-            console.log('Anzahl der drops ' + counter);
+            const counter = Math.floor(drops.length * 0.2);
+            console.log('Die Anzahl der Kingdrops beträgt ' + counter);
             drops.forEach((singledrop, index) => {
-                console.log('Schleifendurchläufe ' + index);
+                console.log('Die der Schleifendurchläufe beträgt ' + index);
                 if (this.dropService.isDropVisible(singledrop)) {
-                    const dropGroup = leaflet.featureGroup();
+                    // const dropGroup = leaflet.featureGroup();
                     if (visibleDropsUser.indexOf(singledrop.dropID) > -1) {
-                        this.setDropVisible(singledrop);
+                        if (index < counter) {
+                            this.setKingDropVisible(singledrop);
+                        } else {
+                            this.setDropVisible(singledrop);
+                        }
+                    } else {
+
                     }
                     const dist = this.checkDropDistance(singledrop);
-                    if (dist < 1500 && singledrop.score > -10) {
+                    if (dist < 150 && singledrop.score > -10) {
                         this.userService.saveDropToVisibleDrops(singledrop.dropID);
-                        this.setDropVisible(singledrop);
-                    } else if (singledrop.score > -10) {
-                        const drop: any = leaflet.marker([singledrop.latitude, singledrop.longitude], {
-                            icon: greyDropIcon
-                        }).on('click', () => {
-                            console.log('Marker clicked, but out of range');
-                        });
-                        dropGroup.addLayer(drop);
-                        this.map.addLayer(dropGroup);
+                    }
+                    if (index < counter) {
+                        if (dist < 150 && singledrop.score > -10) {
+                            this.setKingDropVisible(singledrop);
+                        } else if (singledrop.score > -10) {
+                            this.addOutOfRangeKingDrop(singledrop);
+                        }
+                    } else {
+                        if (dist < 150 && singledrop.score > -10) {
+                            this.setDropVisible(singledrop);
+                        } else if (singledrop.score > -10) {
+                            this.addOutOfRangeDrop(singledrop);
+                        }
                     }
                 }
             });
@@ -156,9 +151,12 @@ export class HomePage implements OnInit {
         );
         // console.log(dist);
         return dist;
-        }
+    }
     setDropVisible(drop) {
         this.addVisibleDropToMap(drop);
+    }
+    setKingDropVisible(drop) {
+        this.addVisibleKingDropToMap(drop);
     }
     addVisibleDropToMap(dropParam) {
         const coloredDropIcon = leaflet.icon({
@@ -184,5 +182,84 @@ export class HomePage implements OnInit {
         });
         dropGroup.addLayer(drop);
         this.map.addLayer(dropGroup);
+    }
+    addVisibleKingDropToMap(dropParam) {
+        const coloredKingDropIcon = leaflet.icon({
+            iconUrl: '../../../assets/icon/colored-kingdrop.png',
+            shadowUrl: '../../../assets/icon/drop-shadow.svg',
+
+            iconSize: [25, 45], // size of the icon
+            shadowSize: [25, 30], // size of the shadow
+            iconAnchor: [0, 0], // point of the icon which will correspond to marker's location
+            shadowAnchor: [2, -2], // the same for the shadow
+            popupAnchor: [-3, -5] // point from which the popup should open relative to the iconAnchor
+        });
+        const dropGroup = leaflet.featureGroup();
+        const drop: any = leaflet
+            .marker([dropParam.latitude, dropParam.longitude], {
+                icon: coloredKingDropIcon
+            })
+            .on('click', () => {
+                const id = dropParam.id;
+                const url = 'drop/';
+                const dropUrl = url.concat(id);
+                this.router.navigateByUrl(dropUrl);
+            });
+        dropGroup.addLayer(drop);
+        this.map.addLayer(dropGroup);
+    }
+    addOutOfRangeDrop(dropParam) {
+        const greyDropIcon = leaflet.icon({
+            iconUrl: '../../../assets/icon/grey-drop.png',
+            shadowUrl: '../../../assets/icon/drop-shadow.svg',
+
+            iconSize: [25, 30], // size of the icon
+            shadowSize: [25, 30], // size of the shadow
+            iconAnchor: [0, 0], // point of the icon which will correspond to marker's location
+            shadowAnchor: [2, -2], // the same for the shadow
+            popupAnchor: [-3, -5] // point from which the popup should open relative to the iconAnchor
+        });
+        const dropGroup = leaflet.featureGroup();
+        const drop: any = leaflet
+            .marker([dropParam.latitude, dropParam.longitude], {
+                icon: greyDropIcon
+            })
+            .on('click', () => {
+                this.presentAlert();
+            });
+        dropGroup.addLayer(drop);
+        this.map.addLayer(dropGroup);
+    }
+    addOutOfRangeKingDrop(dropParam) {
+        const greyKingDropIcon = leaflet.icon({
+            iconUrl: '../../../assets/icon/grey-kingdrop.png',
+            shadowUrl: '../../../assets/icon/drop-shadow.svg',
+
+            iconSize: [25, 45], // size of the icon
+            shadowSize: [25, 30], // size of the shadow
+            iconAnchor: [0, 0], // point of the icon which will correspond to marker's location
+            shadowAnchor: [2, -2], // the same for the shadow
+            popupAnchor: [-3, -5] // point from which the popup should open relative to the iconAnchor
+        });
+        const dropGroup = leaflet.featureGroup();
+        const drop: any = leaflet
+            .marker([dropParam.latitude, dropParam.longitude], {
+                icon: greyKingDropIcon
+            })
+            .on('click', () => {
+                this.presentAlert();
+            });
+        dropGroup.addLayer(drop);
+        this.map.addLayer(dropGroup);
+    }
+
+    async presentAlert() {
+        const alert = await this.alertController.create({
+            header: 'Außer Reichweite!',
+            message: 'Diesen Drop musst du zuerst besuchen, bevor du ihn lesen kannst.',
+            buttons: ['OK']
+        });
+
+        await alert.present();
     }
 }
