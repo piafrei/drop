@@ -143,7 +143,7 @@ export class DropPage implements OnInit {
     async presentAlert() {
         const alert = await this.alertController.create({
             header: 'Drop wurde gemeldet',
-            message: 'Wir kümmern uns so schnell wie möglich darum den drop zu überprüfen.',
+            message: 'Wir kümmern uns so schnell wie möglich darum, den Drop zu überprüfen.',
             buttons: ['OK']
         });
 

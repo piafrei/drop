@@ -87,7 +87,7 @@ export class HomePage implements OnInit {
     }
     loadMarkers() {
         const greyDropIcon = leaflet.icon({
-            iconUrl: '../../../assets/icon/grey-drop.png',
+            iconUrl: '../../../assets/icon/colored-drop.png',
             shadowUrl: '../../../assets/icon/drop-shadow.svg',
 
             iconSize: [25, 30], // size of the icon
@@ -124,7 +124,7 @@ export class HomePage implements OnInit {
               this.setDropVisible(singledrop);
             } else {
               const dist = this.checkDropDistance(singledrop);
-              if (dist < 1500 && singledrop.score > -10) {
+              if (dist < 150 && singledrop.score > -10) {
                  this.userService.saveDropToVisibleDrops(singledrop.dropID);
                  this.setDropVisible(singledrop);
               } else if (singledrop.score > -10) {
