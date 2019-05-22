@@ -4,6 +4,7 @@ import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {Device} from '@ionic-native/device/ngx';
 import {UserService} from './user.service';
+import {AppComponent} from '../app.component';
 
 export interface Drop {
     id?: string;
@@ -23,17 +24,21 @@ export interface Drop {
 })
 
 export class DropService {
-    private dropsCollection: AngularFirestoreCollection<Drop>;
-    private myDropsCollection: AngularFirestoreCollection<Drop>;
+private dropsCollection: AngularFirestoreCollection<Drop>;
+private myDropsCollection: AngularFirestoreCollection<Drop>;
+private kingdropsCollection: AngularFirestoreCollection<Drop>;
 
-    private drops: Observable<Drop[]>;
-    private myDrops: Observable<Drop[]>;
+private drops: Observable<Drop[]>;
+private myDrops: Observable<Drop[]>;
+private kingDrops: Observable<Drop[]>;
+private _visibleDropsUser;
 
-    private db;
 
-    constructor(db: AngularFirestore, private device: Device, private userService: UserService) {
+private db;
 
-        this.db = db;
+constructor(db: AngularFirestore, private device: Device, private userService: UserService, private appComponent: AppComponent) {
+
+this.db = db;
 
         this.dropsCollection = db.collection('drops', ref =>
             ref.orderBy('score', 'desc')
@@ -48,6 +53,12 @@ export class DropService {
                 });
             })
         );
+
+        const user = this.userService.getUser();
+        let userData;
+        user.subscribe(val => {
+            userData = val.data();
+            this._visibleDropsUser = userData.visibleDrops; });
 
         this.myDropsCollection = db.collection('drops', ref =>
             ref.where('deviceID', '==', this.device.uuid).orderBy('score', 'desc')
@@ -71,35 +82,39 @@ export class DropService {
         return this.myDrops;
     }
 
-    getDrop(id) {
-        return this.dropsCollection.doc<Drop>(id).valueChanges();
-    }
+  getKingDrops() {
+    return this.kingDrops;
+  }
 
-    updateDrop(drop: Drop, id: string) {
-        return this.dropsCollection.doc(id).update(drop);
-    }
+  getDrop(id) {
+    return this.dropsCollection.doc<Drop>(id).valueChanges();
+  }
 
-    /*getDropByCat(category) {
-        const dropsPerCat = this.db.collection('drops', ref =>
-           ref.where('category', '==', category)
-        );
+  getDropsByCat(category) {
+    let dropsPerCat: AngularFirestoreCollection<Drop>;
+    dropsPerCat = this.db.collection('drops', ref =>
+       ref.where('category', '==', category)
+    );
+    return dropsPerCat.snapshotChanges().pipe(
+        map(actions => {
+            return actions.map(a => {
+                const data = a.payload.doc.data();
+                const id = a.payload.doc.id;
+                return {id, ...data};
+            });
+        })
+    );
+  }
 
-        return dropsPerCat.snapshotChanges().pipe(
-            map(actions => {
-                return actions.map(a => {
-                    const data = a.payload.doc.data();
-                    const id = a.payload.doc.id;
-                    return {id, ...data};
-                });
-            })
-        );
-    }*/
+  updateDrop(drop: Drop, id: string) {
+    return this.dropsCollection.doc(id).update(drop);
+  }
 
-    addDrop(drop: Drop) {
-        console.log('Drop Service id to save' + drop.dropID);
-        this.userService.saveDropToVisibleDrops(drop.dropID);
-        return this.dropsCollection.add(drop);
-    }
+  addDrop(drop: Drop) {
+    console.log('Drop Service id to save' + drop.dropID);
+    this.userService.saveDropToVisibleDrops(drop.dropID);
+    return this.dropsCollection.add(drop);
+  }
 
     removeDrop(id) {
         return this.dropsCollection.doc(id).delete();
@@ -121,5 +136,9 @@ export class DropService {
             scoreMillis = currentScore * 3600000;
             return (timeCreated + scoreMillis) > (currentTime - validPastMillis);
         }
+    }
+
+    getVisibleDropsUser() {
+        return this._visibleDropsUser;
     }
 }
