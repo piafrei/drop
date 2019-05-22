@@ -108,7 +108,7 @@ export class HomePage implements OnInit {
                 console.log('Die der Schleifendurchläufe beträgt ' + index);
                 if (this.dropService.isDropVisible(singledrop)) {
                     // const dropGroup = leaflet.featureGroup();
-                    if (visibleDropsUser.indexOf(singledrop.dropID) > -1) {
+                    /*if (visibleDropsUser.indexOf(singledrop.dropID) > -1) {
                         if (index < counter) {
                             this.setKingDropVisible(singledrop);
                         } else {
@@ -116,7 +116,7 @@ export class HomePage implements OnInit {
                         }
                     } else {
 
-                    }
+                    }*/
                     const dist = this.checkDropDistance(singledrop);
                     if (dist < 150 && singledrop.score > -10) {
                         this.userService.saveDropToVisibleDrops(singledrop.dropID);
