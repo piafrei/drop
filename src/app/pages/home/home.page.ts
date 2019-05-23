@@ -68,7 +68,7 @@ export class HomePage implements OnInit {
         this.map.locate({
             setView: true,
             maxZoom: 18,
-            minZoom: 15
+            minZoom: 150
         })
         .on('locationfound', e => {
             const markerGroup = leaflet.featureGroup();
@@ -84,11 +84,30 @@ export class HomePage implements OnInit {
             this.map.addLayer(markerGroup);
         })
         .on('locationerror', err => {
-            console.log(err.message);
+            const longitude = this.appComponent.longitude;
+            const latitude = this.appComponent.latitude;
+
+            if (longitude != null && latitude != null) {
+                console.log('location from appcomponent');
+                const markerGroup = leaflet.featureGroup();
+                const marker: any = leaflet
+                    .marker([latitude, longitude], {
+                        icon: positionIcon,
+                        zIndexOffset: -1000 // put the markers on top of the location marker
+                    })
+                    .on('click', () => {
+                        console.log('Position marker clicked');
+                    });
+                markerGroup.addLayer(marker);
+                this.map.addLayer(markerGroup);
+            } else {
+                console.log(err.message);
+            }
         });
-        this.loadMarkers();
+        this.loadMarkers(this.dropService.getDrops());
     }
-    loadMarkers() {
+
+    loadMarkers(dropsToShow) {
         const user = this.userService.getUser();
 
         let userData;
@@ -99,7 +118,7 @@ export class HomePage implements OnInit {
            visibleDropsUser = userData.visibleDrops;
         });
 
-        this.dropService.getDrops().subscribe((drops: any) => {
+        dropsToShow.subscribe((drops: any) => {
             const counter = Math.floor(drops.length * 0.2);
             console.log('Die Anzahl der Kingdrops beträgt ' + counter);
             drops.forEach((singledrop, index) => {
