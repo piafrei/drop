@@ -18,26 +18,26 @@ import {UserService} from './services/user.service';
 import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
-  declarations: [AppComponent],
-  entryComponents: [],
-  imports: [
-    BrowserModule,
-    IonicModule.forRoot(),
-    AppRoutingModule,
-    AngularFireModule.initializeApp(environment.firebase),
-    AngularFirestoreModule,
-    HttpClientModule
-  ],
-  providers: [
-    StatusBar,
-    Device,
-    SplashScreen,
-    Geolocation,
-    UserService,
-    Device,
-    { provide: FirestoreSettingsToken, useValue: {} },
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
-  ],
-  bootstrap: [AppComponent]
+    declarations: [AppComponent],
+    entryComponents: [],
+    imports: [
+        BrowserModule,
+        IonicModule.forRoot(),
+        AppRoutingModule,
+        AngularFireModule.initializeApp(environment.firebase),
+        AngularFirestoreModule,
+        HttpClientModule
+    ],
+    providers: [
+        StatusBar,
+        Device,
+        SplashScreen,
+        Geolocation,
+        UserService,
+        Device,
+        { provide: FirestoreSettingsToken, useValue: {} },
+        { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule {}

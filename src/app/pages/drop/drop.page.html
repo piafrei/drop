@@ -17,9 +17,9 @@
         {{ drop.description }}
       </div>
       <ion-item class="more-button">
-        <ion-icon name="more" class="edit-icon" (click)="openSelect(item)"></ion-icon>
+        <ion-icon name="more" class="edit-icon"></ion-icon>
         <ion-select interface="action-sheet" (ionChange)="selectedOption(drop, $event)">
-          <ion-select-option *ngIf="!buttonDisabled" (click)="buttonDisabled = true" value="report">Melden</ion-select-option>
+          <ion-select-option (click)="disableReport()" [disabled]="disableButton" value="report">Melden</ion-select-option>
         </ion-select>
       </ion-item>
     </div>
@@ -36,23 +36,6 @@
         {{ drop.score }}
       </div>
     </div>
-  </div>
-  <div class="drop-comments">
-    <div class="comment">
-      <div class="comment-text">
-        Test123
-      </div>
-      <ion-item class="more-button">
-        <ion-icon name="more" class="edit-icon" (click)="openSelect(myDrops)"></ion-icon>
-        <ion-select class="select-field" interface="action-sheet" (ionChange)="showMore(myDrops, $event)" #showSelect>
-          <ion-select-option value="delete">Löschen</ion-select-option>
-          <!--<ion-select-option value="edit">Bearbeiten</ion-select-option>-->
-        </ion-select>
-      </ion-item>
-    </div>
-    <button class="add-comment" routerLink="/add-comment">
-      <img src="assets/icon/add-drop-icon.svg" alt="Kommentar hinzufügen" />
-    </button>
   </div>
 </ion-content>
 

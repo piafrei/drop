@@ -101,9 +101,9 @@ export class HomePage implements OnInit {
 
         this.dropService.getDrops().subscribe((drops: any) => {
             const counter = Math.floor(drops.length * 0.2);
-            console.log('Die Anzahl der Kingdrops beträgt ' + counter);
+            // console.log('Die Anzahl der Kingdrops beträgt ' + counter);
             drops.forEach((singledrop, index) => {
-                console.log('Die der Schleifendurchläufe beträgt ' + index);
+                // console.log('Die der Schleifendurchläufe beträgt ' + index);
                 if (this.dropService.isDropVisible(singledrop)) {
                     // const dropGroup = leaflet.featureGroup();
                     /*if (visibleDropsUser.indexOf(singledrop.dropID) > -1) {

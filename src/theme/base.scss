@@ -216,7 +216,10 @@ ion-toolbar {
 
 .filtertext {
   padding-left: 7px;
-  font-family: "Nunito SemiBold";
+  font: {
+    family: "Nunito";
+    weight: 600;
+  }
 }
 
 .filtertext:before{
