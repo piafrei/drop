@@ -4,7 +4,6 @@ import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {Device} from '@ionic-native/device/ngx';
 import {UserService} from './user.service';
-import {AppComponent} from '../app.component';
 
 export interface Drop {
     id?: string;
@@ -36,7 +35,7 @@ private _visibleDropsUser;
 
 private db;
 
-constructor(db: AngularFirestore, private device: Device, private userService: UserService, private appComponent: AppComponent) {
+constructor(db: AngularFirestore, private device: Device, private userService: UserService) {
 
 this.db = db;
 
@@ -133,8 +132,7 @@ this.db = db;
             scoreMillis = (currentScore * 14.4) * 3600000;
             return (timeCreated + scoreMillis) > (currentTime - validPastMillis);
         } else {
-            if (currentScore < 350)
-            {
+            if (currentScore < 350) {
                 currentScore = 350;
             }
             scoreMillis = currentScore * 3600000;
