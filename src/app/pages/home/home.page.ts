@@ -1,15 +1,14 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import * as Geolib from 'geolib';
 
 import leaflet from 'leaflet';
-import {NavController} from '@ionic/angular';
-import {Drop, DropService} from '../../services/drop.service';
-import {AppComponent} from '../../app.component';
-import {Router} from '@angular/router';
-import {UserService} from '../../services/user.service';
+import { NavController } from '@ionic/angular';
+import { Drop, DropService } from '../../services/drop.service';
+import { AppComponent } from '../../app.component';
+import { Router } from '@angular/router';
+import { UserService } from '../../services/user.service';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AlertController } from '@ionic/angular';
-
 
 @Component({
   selector: 'app-home',
@@ -67,8 +66,8 @@ export class HomePage implements OnInit {
         .addTo(this.map);
         this.map.locate({
             setView: true,
-            maxZoom: 18,
-            minZoom: 15
+            maxZoom: 22,
+            minZoom: 12
         })
         .on('locationfound', e => {
             const markerGroup = leaflet.featureGroup();
@@ -84,19 +83,38 @@ export class HomePage implements OnInit {
             this.map.addLayer(markerGroup);
         })
         .on('locationerror', err => {
-            console.log(err.message);
+            const longitude = this.appComponent.longitude;
+            const latitude = this.appComponent.latitude;
+
+            if (longitude != null && latitude != null) {
+                console.log('location from appcomponent');
+                const markerGroup = leaflet.featureGroup();
+                const marker: any = leaflet
+                    .marker([latitude, longitude], {
+                        icon: positionIcon,
+                        zIndexOffset: -1000 // put the markers on top of the location marker
+                    })
+                    .on('click', () => {
+                        console.log('Position marker clicked');
+                    });
+                markerGroup.addLayer(marker);
+                this.map.addLayer(markerGroup);
+            } else {
+                console.log(err.message);
+            }
         });
-        this.loadMarkers();
+        this.loadMarkers(this.dropService.getDrops());
     }
-    loadMarkers() {
+
+    loadMarkers(dropsToShow) {
         const user = this.userService.getUser();
 
         let userData;
         let visibleDropsUser;
 
         user.subscribe(val => {
-           userData = val.data();
-           visibleDropsUser = userData.visibleDrops;
+          userData = val.data();
+          visibleDropsUser = userData.visibleDrops;
         });
 
         this.dropService.getDrops().subscribe((drops: any) => {

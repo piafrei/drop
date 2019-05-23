@@ -2,7 +2,11 @@
   <div class="header">
     <ion-toolbar class="headline" color="transparent">
       <img src="assets/images/drop-logo.svg" alt="Logo Drop" id="drop-logo" />
-      <img src="assets/images/headline-bg.svg" alt="Drop Background" id="header-bg" />
+      <img
+        src="assets/images/headline-bg.svg"
+        alt="Drop Background"
+        id="header-bg"
+      />
     </ion-toolbar>
   </div>
   <div id="map"></div>
@@ -10,28 +14,26 @@
 
 <ion-tabs class="tab-wrapper">
   <ion-tab-bar slot="bottom">
-    <ion-tab-button tab="filter">
+    <ion-button routerLink="filter">
       <img src="assets/icon/filter-icon.svg" alt="Filter Icon" />
-      <ion-badge>2</ion-badge>
-    </ion-tab-button>
+    </ion-button>
 
-    <ion-tab-button tab="notification">
-      <img src="assets/icon/notification-icon.svg" alt="Filter Icon" />
-      <ion-badge>6</ion-badge>
-    </ion-tab-button>
-
-    <ion-tab-button tab="new-drop" class="add-drop">
+    <ion-button routerLink="new-drop" class="add-drop">
       <img src="assets/icon/add-drop-icon.svg" alt="Filter Icon" />
-    </ion-tab-button>
+    </ion-button>
 
-    <ion-tab-button tab="account">
+    <ion-button routerLink="account">
       <img src="assets/icon/profile-icon.svg" alt="Filter Icon" />
-    </ion-tab-button>
+    </ion-button>
 
-    <ion-tab-button tab="settings">
+    <ion-button routerLink="settings">
       <img src="assets/icon/settings-icon.svg" alt="Filter Icon" />
-    </ion-tab-button>
+    </ion-button>
   </ion-tab-bar>
 </ion-tabs>
 
-<img src="assets/images/tabbar-bg.svg" alt="Tabbar Background" class="tabbar-bg" />
+<img
+  src="assets/images/tabbar-bg.svg"
+  alt="Tabbar Background"
+  class="tabbar-bg"
+/>
