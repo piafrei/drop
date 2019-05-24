@@ -3,7 +3,11 @@
     <ion-buttons slot="end" routerLink="/home">
       <ion-icon name="close"></ion-icon>
     </ion-buttons>
-    <img src="assets/images/close-icon-bg.svg" alt="Close Icon Background" class="close-icon-bg">
+    <img
+      src="assets/images/close-icon-bg.svg"
+      alt="Close Icon Background"
+      class="close-icon-bg"
+    />
   </ion-toolbar>
 </ion-header>
 
@@ -18,18 +22,26 @@
       </div>
       <ion-item class="more-button">
         <ion-icon name="more" class="edit-icon"></ion-icon>
-        <ion-select interface="action-sheet" (ionChange)="selectedOption(drop, $event)">
-          <ion-select-option (click)="disableReport()" [disabled]="disableButton" value="report">Melden</ion-select-option>
+        <ion-select
+          interface="action-sheet"
+          (ionChange)="selectedOption(drop, $event)"
+        >
+          <ion-select-option
+            (click)="disableReport()"
+            [disabled]="disableButton"
+            value="report"
+            >Melden</ion-select-option
+          >
         </ion-select>
       </ion-item>
     </div>
     <div class="voting">
       <div class="voting-buttons">
-        <button (click)="voteUp(drop.score, drop.votedBy)">
-          <img src="assets/icon/upvote.svg" alt="Upvote Button" />
+        <button (click)="voteUp(drop.score)" [disabled]="disableUpVoteBtn">
+          <img id="upvotebtn" [src]="upVoteBtnPick" alt="Upvote Button" />
         </button>
-        <button (click)="voteDown(drop.score, drop.votedBy)">
-          <img src="assets/icon/downvote.svg" alt="Downvote Button" />
+        <button (click)="voteDown(drop.score)" [disabled]="disableDownVoteBtn">
+          <img id="downvotebtn" [src]="downVoteBtnPick" alt="Downvote Button" />
         </button>
       </div>
       <div class="rating">

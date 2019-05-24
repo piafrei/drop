@@ -1,6 +1,6 @@
-import {Component, OnInit, QueryList, ViewChildren} from '@angular/core';
+import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import {IonSelect, LoadingController, NavController} from '@ionic/angular';
+import { IonSelect, LoadingController, NavController } from '@ionic/angular';
 import { Drop, DropService } from '../../services/drop.service';
 import { Device } from '@ionic-native/device/ngx';
 import { AppComponent } from '../../app.component';
@@ -9,177 +9,200 @@ import { AlertController } from '@ionic/angular';
 import { UserService } from '../../services/user.service';
 
 @Component({
-    selector: 'app-drop',
-    templateUrl: './drop.page.html',
-    styleUrls: ['./drop.page.scss']
+  selector: 'app-drop',
+  templateUrl: './drop.page.html',
+  styleUrls: ['./drop.page.scss']
 })
 export class DropPage implements OnInit {
+  dropId = null;
 
-    dropId = null;
+  disableButton = false;
+  disableUpVoteBtn = false;
+  disableDownVoteBtn = false;
+  allowedtovote = true;
 
-    disableButton;
+  upVoteBtnPick: string;
+  downVoteBtnPick: string;
 
-    constructor(
-        private route: ActivatedRoute,
-        private nav: NavController,
-        private dropService: DropService,
-        private loadingController: LoadingController,
-        private device: Device,
-        private appComponent: AppComponent,
-        private http: HttpClient,
-        public alertController: AlertController,
-        private userService: UserService
-    ) {}
-    drop: Drop = {
-        createdAt: new Date().getTime(),
-        description: '',
-        category: '',
-        latitude: this.appComponent.latitude,
-        longitude: this.appComponent.longitude,
-        score: 0,
-        deviceID: this.getInfo(),
-        dropID: 0,
-        votedBy: []
-    };
+  constructor(
+    private route: ActivatedRoute,
+    private nav: NavController,
+    private dropService: DropService,
+    private loadingController: LoadingController,
+    private device: Device,
+    private appComponent: AppComponent,
+    private http: HttpClient,
+    public alertController: AlertController,
+    private userService: UserService
+  ) {}
+  drop: Drop = {
+    createdAt: new Date().getTime(),
+    description: '',
+    category: '',
+    latitude: this.appComponent.latitude,
+    longitude: this.appComponent.longitude,
+    score: 0,
+    deviceID: this.getInfo(),
+    dropID: 0,
+    votedBy: []
+  };
 
-    ngOnInit() {
-        this.dropId = this.route.snapshot.params['id'];
-        if (this.dropId) {
-            this.loadDrop();
-        }
+  ngOnInit() {
+    this.dropId = this.route.snapshot.params['id'];
+    if (this.dropId) {
+      this.loadDrop();
     }
+    this.upVoteBtnPick = 'assets/icon/upvote.svg';
+    this.downVoteBtnPick = 'assets/icon/downvote.svg';
+  }
 
-    disableReport() {
-        this.disableButton = true;
+  disableReport() {
+    this.disableButton = true;
+  }
+  disableUpVoteButton() {
+    this.disableUpVoteBtn = true;
+    this.upVoteBtnPick = 'assets/icon/upvote_disabled.svg';
+  }
+  disableDownVoteButton() {
+    this.disableDownVoteBtn = true;
+    this.downVoteBtnPick = 'assets/icon/downvote_disabled.svg';
+  }
+
+  getInfo() {
+    let deviceId = this.device.uuid;
+    if (deviceId == null) {
+      deviceId = 'DESKTOP';
     }
+    return deviceId;
+  }
 
-    getInfo() {
-        let deviceId = this.device.uuid;
-        if (deviceId == null) {
-            deviceId = 'DESKTOP';
-        }
-        return deviceId;
-    }
+  async loadDrop() {
+    const loading = await this.loadingController.create({
+      message: 'Lädt...'
+    });
+    await loading.present();
 
-    async loadDrop() {
-        const loading = await this.loadingController.create({
-            message: 'Lädt...'
+    this.dropService.getDrop(this.dropId).subscribe(res => {
+      loading.dismiss();
+      this.drop = res;
+      this.checkVoteAllowed(this.drop.votedBy);
+    });
+  }
+  async saveDrop() {
+    const loading = await this.loadingController.create({
+      message: 'Speichern...'
+    });
+    await loading.present();
+
+    if (this.dropId) {
+      if (this.drop.score <= -10) {
+        this.dropService.removeDrop(this.dropId);
+      } else {
+        this.dropService.updateDrop(this.drop, this.dropId).then(() => {
+          loading.dismiss();
+          this.nav.back();
         });
-        await loading.present();
-
-        this.dropService.getDrop(this.dropId).subscribe(res => {
-            loading.dismiss();
-            this.drop = res;
-        });
+      }
+    } else {
+      this.dropService.addDrop(this.drop).then(() => {
+        loading.dismiss();
+        this.nav.back();
+      });
     }
-    async saveDrop() {
-        const loading = await this.loadingController.create({
-            message: 'Speichern...'
-        });
-        await loading.present();
+  }
 
-        if (this.dropId) {
-            if (this.drop.score <= -10) {
-                this.dropService.removeDrop(this.dropId);
-            } else {
-                this.dropService.updateDrop(this.drop, this.dropId).then(() => {
-                    loading.dismiss();
-                    this.nav.back();
-                });
-            }
-        } else {
-            this.dropService.addDrop(this.drop).then(() => {
-                loading.dismiss();
-                this.nav.back();
-            });
-        }
+  checkVoteAllowed(votedBy) {
+    const currentUuid = this.getInfo();
+    const creatorId = this.drop.deviceID;
+    let allowedtovoteVar = true;
+    let ismydrop = false;
+
+    console.log('current id ' + currentUuid);
+    console.log('creator ' + creatorId);
+    console.log('votedBy ' + votedBy[0]);
+    console.log('mein drop: ' + this.drop.dropID);
+
+    if (currentUuid == creatorId) {
+      console.log('eigener drop');
+      ismydrop = true;
     }
-    voteUp(score, votedBy) {
-        let allowedtovote = true;
-        let mydrop = false;
-        const currentUuid = this.getInfo();
-        const creatorId = this.drop.deviceID;
 
-        if (currentUuid === creatorId) {
-            console.log('eigener drop');
-            mydrop = true;
-        }
-
-        votedBy.forEach(function(uuid) {
-            if (uuid === currentUuid) {
-                allowedtovote = false;
-                console.log('bereits gevotet');
-            }
-        });
-
-        if (allowedtovote === true && mydrop === false) {
-            this.drop.score = score + 1;
-            this.userService.improveUserScore(1);
-            this.userService.improveCreatorsScore(1, this.drop.deviceID);
-            console.log('new score: ' + score);
-            this.drop.votedBy.push(currentUuid);
-            this.dropService.updateDrop(this.drop, this.dropId);
-        }
+    for (let uuid of votedBy) {
+      if (uuid == currentUuid) {
+        allowedtovoteVar = false;
+        console.log('bereits gevotet');
+      }
     }
-    voteDown(score, votedBy) {
-        let allowedtovote = true;
-        let mydrop = false;
-        const currentUuid = this.getInfo();
-        const creatorId = this.drop.deviceID;
 
-        if (currentUuid === creatorId) {
-            console.log('eigener drop');
-            mydrop = true;
-        }
-
-        votedBy.forEach(function(uuid) {
-            if (uuid === currentUuid) {
-                allowedtovote = false;
-                console.log('bereits gevotet');
-            }
-        });
-
-        if (allowedtovote === true && mydrop === false) {
-            this.drop.score = score - 1;
-            this.userService.improveUserScore(1);
-            this.userService.declineCreatorsScore(1, this.drop.deviceID);
-            console.log('new score: ' + score);
-            this.drop.votedBy.push(currentUuid);
-            this.dropService.updateDrop(this.drop, this.dropId);
-        }
+    if (allowedtovoteVar === false || ismydrop === true) {
+      this.allowedtovote = false;
+      console.log('allowedtoVote is set: ' + this.allowedtovote);
+      this.disableDownVoteButton();
+      this.disableUpVoteButton();
+    } else {
     }
-    selectedOption(drop, event) {
-        if (event.detail.value === 'report') {
-            const baseUrl = 'https://us-central1-dropdb-55efa.cloudfunctions.net';
-            const url = baseUrl.concat(
-                '/sendMail?dest=reportdropapp@gmail.com&dropId=',
-                drop.dropID,
-                '&reporterId=',
-                this.getInfo(),
-                '&dropDescription=',
-                drop.description,
-                '&userId=',
-                drop.deviceId
-            );
-            console.log(drop.dropID, drop.deviceId, this.getInfo());
-            this.presentAlert();
-            return this.http.get(url, { observe: 'response' }).subscribe(response => {
-                // You can access status:
-                console.log(response.status);
+  }
 
-                // Or any other header:
-                console.log(response.headers.get('X-Custom-Header'));
-            });
-        }
-    }
-    async presentAlert() {
-        const alert = await this.alertController.create({
-            header: 'Drop wurde gemeldet',
-            message:
-                'Wir kümmern uns so schnell wie möglich darum, den Drop zu überprüfen.',
-            buttons: ['OK']
-        });
+  voteUp(score) {
+    const currentUuid = this.getInfo();
 
-        await alert.present();
+    if (this.allowedtovote === true) {
+      this.drop.score = score + 1;
+      this.userService.improveUserScore(1);
+      this.userService.improveCreatorsScore(1, this.drop.deviceID);
+      this.drop.votedBy.push(currentUuid);
+      this.dropService.updateDrop(this.drop, this.dropId);
+      this.disableUpVoteButton();
+      this.allowedtovote = false;
     }
+  }
+
+  voteDown(score) {
+    const currentUuid = this.getInfo();
+
+    if (this.allowedtovote === true) {
+      this.drop.score = score - 1;
+      this.userService.improveUserScore(1);
+      this.userService.improveCreatorsScore(1, this.drop.deviceID);
+      this.drop.votedBy.push(currentUuid);
+      this.dropService.updateDrop(this.drop, this.dropId);
+      this.disableUpVoteButton();
+      this.disableDownVoteButton();
+      this.allowedtovote = false;
+    }
+  }
+  selectedOption(drop, event) {
+    if (event.detail.value === 'report') {
+      const baseUrl = 'https://us-central1-dropdb-55efa.cloudfunctions.net';
+      const url = baseUrl.concat(
+        '/sendMail?dest=reportdropapp@gmail.com&dropId=',
+        drop.dropID,
+        '&reporterId=',
+        this.getInfo(),
+        '&dropDescription=',
+        drop.description,
+        '&userId=',
+        drop.deviceId
+      );
+      console.log(drop.dropID, drop.deviceId, this.getInfo());
+      this.presentAlert();
+      return this.http.get(url, { observe: 'response' }).subscribe(response => {
+        // You can access status:
+        console.log(response.status);
+
+        // Or any other header:
+        console.log(response.headers.get('X-Custom-Header'));
+      });
+    }
+  }
+  async presentAlert() {
+    const alert = await this.alertController.create({
+      header: 'Drop wurde gemeldet',
+      message:
+        'Wir kümmern uns so schnell wie möglich darum, den Drop zu überprüfen.',
+      buttons: ['OK']
+    });
+
+    await alert.present();
+  }
 }
