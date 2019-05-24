@@ -88,11 +88,31 @@ export class DropPage implements OnInit {
                 });
             }
         } else {
+            if (this.checkDropLocation(this.drop) === true) {
             this.dropService.addDrop(this.drop).then(() => {
-                loading.dismiss();
-                this.nav.back();
+            loading.dismiss();
+            this.nav.back();
             });
+            }
         }
+    }
+    checkDropLocation(drop: Drop) {
+        console.log('Latitude:' + drop.latitude);
+        if (drop.latitude !== undefined && drop.longitude !== undefined && drop.longitude !== null && drop.latitude !== null) {
+            return true;
+        } else {
+            this.dropWithoutLocationAlert();
+            return false;
+        }
+    }
+    async dropWithoutLocationAlert() {
+        const alert = await this.alertController.create({
+            header: 'Dein Standort konnte nicht geortet werden',
+            message: 'Um den Drop richtig anzeigen zu können benötigen wir deine Standortinformationen. Bitte versuche es erneut',
+            buttons: ['OK']
+        });
+
+        await alert.present();
     }
     voteUp(score, votedBy) {
         let allowedtovote = true;
