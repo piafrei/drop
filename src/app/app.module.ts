@@ -31,6 +31,7 @@ import { HttpClientModule } from '@angular/common/http';
     providers: [
         StatusBar,
         Device,
+        AppComponent,
         SplashScreen,
         Geolocation,
         UserService,

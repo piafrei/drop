@@ -45,7 +45,7 @@ export class AddDropPage implements OnInit {
   }
 
   getInfo() {
-    var deviceId = this.device.uuid;
+    let deviceId = this.device.uuid;
     if (deviceId == null) {
       deviceId = 'DESKTOP';
     }
