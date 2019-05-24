@@ -88,28 +88,6 @@ export class DropPage implements OnInit {
       this.checkVoteAllowed(this.drop.votedBy);
     });
   }
-  async saveDrop() {
-    const loading = await this.loadingController.create({
-      message: 'Speichern...'
-    });
-    await loading.present();
-
-    if (this.dropId) {
-      if (this.drop.score <= -10) {
-        this.dropService.removeDrop(this.dropId);
-      } else {
-        this.dropService.updateDrop(this.drop, this.dropId).then(() => {
-          loading.dismiss();
-          this.nav.back();
-        });
-      }
-    } else {
-      this.dropService.addDrop(this.drop).then(() => {
-        loading.dismiss();
-        this.nav.back();
-      });
-    }
-  }
 
   checkVoteAllowed(votedBy) {
     const currentUuid = this.getInfo();
@@ -200,6 +178,56 @@ export class DropPage implements OnInit {
       header: 'Drop wurde gemeldet',
       message:
         'Wir kümmern uns so schnell wie möglich darum, den Drop zu überprüfen.',
+      buttons: ['OK']
+    });
+
+    await alert.present();
+  }
+
+  async saveDrop() {
+    const loading = await this.loadingController.create({
+      message: 'Speichern...'
+    });
+    await loading.present();
+
+    if (this.dropId) {
+      if (this.drop.score <= -10) {
+        this.dropService.removeDrop(this.dropId);
+      } else {
+        this.dropService.updateDrop(this.drop, this.dropId).then(() => {
+          loading.dismiss();
+          this.nav.back();
+        });
+      }
+    } else {
+      if (this.checkDropLocation(this.drop) === true) {
+        this.dropService.addDrop(this.drop).then(() => {
+          loading.dismiss();
+          this.nav.back();
+        });
+      }
+    }
+  }
+
+  checkDropLocation(drop: Drop) {
+    console.log('Latitude:' + drop.latitude);
+    if (
+      drop.latitude !== undefined &&
+      drop.longitude !== undefined &&
+      drop.longitude !== null &&
+      drop.latitude !== null
+    ) {
+      return true;
+    } else {
+      this.dropWithoutLocationAlert();
+      return false;
+    }
+  }
+  async dropWithoutLocationAlert() {
+    const alert = await this.alertController.create({
+      header: 'Dein Standort konnte nicht geortet werden',
+      message:
+        'Um den Drop richtig anzeigen zu können benötigen wir deine Standortinformationen. Bitte versuche es erneut',
       buttons: ['OK']
     });
 

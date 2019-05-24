@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AlertController } from '@ionic/angular';
+import {Alert} from 'selenium-webdriver';
 
 @Component({
   selector: 'app-home',
@@ -56,7 +57,7 @@ export class HomePage implements OnInit {
         this.map = leaflet.map('map').fitWorld();
         leaflet.tileLayer(
             'https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png',
-            //old tiles 'https://api.maptiler.com/maps/positron/{z}/{x}/{y}.png?key=JrASdfPCkNw3CYBKAD6E',
+            // old tiles 'https://api.maptiler.com/maps/positron/{z}/{x}/{y}.png?key=JrASdfPCkNw3CYBKAD6E',
             {
             attributions:
             'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
@@ -82,6 +83,7 @@ export class HomePage implements OnInit {
             });
             markerGroup.addLayer(marker);
             this.map.addLayer(markerGroup);
+            this.loadMarkers(this.dropService.getDrops());
         })
         .on('locationerror', err => {
             const longitude = this.appComponent.longitude;
@@ -100,11 +102,13 @@ export class HomePage implements OnInit {
                     });
                 markerGroup.addLayer(marker);
                 this.map.addLayer(markerGroup);
+                this.loadMarkers(this.dropService.getDrops());
             } else {
                 console.log(err.message);
+                this.locationErrorAlert();
+                return;
             }
         });
-        this.loadMarkers(this.dropService.getDrops());
     }
 
     loadMarkers(dropsToShow) {
@@ -118,7 +122,7 @@ export class HomePage implements OnInit {
           visibleDropsUser = userData.visibleDrops;
         });
 
-        this.dropService.getDrops().subscribe((drops: any) => {
+        dropsToShow.subscribe((drops: any) => {
             const counter = Math.floor(drops.length * 0.2);
             // console.log('Die Anzahl der Kingdrops beträgt ' + counter);
             drops.forEach((singledrop, index) => {
@@ -277,6 +281,23 @@ export class HomePage implements OnInit {
             buttons: ['OK']
         });
 
+        await alert.present();
+    }
+
+    async locationErrorAlert() {
+        const alert = await this.alertController.create({
+            header: 'Dein Standort konnte nicht geortet werden',
+            message: 'Wir werden versuchen, deinen Standort erneut festzustellen',
+            buttons: [
+                {
+                    text: 'OK',
+                    handler: () => {
+                        console.log('Ok clicked');
+                        location.reload();
+                    }
+                },
+            ]
+        });
         await alert.present();
     }
 }
