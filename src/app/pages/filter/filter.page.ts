@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {DropService} from '../../services/drop.service';
 import {FormArray, FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {MapService} from '../../services/map.service';
+import {NavController} from '@ionic/angular';
 
 @Component({
   selector: 'app-filter',
@@ -16,7 +17,7 @@ export class FilterPage implements OnInit {
   private matchingDrops: any[];
   private _activeFilterNumber = 0;
 
-  constructor(private fb: FormBuilder, private dropService: DropService, private mapService: MapService) {
+  constructor(private fb: FormBuilder, private dropService: DropService, private mapService: MapService, private nav: NavController) {
   }
   getActiveFilterNumber() {
         return this._activeFilterNumber;
@@ -53,10 +54,11 @@ export class FilterPage implements OnInit {
   this._activeFilterNumber = this.filterFormArray.length;
   console.log(this._activeFilterNumber);
 
-  // this.mapService.clearAllMarkers();
+  this.mapService.clearAllMarkers();
 
-  /*for (const categoryObservable of this.matchingDrops) {
-      this.homePage.loadMarkers(categoryObservable);
-  }*/
+  for (const categoryObservable of this.matchingDrops) {
+      this.mapService.loadMarkers(categoryObservable);
+  }
+  this.nav.back();
   }
 }

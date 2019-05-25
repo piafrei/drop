@@ -27,7 +27,7 @@ export class HomePage implements OnInit {
     ) {}
 
     public static map: any;
-
+    public static markersArray = [];
     @ViewChild('map') public static mapContainer: ElementRef;
 
     myDrops: Drop[];

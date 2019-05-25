@@ -11,8 +11,8 @@ import {UserService} from './services/user.service';
   templateUrl: 'app.component.html'
 })
 export class AppComponent {
-  private _latitude: number;
-  private _longitude: number;
+  public static _latitude: number;
+  public static _longitude: number;
 
     constructor(
     private platform: Platform,
@@ -32,8 +32,8 @@ export class AppComponent {
 
       const watchLocation = this.geolocation.watchPosition();
       watchLocation.subscribe((data) => {
-          this._latitude = data.coords.latitude;
-          this._longitude = data.coords.longitude;
+          AppComponent._latitude = data.coords.latitude;
+          AppComponent._longitude = data.coords.longitude;
       });
 
        this.addUser();
@@ -43,9 +43,9 @@ export class AppComponent {
     }
 
     get longitude(): number {
-        return this._longitude;
+        return AppComponent._longitude;
     }
     get latitude(): number {
-        return this._latitude;
+        return AppComponent._latitude;
     }
 }

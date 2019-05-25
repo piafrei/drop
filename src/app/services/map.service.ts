@@ -178,9 +178,10 @@ export class MapService {
                 const dropUrl = url.concat(id);
                 this.router.navigateByUrl(dropUrl);
             });
+        HomePage.markersArray.push(drop);
         dropGroup.addLayer(drop);
-        this.map.addLayer(dropGroup);
-    }
+        HomePage.map.addLayer(dropGroup);
+        }
     addVisibleKingDropToMap(dropParam) {
         const coloredKingDropIcon = leaflet.icon({
             iconUrl: '../../../assets/icon/colored-kingdrop.png',
@@ -203,8 +204,9 @@ export class MapService {
                 const dropUrl = url.concat(id);
                 this.router.navigateByUrl(dropUrl);
             });
+        HomePage.markersArray.push(drop);
         dropGroup.addLayer(drop);
-        this.map.addLayer(dropGroup);
+        HomePage.map.addLayer(dropGroup);
     }
     addOutOfRangeDrop(dropParam) {
         const greyDropIcon = leaflet.icon({
@@ -225,8 +227,9 @@ export class MapService {
             .on('click', () => {
                 this.presentAlert();
             });
+        HomePage.markersArray.push(drop);
         dropGroup.addLayer(drop);
-        this.map.addLayer(dropGroup);
+        HomePage.map.addLayer(dropGroup);
     }
     addOutOfRangeKingDrop(dropParam) {
         const greyKingDropIcon = leaflet.icon({
@@ -247,8 +250,9 @@ export class MapService {
             .on('click', () => {
                 this.presentAlert();
             });
+        HomePage.markersArray.push(drop);
         dropGroup.addLayer(drop);
-        this.map.addLayer(dropGroup);
+        HomePage.map.addLayer(dropGroup);
     }
 
     async presentAlert() {
@@ -279,5 +283,9 @@ export class MapService {
     }
 
     clearAllMarkers() {
+        const mapToEdit = HomePage.map;
+        for (const markers of HomePage.markersArray) {
+            mapToEdit.removeLayer(markers);
+        }
     }
 }

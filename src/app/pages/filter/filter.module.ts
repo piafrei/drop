@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import {FormBuilder, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 
-import { IonicModule } from '@ionic/angular';
+import {IonicModule, NavController} from '@ionic/angular';
 
 import { FilterPage } from './filter.page';
 import {HomePage} from '../home/home.page';
@@ -29,7 +29,8 @@ const routes: Routes = [
     HomePage,
     DropService,
     FormBuilder,
-    AppComponent
+    AppComponent,
+    NavController
   ],
   declarations: [FilterPage]
 })
