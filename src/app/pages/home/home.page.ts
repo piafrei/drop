@@ -41,6 +41,7 @@ export class HomePage implements OnInit {
     }
 
     ionViewDidEnter() {
+        this.mapService.getAndSaveUserData();
         HomePage.map = leaflet.map('map').fitWorld();
         HomePage.map = this.mapService.loadmap(HomePage.map);
     }

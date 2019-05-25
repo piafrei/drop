@@ -13,7 +13,9 @@ import {HomePage} from '../pages/home/home.page';
 })
 export class MapService {
   map: any;
-  constructor(
+  visibleDropsUser;
+
+    constructor(
               public dropService: DropService,
               public appComponent: AppComponent,
               public userService: UserService,
@@ -90,46 +92,45 @@ export class MapService {
         return this.map;
     }
 
-    loadMarkers(dropsToShow) {
+    getAndSaveUserData() {
         const user = this.userService.getUser();
         let userData;
-        let visibleDropsUser;
 
         user.subscribe(val => {
             userData = val.data();
-            visibleDropsUser = userData.visibleDrops;
+            this.visibleDropsUser = userData.visibleDrops;
         });
+    }
 
+    loadMarkers(dropsToShow) {
         dropsToShow.subscribe((drops: any) => {
             const counter = Math.floor(drops.length * 0.2);
-            // console.log('Die Anzahl der Kingdrops beträgt ' + counter);
             drops.forEach((singledrop, index) => {
                 if (this.dropService.isDropVisible(singledrop)) {
                     // const dropGroup = leaflet.featureGroup();
-                    /*if (visibleDropsUser.indexOf(singledrop.dropID) > -1) {
+                    if (this.visibleDropsUser.indexOf(singledrop.dropID) > -1) {
                         if (index < counter) {
                             this.setKingDropVisible(singledrop);
                         } else {
                             this.setDropVisible(singledrop);
                         }
                     } else {
-
-                    }*/
-                    const dist = this.checkDropDistance(singledrop);
-                    if (dist < 150 && singledrop.score > -10) {
-                        this.userService.saveDropToVisibleDrops(singledrop.dropID);
-                    }
-                    if (index < counter) {
+                        const dist = this.checkDropDistance(singledrop);
                         if (dist < 150 && singledrop.score > -10) {
-                            this.setKingDropVisible(singledrop);
-                        } else if (singledrop.score > -10) {
-                            this.addOutOfRangeKingDrop(singledrop);
+                            this.userService.saveDropToVisibleDrops(singledrop.dropID);
                         }
-                    } else {
-                        if (dist < 150 && singledrop.score > -10) {
-                            this.setDropVisible(singledrop);
-                        } else if (singledrop.score > -10) {
-                            this.addOutOfRangeDrop(singledrop);
+                        if (index < counter) {
+                            if (dist < 150 && singledrop.score > -10) {
+                                this.setKingDropVisible(singledrop);
+                            } else if (singledrop.score > -10) {
+                                this.addOutOfRangeKingDrop(singledrop);
+                            }
+                        } else {
+                            if (dist < 150 && singledrop.score > -10) {
+                                this.setDropVisible(singledrop);
+                            } else if (singledrop.score > -10) {
+                                this.addOutOfRangeDrop(singledrop);
+                            }
                         }
                     }
                 }
@@ -147,7 +148,6 @@ export class MapService {
                 longitude: drop.longitude
             }
         );
-        // console.log(dist);
         return dist;
     }
     setDropVisible(drop) {
