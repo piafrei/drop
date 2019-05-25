@@ -12,8 +12,8 @@ import {HomePage} from '../pages/home/home.page';
   providedIn: 'root'
 })
 export class MapService {
-  map: any;
-  visibleDropsUser;
+    static visibleDropsUser;
+    map: any;
 
     constructor(
               public dropService: DropService,
@@ -98,7 +98,7 @@ export class MapService {
 
         user.subscribe(val => {
             userData = val.data();
-            this.visibleDropsUser = userData.visibleDrops;
+            MapService.visibleDropsUser = userData.visibleDrops;
         });
     }
 
@@ -108,7 +108,7 @@ export class MapService {
             drops.forEach((singledrop, index) => {
                 if (this.dropService.isDropVisible(singledrop)) {
                     // const dropGroup = leaflet.featureGroup();
-                    if (this.visibleDropsUser.indexOf(singledrop.dropID) > -1) {
+                    if (MapService.visibleDropsUser.indexOf(singledrop.dropID) > -1) {
                         if (index < counter) {
                             this.setKingDropVisible(singledrop);
                         } else {
