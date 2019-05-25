@@ -60,7 +60,7 @@ this.db = db;
             this._visibleDropsUser = userData.visibleDrops; });
 
         this.myDropsCollection = db.collection('drops', ref =>
-            ref.where('deviceID', '==', this.device.uuid).orderBy('score', 'desc')
+            ref.where('deviceID', '==', this.getInfo()).orderBy('score', 'desc')
         );
         this.myDrops = this.myDropsCollection.snapshotChanges().pipe(
             map(actions => {
@@ -127,7 +127,6 @@ this.db = db;
         const currentTime = new Date().getTime();
         const validPastMillis = 540000000;
 
-        // console.log(currentTime);
         if (currentScore < 0) {
             scoreMillis = (currentScore * 14.4) * 3600000;
             return (timeCreated + scoreMillis) > (currentTime - validPastMillis);
@@ -142,5 +141,13 @@ this.db = db;
 
     getVisibleDropsUser() {
         return this._visibleDropsUser;
+    }
+
+    getInfo() {
+        let deviceId = this.device.uuid;
+        if (deviceId == null) {
+            deviceId = 'DESKTOP';
+        }
+        return deviceId;
     }
 }
