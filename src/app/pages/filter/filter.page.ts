@@ -40,18 +40,24 @@ export class FilterPage implements OnInit {
   }
 
   submitSelectedFilter() {
-  const rawValue = this.filterFormArray.getRawValue();
+  let rawValue;
   console.log('Active Filter to submit ' + rawValue);
 
   this.matchingDrops = [];
-  for (let i = 0; i < this.filterFormArray.length; i++) {
-      const element = this.filterFormArray.at(i);
-      if (element.valid) {
-        this.matchingDrops.push(this.dropService.getDropsByCat(element.value));
+
+  if (this.filterFormArray === undefined) {
+    this.matchingDrops.push(this.dropService.getDrops());
+  } else {
+      rawValue = this.filterFormArray.getRawValue();
+      for (let i = 0; i < this.filterFormArray.length; i++) {
+          const element = this.filterFormArray.at(i);
+          if (element.valid) {
+              this.matchingDrops.push(this.dropService.getDropsByCat(element.value));
+          }
       }
-   }
+      this._activeFilterNumber = this.filterFormArray.length;
+  }
   console.log(this.matchingDrops);
-  this._activeFilterNumber = this.filterFormArray.length;
   console.log(this._activeFilterNumber);
 
   this.mapService.clearAllMarkers();
