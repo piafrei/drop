@@ -18,5 +18,24 @@
 9. `ionic serve -l --devapp` on Win or `ionic serve --c` on Mac
 12. Login to the Ionic Dev App with the account created in step 3.
 
+**CREATE APK FILE**
+
+Android Plattform erzeugen und unsignierte APK erzeugen<br>
+`ionic cordova build android --prod --release`
+
+App Key generieren<br>
+`keytool -genkey -keystore <KEY-NAME>.keystore -alias <KEY-ALIAS> -keyalg RSA -keysize 2048 -validity 999999`
+
+APK Signieren<br>
+- Jarsigner liegt unter Windows meistens in: <br>`C:\Program Files\Java\jdk<VERSION>\bin\jarsigner.exe`<br>
+
+`"path/to/jarsigner.exe" -verbose -sigalg SHA1wthRSA -digestalg SHA1 -keystore <KEY-NAME>.keystore "C:\drop\platforms\android\app\build\outputs\apk\release\app-release-unsigned.apk" drop`<br>
+
+APK optimieren und fertigstellen<br>
+`"path/to/zipalign.exe" -v 4 "C:\drop\platforms\android\app\build\outputs\apk\release\app-release-unsigned.apk" Drop.apk`<br>
+
+- Zipalign.exe liegt unter Windows unter  `C:\Users\hofherr\AppData\Local\Android\Sdk\build-tools\28.0.3\zipalign.exe`
+
+
 
 
