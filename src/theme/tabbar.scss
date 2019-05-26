@@ -1,35 +1,34 @@
 ion-tab-bar, ion-tab-button {
-  background: transparent;
+  background: $white;
   border: none;
   box-shadow: none;
   contain: none;
 }
 
-.tab-wrapper {
-  z-index: 200;
-  height: auto !important;
-  top: auto !important;
-  contain: none !important;
-}
-
-.add-drop {
-  //transform: translateY(-20px);
-  height: 100px;
-  align-self: flex-end;
-}
-
-.tabbar-bg {
+.add-new-drop {
   position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 200;
+  cursor: pointer;
+}
+
+.tab-wrapper {
+  /*position: absolute;
   bottom: 0;
   left: 0;
-  right: 0;
-  width: 100%;
-  height: auto;
-  z-index: 150;
-}
-
-.tabbar-icon {
-  &.add {
-
+  right: 0;*/
+  display: flex;
+  background: $white;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  .tab-element {
+    max-width: percentage(1/3);
+    flex: 0 0 percentage(1/3);
+    padding: 15px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 }

@@ -1,0 +1,8 @@
+@mixin color-sheme($color, $contrast, $shadng:10) {
+  --ion-color-#{$color}: $color;
+  --ion-color-#{$color}-rgb: rgb($color);
+  --ion-color-#{$color}-contrast: $contrast;
+  --ion-color-#{$color}-contrast-rgb: rgb($contrast);
+  --ion-color-#{$color}-shade: darken($color, $shadng);
+  --ion-color-#{$color}-tint: lighten($color, $shadng);
+}

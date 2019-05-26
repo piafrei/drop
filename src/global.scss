@@ -1,5 +1,4 @@
 @import "theme/fonts";
-@import "theme/variables";
 
 // http://ionicframework.com/docs/theming/
 @import '~@ionic/angular/css/core.css';
@@ -14,6 +13,7 @@
 @import '~@ionic/angular/css/flex-utils.css';
 @import 'theme/styles/leaflet.css';
 
+@import "theme/variables";
 
 //Custom mixins
 @import "theme/mixins/gradiant";
