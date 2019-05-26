@@ -28,8 +28,8 @@ plugins/
 plugins/android.json
 plugins/ios.json
 $RECYCLE.BIN/
-Drop.apk
-drop-key.keystore
+*.apk
+*.keystore
 
 src/environments/environment.ts
 src/environments/environment.prod.ts
