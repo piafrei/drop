@@ -3,6 +3,7 @@ import {DropService} from '../../services/drop.service';
 import {FormArray, FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {MapService} from '../../services/map.service';
 import {NavController} from '@ionic/angular';
+import {HomePage} from '../home/home.page';
 
 @Component({
   selector: 'app-filter',
@@ -27,6 +28,7 @@ export class FilterPage implements OnInit {
     this.filterForm = this.fb.group({
       activeFilter: this.fb.array([])
     });
+    console.log('Active Filters' + HomePage.activeFilters);
   }
 
   saveFilterToFilterFormArray(filter: string, isChecked: boolean) {
@@ -41,7 +43,7 @@ export class FilterPage implements OnInit {
 
   submitSelectedFilter() {
   let rawValue;
-  console.log('Active Filter to submit ' + rawValue);
+  HomePage.activeFilters = [];
 
   this.matchingDrops = [];
 
@@ -53,6 +55,7 @@ export class FilterPage implements OnInit {
           const element = this.filterFormArray.at(i);
           if (element.valid) {
               this.matchingDrops.push(this.dropService.getDropsByCat(element.value));
+              HomePage.activeFilters.push(element.value);
           }
       }
       this._activeFilterNumber = this.filterFormArray.length;
