@@ -38,7 +38,7 @@ export class HomePage implements OnInit {
         this.statusBar.overlaysWebView(true);
 
         // set status bar to white
-        this.statusBar.backgroundColorByHexString('#8633FF');
+        this.statusBar.backgroundColorByHexString('#7633FF');
     }
     ionViewDidEnter() {
         this.mapService.getAndSaveUserData();

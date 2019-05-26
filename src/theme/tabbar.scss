@@ -7,23 +7,29 @@ ion-tab-bar, ion-tab-button {
 
 .add-new-drop {
   position: absolute;
-  bottom: 20px;
+  bottom: 75px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 200;
+  //box-shadow: 0 0 8px rgba(0,0,0,0.15);
   cursor: pointer;
 }
 
 .tab-wrapper {
-  /*position: absolute;
+  position: absolute;
+  box-shadow: 0 0 8px rgba(0,0,0,0.15);
   bottom: 0;
   left: 0;
-  right: 0;*/
+  right: 0;
   display: flex;
   background: $white;
   justify-content: space-between;
   flex-wrap: wrap;
   .tab-element {
+    cursor: pointer;
+    &:hover, &:active, &:focus {
+      background: darken($white, 0.2);
+    }
     max-width: percentage(1/3);
     flex: 0 0 percentage(1/3);
     padding: 15px 0;
