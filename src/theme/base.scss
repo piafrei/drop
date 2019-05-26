@@ -6,7 +6,7 @@
     family: 'Nunito', sans-serif;
     size: 20px;
   }
-  --border-width: 0!important;
+  --border-width: 0 !important;
 }
 
 #map {
@@ -48,7 +48,7 @@ ion-badge {
 
 .drop-text {
   &:before {
-    content: "";
+    content: '';
     width: 2px;
     height: 30px;
     border-radius: $border-radius;
@@ -84,9 +84,9 @@ ion-badge {
       position: relative;
       width: 50px;
       height: 50px;
-      background: $primary;
+      background: none;
       border-radius: $border-radius-rounded;
-      color: $white;
+      color: none;
       margin: 0 10px;
       img {
         position: absolute;
@@ -96,8 +96,8 @@ ion-badge {
       }
     }
   }
-  .rating {
 
+  .rating {
   }
 }
 
@@ -168,7 +168,6 @@ ion-badge {
   justify-content: flex-end;
   padding: 10px;
   p {
-
   }
 }
 
@@ -196,16 +195,16 @@ ion-badge {
   }
 }
 
-.filter input[type="checkbox"] {
+.filter input[type='checkbox'] {
   display: none;
-  &:checked + .filtertext:before{
+  &:checked + .filtertext:before {
     width: 30px;
     height: 30px;
     display: block;
-    content: "";
+    content: '';
     float: left;
     margin-right: 5px;
-    background-image:url('assets/icon/check.svg');
+    background-image: url('assets/icon/check.svg');
     background-repeat: no-repeat;
   }
 }
@@ -213,18 +212,18 @@ ion-badge {
 .filtertext {
   padding-left: 7px;
   font: {
-    family: "Nunito";
+    family: 'Nunito';
     weight: 600;
   }
 }
 
-.filtertext:before{
+.filtertext:before {
   width: 30px;
   height: 30px;
   background-color: #f0f0f0;
   border-radius: 11px;
   display: block;
-  content: "";
+  content: '';
   float: left;
   margin-right: 5px;
 }

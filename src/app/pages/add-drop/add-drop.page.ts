@@ -1,7 +1,7 @@
 import { Drop, DropService } from '../../services/drop.service';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { NavController, LoadingController } from '@ionic/angular';
+import {NavController, LoadingController, AlertController} from '@ionic/angular';
 import { Device } from '@ionic-native/device/ngx';
 import { AppComponent } from '../../app.component';
 import { v4 as uuid } from 'uuid';
@@ -22,7 +22,8 @@ export class AddDropPage implements OnInit {
     private loadingController: LoadingController,
     private device: Device,
     private appComponent: AppComponent,
-    private userService: UserService
+    private userService: UserService,
+    private alertController: AlertController,
   ) {}
   drop: Drop = {
     createdAt: new Date().getTime(),
@@ -44,7 +45,7 @@ export class AddDropPage implements OnInit {
   }
 
   getInfo() {
-    var deviceId = this.device.uuid;
+    let deviceId = this.device.uuid;
     if (deviceId == null) {
       deviceId = 'DESKTOP';
     }
@@ -64,6 +65,7 @@ export class AddDropPage implements OnInit {
   }
 
   async saveDrop() {
+    if (this.checkDropLocation(this.drop) === true) {
     const loading = await this.loadingController.create({
       message: 'Speichern...'
     });
@@ -85,5 +87,25 @@ export class AddDropPage implements OnInit {
         this.nav.back();
       });
     }
+    }
   }
+
+    checkDropLocation(drop: Drop) {
+        console.log('Latitude:' + drop.latitude);
+        if (drop.latitude !== undefined && drop.longitude !== undefined && drop.longitude !== null && drop.latitude !== null) {
+            return true;
+        } else {
+            this.dropWithoutLocationAlert();
+            return false;
+        }
+    }
+    async dropWithoutLocationAlert() {
+        const alert = await this.alertController.create({
+            header: 'Dein Standort konnte nicht geortet werden',
+            message: 'Um den Drop richtig anzeigen zu können benötigen wir deine Standortinformationen. Bitte versuche es erneut',
+            buttons: ['OK']
+        });
+
+        await alert.present();
+    }
 }

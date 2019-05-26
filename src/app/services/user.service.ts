@@ -12,6 +12,7 @@ export interface User {
   id?: string;
   visibleDrops: Array<number>;
   deviceID: string;
+  score: number;
 }
 
 @Injectable({
@@ -51,7 +52,8 @@ export class UserService {
           const user: User = {
             id: deviceId,
             visibleDrops: [],
-            deviceID: deviceId
+            deviceID: deviceId,
+            score: 0
           };
           this.db
             .collection('users')
@@ -108,37 +110,37 @@ export class UserService {
     return user;
   }
 
-  //Improves score of this user
-  //Triggered at: (1) Upvote another drop; (2) Downvote another drop; (3) Create a drop
+  // Improves score of this user
+  // Triggered at: (1) Upvote another drop; (2) Downvote another drop; (3) Create a drop
   improveUserScore(amount) {
     const userObs = this.getUser();
     let userData;
     userObs.subscribe(val => {
       userData = val.data();
       console.log('improve user: ' + userData.score);
-      let score = userData.score + amount;
+      const score = userData.score + amount;
       this.userCollection.doc(this.getDeviceId()).update({ score: score });
     });
   }
 
-  //Improves the score of the user whose drop you have upvoted
+  // Improves the score of the user whose drop you have upvoted
   improveCreatorsScore(amount, creatorId) {
     const userObs = this.getThisUser(creatorId);
     let userData;
     userObs.subscribe(val => {
       userData = val.data();
-      let score = userData.score + amount;
+      const score = userData.score + amount;
       this.userCollection.doc(creatorId).update({ score: score });
     });
   }
 
-  //Decline the score of the user whose drop you have upvoted
+  // Decline the score of the user whose drop you have upvoted
   declineCreatorsScore(amount, creatorId) {
     const userObs = this.getThisUser(creatorId);
     let userData;
     userObs.subscribe(val => {
       userData = val.data();
-      let score = userData.score - amount;
+      const score = userData.score - amount;
       this.userCollection.doc(creatorId).update({ score: score });
     });
   }

@@ -39,7 +39,6 @@ export class AccountPage implements OnInit {
 
     this.userPromise.subscribe(val => {
       this.user = val.data();
-      console.log(this.user.score);
     });
   }
 

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
-import { FormsModule } from '@angular/forms';
+import {FormBuilder, FormsModule} from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 import { HomePage } from './home.page';
@@ -9,6 +9,8 @@ import { Drop, DropService } from '../../services/drop.service';
 import {AppComponent} from '../../app.component';
 import { AddDropPage } from '../add-drop/add-drop.page';
 import {UserService} from '../../services/user.service';
+import {FilterPage} from '../filter/filter.page';
+import {MapService} from '../../services/map.service';
 // import { DropDetailPage } from '../drop-detail/drop-detail.page';
 
 @NgModule({
@@ -27,7 +29,10 @@ import {UserService} from '../../services/user.service';
       DropService,
       AppComponent,
       AddDropPage,
-      UserService
+      UserService,
+      FilterPage,
+      FormBuilder,
+      MapService
   ],
   declarations: [HomePage]
 })
