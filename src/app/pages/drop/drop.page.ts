@@ -67,13 +67,17 @@ export class DropPage implements OnInit {
     disableReport() {
         this.disableButton = true;
     }
-    disableUpVoteButton() {
+    downVoted() {
+        this.disableDownVoteBtn = true;
         this.disableUpVoteBtn = true;
+        this.downVoteBtnPick = 'assets/icon/downvote.svg';
         this.upVoteBtnPick = 'assets/icon/upvote_disabled.svg';
     }
-    disableDownVoteButton() {
+    upVoted() {
         this.disableDownVoteBtn = true;
+        this.disableUpVoteBtn = true;
         this.downVoteBtnPick = 'assets/icon/downvote_disabled.svg';
+        this.upVoteBtnPick = 'assets/icon/upvote.svg';
     }
 
     getInfo() {
@@ -123,8 +127,8 @@ export class DropPage implements OnInit {
         if (allowedtovoteVar === false || ismydrop === true) {
             this.allowedtovote = false;
             console.log('allowedtoVote is set: ' + this.allowedtovote);
-            this.disableDownVoteButton();
-            this.disableUpVoteButton();
+            this.upVoted();
+            this.downVoted();
         } else {
         }
     }
@@ -138,7 +142,7 @@ export class DropPage implements OnInit {
             this.userService.improveCreatorsScore(1, this.drop.deviceID);
             this.drop.votedBy.push(currentUuid);
             this.dropService.updateDrop(this.drop, this.dropId);
-            this.disableUpVoteButton();
+            this.upVoted();
             this.allowedtovote = false;
         }
     }
@@ -152,8 +156,7 @@ export class DropPage implements OnInit {
             this.userService.improveCreatorsScore(1, this.drop.deviceID);
             this.drop.votedBy.push(currentUuid);
             this.dropService.updateDrop(this.drop, this.dropId);
-            this.disableUpVoteButton();
-            this.disableDownVoteButton();
+            this.downVoted();
             this.allowedtovote = false;
         }
     }
