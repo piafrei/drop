@@ -46,8 +46,8 @@ export class MapService {
             {
                 attributions:
                     'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
-                maxZoom: 18,
-                minZoom: 15
+                maxZoom: 20,
+                minZoom: 13
             }
         ).addTo(this.map);
         this.map.locate({
