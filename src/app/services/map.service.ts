@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable } from '@angular/core';
 import leaflet from 'leaflet';
 import * as Geolib from 'geolib';
 import {AlertController} from '@ionic/angular';
@@ -24,6 +24,10 @@ export class MapService {
         public alertController: AlertController,
         private router: Router
     ) {}
+
+    initialLatitude;
+    initialLongitude;
+
     loadmap(map) {
         this.map = map;
         const positionIcon = leaflet.icon({
@@ -53,14 +57,16 @@ export class MapService {
         })
         .on('locationfound', e => {
             const markerGroup = leaflet.featureGroup();
+            this.initialLatitude = e.latitude;
+            this.initialLongitude = e.longitude;
             const marker: any = leaflet
-                .marker([e.latitude, e.longitude], {
-                    icon: positionIcon,
-                    zIndexOffset: -1000 // put the markers on top of the location marker
-                })
-                .on('click', () => {
-                    console.log('Position marker clicked');
-                });
+            .marker([e.latitude, e.longitude], {
+                icon: positionIcon,
+                zIndexOffset: -1000 // put the markers on top of the location marker
+            })
+            .on('click', () => {
+                console.log('Position marker clicked');
+            });
             markerGroup.addLayer(marker);
             this.map.addLayer(markerGroup);
             this.loadMarkers(this.dropService.getDrops());
@@ -256,7 +262,7 @@ export class MapService {
     }
 
     backToCenter() {
-        console.log('Center Map');
+        this.map.setView([this.initialLatitude, this.initialLongitude]);
     }
 
     async outOfRangeAlert() {

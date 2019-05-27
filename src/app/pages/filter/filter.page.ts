@@ -12,7 +12,7 @@ import {HomePage} from '../home/home.page';
 })
 export class FilterPage implements OnInit {
 
-  filters = [{ name: 'Essen & Trinken' }, { name: 'Kultur' }, { name: 'Unterhaltung & Spaß' }, { name: 'Einkaufen' }, { name: 'Nice Place' }, { name: 'Hidden Gem' }, { name: 'Überraschung' }];
+  filters = [{ name: 'Essen & Trinken' }, { name: 'Kultur' }, { name: 'Unterhaltung & Spaß' }, { name: 'Einkaufen' }, { name: 'Schöner Ort' }, { name: 'Verstecktes Juwel' }, { name: 'Überraschung' }];
   filterForm: FormGroup;
   filterFormArray;
   private matchingDrops: any[];

@@ -7,27 +7,19 @@ ion-tab-bar, ion-tab-button {
 
 .home-button {
   position: absolute;
-  bottom: 75px;
-  left: 50%;
-  transform: translateX(-50%);
+  top: 110px;
   z-index: 200;
-  //box-shadow: 0 0 8px rgba(0,0,0,0.15);
+  box-shadow: 0 0 8px rgba(0,0,0,0.15);
   cursor: pointer;
-}
-
-.add-new-drop {
-
-}
-
-.home-button {
   left: auto;
-  right: 20px;
+  right: 30px;
   transform: none;
-  padding: 0;
-  ion-icon {
-    width: 50px;
-    height: 50px;
-    color: $secondary;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  img {
+    width: 100%;
+    height: auto;
   }
 }
 
@@ -48,9 +40,40 @@ ion-tab-bar, ion-tab-button {
     }
     max-width: percentage(1/3);
     flex: 0 0 percentage(1/3);
-    padding: 15px 0;
+    padding: 10px 0;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    font: {
+      size: 11px;
+    }
+    color: $secondary;
+    img {
+      display: block;
+      margin-bottom: 5px;
+    }
+  }
+  .add-new-drop {
+    width: 80px;
+    height: auto;
+    padding: 0;
+    position: absolute;
+    left: 50%;
+    //box-shadow: 0 0 8px rgba(0,0,0,0.15);
+    border-radius: 50%;
+    transform: translateX(-50%);
+    bottom: 10px;
+    img {
+      width: 100%;
+      height: auto;
+      margin-bottom: 0;
+    }
+    &:hover, &:active, &:focus {
+      background: transparent;
+
+    }
   }
 }
+
+

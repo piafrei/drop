@@ -155,10 +155,10 @@ ion-badge {
   width: 100%;
 }
 
-.account-item {
+.select-item, .drop-view {
   display: flex;
   justify-content: space-between;
-  .account-content {
+  .select-content {
     width: 100%;
   }
 }
@@ -238,4 +238,8 @@ ion-badge {
   bottom: 0px;
   transform: translate(-50%, -50%);
   margin: 0px 0px -20px 0px;
+}
+
+.custom-button {
+  text-align: center;
 }

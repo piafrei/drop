@@ -35,10 +35,14 @@ APK Signieren<br>
 
 `"path/to/jarsigner.exe" -verbose -sigalg SHA1wthRSA -digestalg SHA1 -keystore <KEY-NAME>.keystore "C:\drop\platforms\android\app\build\outputs\apk\release\app-release-unsigned.apk" drop`<br>
 
+"C:\Program Files\Java\jdk1.8.0_211\bin\jarsigner.exe" -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore drop-key.keystore "C:\drop\platforms\android\app\build\outputs\apk\release\app-release-unsigned.apk" drop
+
 ---
 
 APK optimieren und fertigstellen<br>
 `"path/to/zipalign.exe" -v 4 "C:\drop\platforms\android\app\build\outputs\apk\release\app-release-unsigned.apk" Drop.apk`<br>
+
+"C:\Users\hofherr\AppData\Local\Android\Sdk\build-tools\28.0.3\zipalign.exe" -v 4 "C:\drop\platforms\android\app\build\outputs\apk\release\app-release-unsigned.apk" Drop.apk
 
 - Zipalign.exe liegt unter Windows unter  `C:\Users\hofherr\AppData\Local\Android\Sdk\build-tools\28.0.3\zipalign.exe`
 

@@ -7,9 +7,9 @@
     </ion-toolbar>
   </div>
 
-  <!--<div class="home-button" (click)="centerMap()">
-    <ion-icon name="navigate"></ion-icon>
-  </div>-->
+  <div class="home-button" (click)="centerMap()">
+    <img src="assets/icon/location-icon.svg" alt="Location Icon"/>
+  </div>
 
   <div id="map"></div>
 </ion-content>
@@ -17,11 +17,13 @@
 <div class="tab-wrapper">
   <div class="tab-element" routerLink="filter">
     <img src="assets/icon/filter-icon.svg" alt="Filter Icon" />
+    Filter
   </div>
-  <div class="tab-element" routerLink="add-drop" >
-    <img src="assets/icon/add-drop-icon.svg" alt="Add new Drop Icon" class="add-new-drop" />
+  <div class="tab-element add-new-drop" routerLink="add-drop">
+    <img src="assets/icon/add-drop-icon.svg" alt="Add new Drop Icon" />
   </div>
   <div class="tab-element" routerLink="account">
     <img src="assets/icon/profile-icon.svg" alt="Profile Icon" />
+    Account
   </div>
 </div>
