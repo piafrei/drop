@@ -2,11 +2,14 @@
   <div class="header">
     <ion-toolbar class="headline" color="transparent">
       <img src="assets/images/drop-logo.svg" alt="Logo Drop" id="drop-logo" />
+      <img src="assets/icon/info-icon.svg" alt="Info Icon" routerLink="settings" id="info-button" />
       <img src="assets/images/headline-bg.svg" alt="Drop Background" id="header-bg" />
     </ion-toolbar>
   </div>
 
-  <img src="assets/icon/add-drop-icon.svg" routerLink="add-drop" alt="Add new Drop Icon" class="add-new-drop" />
+  <!--<div class="home-button" (click)="centerMap()">
+    <ion-icon name="navigate"></ion-icon>
+  </div>-->
 
   <div id="map"></div>
 </ion-content>
@@ -15,10 +18,10 @@
   <div class="tab-element" routerLink="filter">
     <img src="assets/icon/filter-icon.svg" alt="Filter Icon" />
   </div>
+  <div class="tab-element" routerLink="add-drop" >
+    <img src="assets/icon/add-drop-icon.svg" alt="Add new Drop Icon" class="add-new-drop" />
+  </div>
   <div class="tab-element" routerLink="account">
     <img src="assets/icon/profile-icon.svg" alt="Profile Icon" />
-  </div>
-  <div class="tab-element" routerLink="settings">
-    <img src="assets/icon/info-icon.svg" alt="Info Icon" />
   </div>
 </div>

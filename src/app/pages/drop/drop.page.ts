@@ -163,7 +163,7 @@ export class DropPage implements OnInit {
         drop.deviceId
       );
       console.log(drop.dropID, drop.deviceId, this.getInfo());
-      this.presentAlert();
+      this.outOfRangeAlert();
       return this.http.get(url, { observe: 'response' }).subscribe(response => {
         // You can access status:
         console.log(response.status);
@@ -173,7 +173,7 @@ export class DropPage implements OnInit {
       });
     }
   }
-  async presentAlert() {
+  async outOfRangeAlert() {
     const alert = await this.alertController.create({
       header: 'Drop wurde gemeldet',
       message:

@@ -1,14 +1,9 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import * as Geolib from 'geolib';
 
 import leaflet from 'leaflet';
-import { NavController } from '@ionic/angular';
-import { Drop, DropService } from '../../services/drop.service';
-import { AppComponent } from '../../app.component';
+import { Drop } from '../../services/drop.service';
 import { Router } from '@angular/router';
-import { UserService } from '../../services/user.service';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
-import { AlertController } from '@ionic/angular';
 import {FilterPage} from '../filter/filter.page';
 import {MapService} from '../../services/map.service';
 
@@ -29,6 +24,7 @@ export class HomePage implements OnInit {
     public static map: any;
     public static markersArray = [];
     public static activeFilters = [];
+
     @ViewChild('map') public static mapContainer: ElementRef;
 
     myDrops: Drop[];
@@ -44,5 +40,8 @@ export class HomePage implements OnInit {
         this.mapService.getAndSaveUserData();
         HomePage.map = leaflet.map('map').fitWorld();
         HomePage.map = this.mapService.loadmap(HomePage.map);
+    }
+    centerMap() {
+        this.mapService.backToCenter();
     }
 }

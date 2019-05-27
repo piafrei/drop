@@ -42,6 +42,8 @@ APK optimieren und fertigstellen<br>
 
 - Zipalign.exe liegt unter Windows unter  `C:\Users\hofherr\AppData\Local\Android\Sdk\build-tools\28.0.3\zipalign.exe`
 
+[Link zum Tutorial](https://ionicframework.com/docs/publishing/play-store)
+
 
 
 

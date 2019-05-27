@@ -12,17 +12,18 @@ import {HomePage} from '../pages/home/home.page';
   providedIn: 'root'
 })
 export class MapService {
+
     static visibleDropsUser;
+
     map: any;
 
     constructor(
-              public dropService: DropService,
-              public appComponent: AppComponent,
-              public userService: UserService,
-              public alertController: AlertController,
-              private router: Router
-  ) {
-  }
+        public dropService: DropService,
+        public appComponent: AppComponent,
+        public userService: UserService,
+        public alertController: AlertController,
+        private router: Router
+    ) {}
     loadmap(map) {
         this.map = map;
         const positionIcon = leaflet.icon({
@@ -44,17 +45,35 @@ export class MapService {
                 maxZoom: 18,
                 minZoom: 15
             }
-        )
-            .addTo(this.map);
+        ).addTo(this.map);
         this.map.locate({
             setView: true,
             maxZoom: 22,
             minZoom: 12
         })
-            .on('locationfound', e => {
+        .on('locationfound', e => {
+            const markerGroup = leaflet.featureGroup();
+            const marker: any = leaflet
+                .marker([e.latitude, e.longitude], {
+                    icon: positionIcon,
+                    zIndexOffset: -1000 // put the markers on top of the location marker
+                })
+                .on('click', () => {
+                    console.log('Position marker clicked');
+                });
+            markerGroup.addLayer(marker);
+            this.map.addLayer(markerGroup);
+            this.loadMarkers(this.dropService.getDrops());
+        })
+        .on('locationerror', err => {
+            const longitude = this.appComponent.longitude;
+            const latitude = this.appComponent.latitude;
+
+            if (longitude !== null && latitude !== null) {
+                console.log('location from appcomponent');
                 const markerGroup = leaflet.featureGroup();
                 const marker: any = leaflet
-                    .marker([e.latitude, e.longitude], {
+                    .marker([latitude, longitude], {
                         icon: positionIcon,
                         zIndexOffset: -1000 // put the markers on top of the location marker
                     })
@@ -64,31 +83,12 @@ export class MapService {
                 markerGroup.addLayer(marker);
                 this.map.addLayer(markerGroup);
                 this.loadMarkers(this.dropService.getDrops());
-            })
-            .on('locationerror', err => {
-                const longitude = this.appComponent.longitude;
-                const latitude = this.appComponent.latitude;
-
-                if (longitude != null && latitude != null) {
-                    console.log('location from appcomponent');
-                    const markerGroup = leaflet.featureGroup();
-                    const marker: any = leaflet
-                        .marker([latitude, longitude], {
-                            icon: positionIcon,
-                            zIndexOffset: -1000 // put the markers on top of the location marker
-                        })
-                        .on('click', () => {
-                            console.log('Position marker clicked');
-                        });
-                    markerGroup.addLayer(marker);
-                    this.map.addLayer(markerGroup);
-                    this.loadMarkers(this.dropService.getDrops());
-                } else {
-                    console.log(err.message);
-                    this.locationErrorAlert();
-                    return;
-                }
-            });
+            } else {
+                console.log(err.message);
+                this.locationErrorAlert();
+                return;
+            }
+        });
         return this.map;
     }
 
@@ -225,7 +225,7 @@ export class MapService {
                 icon: greyDropIcon
             })
             .on('click', () => {
-                this.presentAlert();
+                this.outOfRangeAlert();
             });
         HomePage.markersArray.push(drop);
         dropGroup.addLayer(drop);
@@ -248,14 +248,18 @@ export class MapService {
                 icon: greyKingDropIcon
             })
             .on('click', () => {
-                this.presentAlert();
+                this.outOfRangeAlert();
             });
         HomePage.markersArray.push(drop);
         dropGroup.addLayer(drop);
         HomePage.map.addLayer(dropGroup);
     }
 
-    async presentAlert() {
+    backToCenter() {
+        console.log('Center Map');
+    }
+
+    async outOfRangeAlert() {
         const alert = await this.alertController.create({
             header: 'Außer Reichweite!',
             message: 'Diesen Drop musst du zuerst besuchen, bevor du ihn lesen kannst.',

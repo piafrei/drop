@@ -5,7 +5,7 @@ ion-tab-bar, ion-tab-button {
   contain: none;
 }
 
-.add-new-drop {
+.home-button {
   position: absolute;
   bottom: 75px;
   left: 50%;
@@ -13,6 +13,22 @@ ion-tab-bar, ion-tab-button {
   z-index: 200;
   //box-shadow: 0 0 8px rgba(0,0,0,0.15);
   cursor: pointer;
+}
+
+.add-new-drop {
+
+}
+
+.home-button {
+  left: auto;
+  right: 20px;
+  transform: none;
+  padding: 0;
+  ion-icon {
+    width: 50px;
+    height: 50px;
+    color: $secondary;
+  }
 }
 
 .tab-wrapper {
