@@ -4,6 +4,7 @@
 * {
   font: {
     family: 'Nunito', sans-serif;
+    weight: 600;
     size: 20px;
   }
   --border-width: 0 !important;
@@ -27,7 +28,7 @@ ion-badge {
 
 .score-headline {
   text-align: center;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
   font: {
     size: 30px;
   }
@@ -40,10 +41,17 @@ ion-badge {
   }
 }
 
+.mydrops-headline {
+  margin-bottom: 14px;
+}
+
 .maincontent {
   position: relative;
   z-index: 100;
   --padding-top: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
 }
 
 .drop-text {
@@ -67,7 +75,6 @@ ion-badge {
   font: {
     size: 16px;
   }
-  text-transform: uppercase;
 }
 
 .voting {
@@ -117,7 +124,8 @@ ion-badge {
 }
 
 .edit-icon {
-  transform: rotate(0);
+  display: inline-block;
+  transform: rotate(90deg);
 }
 
 .drop-text {
@@ -238,4 +246,58 @@ ion-badge {
   bottom: 0px;
   transform: translate(-50%, -50%);
   margin: 0px 0px -20px 0px;
+}
+
+.img-info {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 60%;
+}
+
+.info-list {
+  height: calc(100% - 110px - 70px);
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: column;
+}
+.info-item {
+  padding-bottom: 20px;
+}
+.icon-about {
+  color: #8633FF;
+}
+
+h1 {
+  font-weight: 600;
+  font-size: 30px;
+}
+
+h2 {
+  font-weight: 600;
+  font-size: 25px;
+  padding-bottom: 14px;
+}
+
+h3 {
+  font-weight: 600;
+  font-size: 20px;
+}
+
+h4 {
+  font-weight: 600;
+  font-size: 16px;
+}
+
+p {
+  font-family: Lato;
+  font-size: 16px;
+  a {
+    font-family: Lato;
+    font-size: 16px;
+  }
+}
+
+.haftung {
+  padding-top: 30px;
 }

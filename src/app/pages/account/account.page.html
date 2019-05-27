@@ -17,6 +17,7 @@
     <span class="score" *ngIf="userPromise | async">{{ user.score }}</span>
   </div>
 
+  <h2>Deine drops</h2>
   <ion-list>
     <ng-container *ngIf="!myDrops || myDrops.length == 0">
       <div *ngFor="let n of [0, 1, 2]" padding>
