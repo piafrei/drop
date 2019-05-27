@@ -20,17 +20,12 @@
   <h2>Deine drops</h2>
   <ion-list>
     <ng-container *ngIf="!myDrops || myDrops.length == 0">
-      <div *ngFor="let n of [0, 1, 2]" padding>
-        <ion-skeleton-text></ion-skeleton-text>
-        <p>
-          <ion-skeleton-text class="fake-skeleton"></ion-skeleton-text>
-        </p>
-      </div>
+      Drops konnten leider nicht geladen werden.
     </ng-container>
 
     <div class="account-drop-wrapper" *ngFor="let item of myDrops">
-      <div class="account-item">
-        <div class="account-content" [routerLink]="['/drop', item.id]">
+      <div class="select-item">
+        <div class="select-content" [routerLink]="['/drop', item.id]">
           <div class="text-content">
             {{ item.description }}
           </div>
@@ -40,17 +35,8 @@
           </div>
         </div>
         <ion-item class="more-button">
-          <ion-icon
-            name="more"
-            class="edit-icon"
-            (click)="openSelect(item)"
-          ></ion-icon>
-          <ion-select
-            class="select-field"
-            interface="action-sheet"
-            (ionChange)="showMore(item, $event)"
-            #showSelect
-          >
+          <ion-icon name="more" class="edit-icon" (click)="openSelect(item)"></ion-icon>
+          <ion-select class="select-field" interface="action-sheet" (ionChange)="showMore(item, $event)" #showSelect>
             <ion-select-option value="delete">Löschen</ion-select-option>
             <!--<ion-select-option value="edit">Bearbeiten</ion-select-option>-->
           </ion-select>

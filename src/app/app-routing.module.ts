@@ -22,11 +22,6 @@ const routes: Routes = [
     loadChildren: './pages/filter/filter.module#FilterPageModule'
   },
   {
-    path: 'home/notification',
-    loadChildren:
-      './pages/notifications/notifications.module#NotificationsPageModule'
-  },
-  {
     path: 'home/settings',
     loadChildren: './pages/settings/settings.module#SettingsPageModule'
   },

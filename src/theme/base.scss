@@ -163,10 +163,10 @@ ion-badge {
   width: 100%;
 }
 
-.account-item {
+.select-item, .drop-view {
   display: flex;
   justify-content: space-between;
-  .account-content {
+  .select-content {
     width: 100%;
   }
 }
@@ -300,4 +300,7 @@ p {
 
 .haftung {
   padding-top: 30px;
+}
+.custom-button {
+  text-align: center;
 }

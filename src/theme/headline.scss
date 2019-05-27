@@ -66,6 +66,10 @@ ion-header {
   background: none;
   border-width: 0;
   border: none !important;
+  min-height: 100px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
 }
 
 #header-bg {
@@ -74,7 +78,18 @@ ion-header {
   right: 0;
   left: 0;
   width: 100%;
+  height: auto;
   padding: 0;
   margin: 0;
   z-index: -1;
+}
+
+#info-button {
+  width: 30px;
+  height: auto;
+  padding: 10px;
+  position: absolute;
+  right: 20px;
+  top: 30px;
+  box-sizing: inherit;
 }
