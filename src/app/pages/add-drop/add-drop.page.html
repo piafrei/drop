@@ -19,7 +19,7 @@
     <ion-select-option value="Nice Place">Schöner Ort</ion-select-option>
     <ion-select-option value="Hidden Gem">Verstecktes Juwel</ion-select-option>
   </ion-select>
-  <ion-textarea class="drop-text" autofocus required type="text" placeholder="Hier Drop eintragen." [(ngModel)]="drop.description" maxlength="250" minlength="10" #dropContent="ngModel"></ion-textarea>
+  <ion-textarea class="drop-text" autofocus required type="text" placeholder="Hier drop eintragen" [(ngModel)]="drop.description" maxlength="250" minlength="10" #dropContent="ngModel"></ion-textarea>
   <div *ngIf="dropContent.invalid && (dropContent.dirty || dropContent.touched)">
     <div *ngIf="dropContent.errors.required" class="alert-text">
       Der Drop darf nicht leer sein.

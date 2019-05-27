@@ -108,7 +108,7 @@ export class DropPage implements OnInit {
         console.log('votedBy ' + votedBy[0]);
         console.log('mein drop: ' + this.drop.dropID);
 
-        if (currentUuid == creatorId) {
+        if (currentUuid === creatorId) {
             console.log('eigener drop');
             ismydrop = true;
         }
