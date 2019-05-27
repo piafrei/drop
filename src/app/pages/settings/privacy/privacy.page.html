@@ -25,17 +25,16 @@
     Inhalte sowie externen Onlinepräsenzen, wie z.B. unser Social Media Profile
     auf (nachfolgend gemeinsam bezeichnet als „Onlineangebot“).
   </p>
-
-  <ion-button (click)="toggle()" id="bt">
-    {{ buttonName }}
-  </ion-button>
+  <ion-toolbar class="custom-button">
+    <ion-button (click)="toggle()" id="bt" class="drop-button privacy-button">
+      {{ buttonName }}
+    </ion-button>
+  </ion-toolbar>
 
   <ng-container *ngIf="show">
     <div style="margin: 0 auto;text-align: left;">
       <h3 id="dsg-general-controller">Verantwortlicher</h3>
-      <p>
-        <span class="tsmcontroller"
-          >WebTech 5 - drop.<br />
+      <p>WebTech 5 - drop.<br />
           Studiengang Onlinemedien<br />
           DHBW Mosbach<br />
           <br />
@@ -43,13 +42,10 @@
           74821 Mosbach<br />
           Deutschland<br />
           <br />
-          drop@dhbw-mosbach.de</span
-        >
       </p>
       <h3 id="dsg-general-datatype">Arten der verarbeiteten Daten</h3>
       <p>
         - Bestandsdaten (z.B., Personen-Stammdaten, Namen oder Adressen).<br />
-        - Kontaktdaten (z.B., E-Mail, Telefonnummern).<br />
         - Inhaltsdaten (z.B., Texteingaben, Fotografien, Videos).<br />
         - Nutzungsdaten (z.B., besuchte Webseiten, Interesse an Inhalten,
         Zugriffszeiten).<br />
@@ -249,8 +245,7 @@
       </p>
       <h3 id="dsg-general-object">Widerspruchsrecht</h3>
       <p>
-        <strong
-          >Widerspruchsrecht: Sie haben das Recht, aus Gründen, die sich aus
+          Widerspruchsrecht: Sie haben das Recht, aus Gründen, die sich aus
           Ihrer besonderen Situation ergeben, jederzeit gegen die Verarbeitung
           der Sie betreffenden personenbezogenen Daten, die aufgrund von Art. 6
           Abs. 1 lit. e oder f DSGVO erfolgt, Widerspruch einzulegen; dies gilt
@@ -259,8 +254,7 @@
           zu betreiben, haben Sie das Recht, jederzeit Widerspruch gegen die
           Verarbeitung der Sie betreffenden personenbezogenen Daten zum Zwecke
           derartiger Werbung einzulegen; dies gilt auch für das Profiling,
-          soweit es mit solcher Direktwerbung in Verbindung steht.</strong
-        >
+          soweit es mit solcher Direktwerbung in Verbindung steht.
       </p>
       <h3 id="dsg-general-cookies">
         Cookies und Widerspruchsrecht bei Direktwerbung
@@ -357,8 +351,7 @@
       <h3 id="dsg-google-cloud">Google&nbsp;Cloud-Dienste</h3>
       <p></p>
       <p>
-        <span class="ts-muster-content"
-          >Wir nutzen die von Google angebotene Cloud und die
+          Wir nutzen die von Google angebotene Cloud und die
           Cloud-Softwaredienste (sog. Software as a Service, z.B. Google Suite)
           für die folgenden Zwecke: Dokumentenspeicherung und Verwaltung,
           Kalenderverwaltung, E-Mail-Versand, Tabellenkalkulationen und
@@ -416,15 +409,13 @@
             target="_blank"
             href="https://cloud.google.com/terms/data-processing-terms"
             >https://cloud.google.com/terms/data-processing-terms</a
-          >).</span
-        >
+          >).
       </p>
       <p></p>
       <h3 id="dsg-registration">Registrierfunktion</h3>
       <p></p>
       <p>
-        <span class="ts-muster-content"
-          >Nutzer können ein Nutzerkonto anlegen. Im Rahmen der Registrierung
+          Nutzer können ein Nutzerkonto anlegen. Im Rahmen der Registrierung
           werden die erforderlichen Pflichtangaben den Nutzern mitgeteilt und
           auf Grundlage des Art. 6 Abs. 1 lit. b DSGVO zu Zwecken der
           Bereitstellung des Nutzerkontos verarbeitet. Zu den verarbeiteten
@@ -452,14 +443,12 @@
           oder es besteht hierzu besteht eine gesetzliche Verpflichtung gem.
           Art. 6 Abs. 1 lit. c. DSGVO. Die IP-Adressen werden spätestens nach 7
           Tagen anonymisiert oder gelöscht.<br />
-        </span>
       </p>
       <p></p>
       <h3 id="dsg-comments">Kommentare und Beiträge</h3>
       <p></p>
       <p>
-        <span class="ts-muster-content"
-          >Wenn Nutzer Kommentare oder sonstige Beiträge hinterlassen, können
+          Wenn Nutzer Kommentare oder sonstige Beiträge hinterlassen, können
           ihre IP-Adressen auf Grundlage unserer berechtigten Interessen im
           Sinne des Art. 6 Abs. 1 lit. f. DSGVO für 7 Tage gespeichert werden.
           Das erfolgt zu unserer Sicherheit, falls jemand in Kommentaren und
@@ -479,15 +468,13 @@
           Die im Rahmen der Kommentare und Beiträge mitgeteilte Informationen
           zur Person, etwaige Kontakt- sowie Websiteinformationen als auch die
           inhaltlichen Angaben, werden von uns bis zum Widerspruch der Nutzer
-          dauerhaft gespeichert.</span
-        >
+          dauerhaft gespeichert.
       </p>
       <p></p>
       <h3 id="dsg-contact">Kontaktaufnahme</h3>
       <p></p>
       <p>
-        <span class="ts-muster-content"
-          >Bei der Kontaktaufnahme mit uns (z.B. per Kontaktformular, E-Mail,
+          Bei der Kontaktaufnahme mit uns (z.B. per Kontaktformular, E-Mail,
           Telefon oder via sozialer Medien) werden die Angaben des Nutzers zur
           Bearbeitung der Kontaktanfrage und deren Abwicklung gem. Art. 6 Abs. 1
           lit. b. (im Rahmen vertraglicher-/vorvertraglicher Beziehungen), Art.
@@ -498,15 +485,13 @@
           <br />
           Wir löschen die Anfragen, sofern diese nicht mehr erforderlich sind.
           Wir überprüfen die Erforderlichkeit alle zwei Jahre; Ferner gelten die
-          gesetzlichen Archivierungspflichten.</span
-        >
+          gesetzlichen Archivierungspflichten.
       </p>
       <p></p>
       <h3 id="dsg-hostingprovider">Hosting und E-Mail-Versand</h3>
       <p></p>
       <p>
-        <span class="ts-muster-content"
-          >Die von uns in Anspruch genommenen Hosting-Leistungen dienen der
+          Die von uns in Anspruch genommenen Hosting-Leistungen dienen der
           Zurverfügungstellung der folgenden Leistungen: Infrastruktur- und
           Plattformdienstleistungen, Rechenkapazität, Speicherplatz und
           Datenbankdienste, E-Mail-Versand, Sicherheitsleistungen sowie
@@ -519,15 +504,13 @@
           Onlineangebotes auf Grundlage unserer berechtigten Interessen an einer
           effizienten und sicheren Zurverfügungstellung dieses Onlineangebotes
           gem. Art. 6 Abs. 1 lit. f DSGVO i.V.m. Art. 28 DSGVO (Abschluss
-          Auftragsverarbeitungsvertrag).</span
-        >
+          Auftragsverarbeitungsvertrag).
       </p>
       <p></p>
       <h3 id="dsg-logfiles">Erhebung von Zugriffsdaten und Logfiles</h3>
       <p></p>
       <p>
-        <span class="ts-muster-content"
-          >Wir, bzw. unser Hostinganbieter, erhebt auf Grundlage unserer
+          Wir, bzw. unser Hostinganbieter, erhebt auf Grundlage unserer
           berechtigten Interessen im Sinne des Art. 6 Abs. 1 lit. f. DSGVO Daten
           über jeden Zugriff auf den Server, auf dem sich dieser Dienst befindet
           (sogenannte Serverlogfiles). Zu den Zugriffsdaten gehören Name der
@@ -541,15 +524,13 @@
           maximal 7 Tagen gespeichert und danach gelöscht. Daten, deren weitere
           Aufbewahrung zu Beweiszwecken erforderlich ist, sind bis zur
           endgültigen Klärung des jeweiligen Vorfalls von der Löschung
-          ausgenommen.</span
-        >
+          ausgenommen.
       </p>
       <p></p>
       <h3 id="dsg-tracking-tagmanager">Google Tag Manager</h3>
       <p></p>
       <p>
-        <span class="ts-muster-content"
-          >Google Tag Manager ist eine Lösung, mit der wir sog. Website-Tags
+        Google Tag Manager ist eine Lösung, mit der wir sog. Website-Tags
           über eine Oberfläche verwalten können (und so z.B. Google Analytics
           sowie andere Google-Marketing-Dienste in unser Onlineangebot
           einbinden). Der Tag Manager selbst (welches die Tags implementiert)
@@ -562,14 +543,12 @@
             href="https://www.google.com/intl/de/tagmanager/use-policy.html"
             >https://www.google.com/intl/de/tagmanager/use-policy.html</a
           >.<br />
-        </span>
       </p>
       <p></p>
       <h3 id="dsg-ga-googleanalytics">Google Analytics</h3>
       <p></p>
       <p>
-        <span class="ts-muster-content"
-          >Wir setzen Google Analytics, einen Webanalysedienst der Google
+          Wir setzen Google Analytics, einen Webanalysedienst der Google
           Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland
           („Google“) ein. Google verwendet Cookies. Die durch das Cookie
           erzeugten Informationen über Benutzung des Onlineangebotes durch die
@@ -633,15 +612,13 @@
           >).<br />
           <br />
           Die personenbezogenen Daten der Nutzer werden nach 14 Monaten gelöscht
-          oder anonymisiert.</span
-        >
+          oder anonymisiert.
       </p>
       <p></p>
       <h3 id="dsg-ga-universal">Google Universal Analytics</h3>
       <p></p>
       <p>
-        <span class="ts-muster-content"
-          >Wir setzen Google Analytics in der Ausgestaltung als „<a
+        Wir setzen Google Analytics in der Ausgestaltung als „<a
             target="_blank"
             href="https://support.google.com/analytics/answer/2790010?hl=de&amp;ref_topic=6010376"
             >Universal-Analytics</a
@@ -649,15 +626,13 @@
           Analytics, bei dem die Nutzeranalyse auf Grundlage einer pseudonymen
           Nutzer-ID erfolgt und damit ein pseudonymes Profil des Nutzers mit
           Informationen aus der Nutzung verschiedener Geräten erstellt wird
-          (sog. „Cross-Device-Tracking“).</span
-        >
+          (sog. „Cross-Device-Tracking“).
       </p>
       <p></p>
       <h3 id="dsg-ga-audiences">Zielgruppenbildung mit Google Analytics</h3>
       <p></p>
       <p>
-        <span class="ts-muster-content"
-          >Wir setzen Google Analytics ein, um die durch innerhalb von
+          Wir setzen Google Analytics ein, um die durch innerhalb von
           Werbediensten Googles und seiner Partner geschalteten Anzeigen, nur
           solchen Nutzern anzuzeigen, die auch ein Interesse an unserem
           Onlineangebot gezeigt haben oder die bestimmte Merkmale (z.B.
@@ -667,14 +642,12 @@
           Mit Hilfe der Remarketing Audiences möchten wir auch sicherstellen,
           dass unsere Anzeigen dem potentiellen Interesse der Nutzer
           entsprechen.<br />
-        </span>
       </p>
       <p></p>
       <h3 id="dsg-google-firebase">Google-Firebase</h3>
       <p></p>
       <p>
-        <span class="ts-muster-content"
-          >Wir nutzen die Entwicklerplattform „Google Firebase“ und die mit ihr
+          Wir nutzen die Entwicklerplattform „Google Firebase“ und die mit ihr
           verbundenen Funktionen und Dienste, angeboten von Google Ireland
           Limited, Gordon House, Barrow Street, Dublin 4, Irland.<br />
           <br />
@@ -748,15 +721,13 @@
           Google gestellten Einstellungs- und Opt-Out-Möglichkeiten nutzen:
           <a target="_blank" href="https://adssettings.google.com/"
             >https://adssettings.google.com/</a
-          ></span
-        >
+          >
       </p>
       <p></p>
       <h3 id="dsg-socialmedia">Onlinepräsenzen in sozialen Medien</h3>
       <p></p>
       <p>
-        <span class="ts-muster-content"
-          >Wir unterhalten Onlinepräsenzen innerhalb sozialer Netzwerke und
+        Wir unterhalten Onlinepräsenzen innerhalb sozialer Netzwerke und
           Plattformen, um mit den dort aktiven Kunden, Interessenten und Nutzern
           kommunizieren und sie dort über unsere Leistungen informieren zu
           können.<br />
@@ -911,8 +882,7 @@
           Berlin, Deutschland) - Datenschutzerklärung/ Opt-Out:
           <a target="_blank" href="https://soundcloud.com/pages/privacy"
             >https://soundcloud.com/pages/privacy</a
-          >.</span
-        >
+          >.
       </p>
       <p></p>
       <h3 id="dsg-thirdparty-einleitung">
@@ -920,8 +890,7 @@
       </h3>
       <p></p>
       <p>
-        <span class="ts-muster-content"
-          >Wir setzen innerhalb unseres Onlineangebotes auf Grundlage unserer
+        Wir setzen innerhalb unseres Onlineangebotes auf Grundlage unserer
           berechtigten Interessen (d.h. Interesse an der Analyse, Optimierung
           und wirtschaftlichem Betrieb unseres Onlineangebotes im Sinne des Art.
           6 Abs. 1 lit. f. DSGVO) Inhalts- oder Serviceangebote von
@@ -944,15 +913,13 @@
           technische Informationen zum Browser und Betriebssystem, verweisende
           Webseiten, Besuchszeit sowie weitere Angaben zur Nutzung unseres
           Onlineangebotes enthalten, als auch mit solchen Informationen aus
-          anderen Quellen verbunden werden.</span
-        >
+          anderen Quellen verbunden werden.
       </p>
       <p></p>
       <h3 id="dsg-thirdparty-vimeo">Vimeo</h3>
       <p></p>
       <p>
-        <span class="ts-muster-content"
-          >Wir können die Videos der Plattform “Vimeo” des Anbieters Vimeo Inc.,
+        Wir können die Videos der Plattform “Vimeo” des Anbieters Vimeo Inc.,
           Attention: Legal Department, 555 West 18th Street New York, New York
           10011, USA, einbinden. Datenschutzerklärung:
           <a target="_blank" href="https://vimeo.com/privacy"
@@ -971,15 +938,13 @@
             target="_blank"
             href="https://adssettings.google.com/"
             >https://adssettings.google.com/</a
-          >).</span
-        >
+          >).
       </p>
       <p></p>
       <h3 id="dsg-thirdparty-youtube">Youtube</h3>
       <p></p>
       <p>
-        <span class="ts-muster-content"
-          >Wir binden die Videos der Plattform “YouTube” des Anbieters Google
+        Wir binden die Videos der Plattform “YouTube” des Anbieters Google
           Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland, ein.
           Datenschutzerklärung:
           <a target="_blank" href="https://www.google.com/policies/privacy/"
@@ -987,15 +952,13 @@
           >, Opt-Out:
           <a target="_blank" href="https://adssettings.google.com/authenticated"
             >https://adssettings.google.com/authenticated</a
-          >.</span
-        >
+          >.
       </p>
       <p></p>
       <h3 id="dsg-thirdparty-googlefonts">Google Fonts</h3>
       <p></p>
       <p>
-        <span class="ts-muster-content"
-          >Wir binden die Schriftarten ("Google Fonts") des Anbieters Google
+        Wir binden die Schriftarten ("Google Fonts") des Anbieters Google
           Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland, ein.
           Nach Angaben von Google werden die Daten der Nutzer allein zu Zwecken
           der Darstellung der Schriftarten im Browser der Nutzer verwendet. Die
@@ -1006,15 +969,13 @@
           Datenschutzerklärung:
           <a target="_blank" href="https://www.google.com/policies/privacy/"
             >https://www.google.com/policies/privacy/</a
-          >.</span
-        >
+          >.
       </p>
       <p></p>
       <h3 id="dsg-thirdparty-openstreetmap">OpenStreetMap</h3>
       <p></p>
       <p>
-        <span class="ts-muster-content"
-          >Wir binden die Landkarten des Dienstes "OpenStreetMap" ein (<a
+        Wir binden die Landkarten des Dienstes "OpenStreetMap" ein (<a
             target="_blank"
             href="https://www.openstreetmap.de"
             >https://www.openstreetmap.de</a
@@ -1041,16 +1002,17 @@
             target="_blank"
             href="https://wiki.openstreetmap.org/wiki/Privacy_Policy"
             >https://wiki.openstreetmap.org/wiki/Privacy_Policy</a
-          >.</span
-        >
+          >.
       </p>
+      <p>
       <a
         href="https://datenschutz-generator.de"
         class="dsg1-6"
         rel="nofollow"
         target="_blank"
-        >Erstellt mit Datenschutz-Generator.de von RA Dr. Thomas Schwenke</a
-      >
+        >Erstellt mit Datenschutz-Generator.de von RA Dr. Thomas Schwenke
+      </a>
+      </p>
     </div>
   </ng-container>
 </ion-content>
