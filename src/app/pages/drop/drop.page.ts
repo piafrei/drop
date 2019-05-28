@@ -48,7 +48,14 @@ export class DropPage implements OnInit {
         dropID: 0,
         votedBy: []
     };
+    doRefresh(event) {
+        console.log('Begin async operation');
 
+        setTimeout(() => {
+            console.log('Async operation has ended');
+            event.target.complete();
+        }, 2000);
+    }
 
     @ViewChild('showSelect') selectRef: IonSelect;
 
@@ -75,10 +82,10 @@ export class DropPage implements OnInit {
     }
     setNewUpIcon() {
         this.downVoteBtnPick = 'assets/icon/downvote_disabled.svg';
-        this.upVoteBtnPick = 'assets/icon/upvoted.svg';
+        this.upVoteBtnPick = 'assets/icon/upvote.svg';
     }
     setNewDownIcon() {
-        this.downVoteBtnPick = 'assets/icon/downvoted.svg';
+        this.downVoteBtnPick = 'assets/icon/downvote.svg';
         this.upVoteBtnPick = 'assets/icon/upvote_disabled.svg';
     }
 
