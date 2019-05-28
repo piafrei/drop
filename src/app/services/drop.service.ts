@@ -78,6 +78,7 @@ this.db = db;
     }
 
     getMyDrops() {
+        console.log(this.myDrops);
         return this.myDrops;
     }
 

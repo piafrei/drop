@@ -50,6 +50,7 @@ export class AccountPage implements OnInit {
     this.dropService.getMyDrops().subscribe(res => {
       this.myDrops = res;
     });
+    console.log(this.myDrops);
   }
 
   showMore(item, event) {
