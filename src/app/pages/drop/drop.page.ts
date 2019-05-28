@@ -67,17 +67,18 @@ export class DropPage implements OnInit {
     disableReport() {
         this.disableButton = true;
     }
-    downVoted() {
+    dropIsVoted() {
         this.disableDownVoteBtn = true;
         this.disableUpVoteBtn = true;
-        this.downVoteBtnPick = 'assets/icon/downvote.svg';
-        this.upVoteBtnPick = 'assets/icon/upvote_disabled.svg';
+        console.log('downvoted');
     }
-    upVoted() {
-        this.disableDownVoteBtn = true;
-        this.disableUpVoteBtn = true;
+    setNewUpIcon() {
         this.downVoteBtnPick = 'assets/icon/downvote_disabled.svg';
         this.upVoteBtnPick = 'assets/icon/upvote.svg';
+    }
+    setNewDownIcon() {
+        this.downVoteBtnPick = 'assets/icon/downvote.svg';
+        this.upVoteBtnPick = 'assets/icon/upvote_disabled.svg';
     }
 
     getInfo() {
@@ -117,7 +118,7 @@ export class DropPage implements OnInit {
             ismydrop = true;
         }
 
-        for (let uuid of votedBy) {
+        for (const uuid of votedBy) {
             if (uuid === currentUuid) {
                 allowedtovoteVar = false;
                 console.log('bereits gevotet');
@@ -127,8 +128,7 @@ export class DropPage implements OnInit {
         if (allowedtovoteVar === false || ismydrop === true) {
             this.allowedtovote = false;
             console.log('allowedtoVote is set: ' + this.allowedtovote);
-            this.upVoted();
-            this.downVoted();
+            this.dropIsVoted();
         } else {
         }
     }
@@ -142,7 +142,8 @@ export class DropPage implements OnInit {
             this.userService.improveCreatorsScore(1, this.drop.deviceID);
             this.drop.votedBy.push(currentUuid);
             this.dropService.updateDrop(this.drop, this.dropId);
-            this.upVoted();
+            this.dropIsVoted();
+            this.setNewUpIcon();
             this.allowedtovote = false;
         }
     }
@@ -156,7 +157,8 @@ export class DropPage implements OnInit {
             this.userService.improveCreatorsScore(1, this.drop.deviceID);
             this.drop.votedBy.push(currentUuid);
             this.dropService.updateDrop(this.drop, this.dropId);
-            this.downVoted();
+            this.dropIsVoted();
+            this.setNewDownIcon();
             this.allowedtovote = false;
         }
     }
