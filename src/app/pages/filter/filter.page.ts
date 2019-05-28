@@ -12,10 +12,9 @@ import {HomePage} from '../home/home.page';
 })
 export class FilterPage implements OnInit {
 
-  filters = [{ name: 'Essen & Trinken', checked: false }, { name: 'Kultur' , checked: false}, { name: 'Unterhaltung & Spaß' , checked: false}, { name: 'Einkaufen', checked: false }, { name: 'Schöner Ort', checked: false }, { name: 'Verstecktes Juwel', checked: false }, { name: 'Überraschung', checked: false }];
+  filters = [{ name: 'Essen & Trinken', checked: false}, { name: 'Kultur' , checked: false}, { name: 'Unterhaltung & Spaß' , checked: false}, { name: 'Einkaufen', checked: false}, { name: 'Schöner Ort', checked: false}, { name: 'Verstecktes Juwel', checked: false}, { name: 'Überraschung', checked: false}];
   filterForm: FormGroup;
   filterFormArray;
-  filteredBoolean = false;
   private matchingDrops: any[];
   private _activeFilterNumber = 0;
 
@@ -44,7 +43,6 @@ export class FilterPage implements OnInit {
       for (const activeFilter of HomePage.activeFilters) {
           for (const filterElement of this.filters) {
               if (filterElement.name === activeFilter) {
-                  console.log('Filter match found - set value to true');
                   filterElement.checked = true;
               }
           }
@@ -57,15 +55,14 @@ export class FilterPage implements OnInit {
     } else {
       const index = this.filterFormArray.controls.findIndex(x => x.value === filter);
       this.filterFormArray.removeAt(index);
+      const indexActiveFilter = HomePage.activeFilters.indexOf(filter);
+      if (indexActiveFilter > -1) {
+          delete HomePage.activeFilters[indexActiveFilter];
+      }
     }
   }
 
-  testMethod($event) {
-     console.log('NG Model changed' + $event);
-  }
-
   clearActiveFilters() {
-      HomePage.activeFilters = [];
   }
 
   submitSelectedFilter() {
@@ -76,19 +73,21 @@ export class FilterPage implements OnInit {
 
   if (this.filterFormArray === undefined) {
     this.matchingDrops.push(this.dropService.getDrops());
+    HomePage.activeFilters = [];
   } else {
+      this.addPreCheckedFilter();
       rawValue = this.filterFormArray.getRawValue();
       for (let i = 0; i < this.filterFormArray.length; i++) {
           const element = this.filterFormArray.at(i);
           if (element.valid) {
               this.matchingDrops.push(this.dropService.getDropsByCat(element.value));
+              if (HomePage.activeFilters.indexOf(element.value) === -1) {
               HomePage.activeFilters.push(element.value);
+              }
           }
       }
       this._activeFilterNumber = this.filterFormArray.length;
   }
-  console.log(this.matchingDrops);
-  console.log(this._activeFilterNumber);
 
   this.mapService.clearAllMarkers();
 
@@ -96,5 +95,14 @@ export class FilterPage implements OnInit {
       this.mapService.loadMarkers(categoryObservable);
   }
   this.nav.back();
+  }
+
+  addPreCheckedFilter() {
+     for (const preCheckedFilter of HomePage.activeFilters) {
+         console.log(this.filterFormArray.getRawValue().indexOf(preCheckedFilter));
+         if (this.filterFormArray.getRawValue().indexOf(preCheckedFilter) === -1) {
+         this.filterFormArray.push(new FormControl(preCheckedFilter));
+         }
+     }
   }
 }

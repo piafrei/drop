@@ -78,6 +78,7 @@ export class DropService {
     }
 
     getMyDrops() {
+        console.log(this.myDrops);
         return this.myDrops;
     }
 

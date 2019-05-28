@@ -26,9 +26,9 @@
     auf (nachfolgend gemeinsam bezeichnet als „Onlineangebot“).
   </p>
   <ion-toolbar class="custom-button">
-    <ion-button (click)="toggle()" id="bt" class="drop-button privacy-button">
+    <button (click)="toggle()" id="bt" class="drop-button">
       {{ buttonName }}
-    </ion-button>
+    </button>
   </ion-toolbar>
 
   <ng-container *ngIf="show">
