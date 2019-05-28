@@ -81,4 +81,8 @@ export class AccountPage implements OnInit {
     });
     await alert.present();
   }
+
+  reloadPage() {
+    location.reload();
+  }
 }

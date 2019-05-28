@@ -16,10 +16,19 @@
     Dein Score
     <span class="score" *ngIf="userPromise | async">{{ user.score }}</span>
   </div>
-  <h2>Deine drops</h2>
+  <h2 *ngIf="myDrops">Deine drops</h2>
   <ion-list>
     <ng-container *ngIf="!myDrops || myDrops.length == 0">
-      Drops konnten leider nicht geladen werden.
+      <p>Ups! Hier ist nichts.</p>
+      <br />
+      <ion-text class="textlink" (click)="reloadPage()"
+        ><p>Nochmal versuchen?</p>
+        <br />
+        <img
+          src="../../../assets/images/undraw_empty_xct9.svg"
+          class="img-info"
+        />
+      </ion-text>
     </ng-container>
 
     <div class="account-drop-wrapper" *ngFor="let item of myDrops">
@@ -34,8 +43,17 @@
           </div>
         </div>
         <ion-item class="more-button">
-          <ion-icon name="more" class="edit-icon" (click)="openSelect(item)"></ion-icon>
-          <ion-select class="select-field" interface="action-sheet" (ionChange)="showMore(item, $event)" #showSelect>
+          <ion-icon
+            name="more"
+            class="edit-icon"
+            (click)="openSelect(item)"
+          ></ion-icon>
+          <ion-select
+            class="select-field"
+            interface="action-sheet"
+            (ionChange)="showMore(item, $event)"
+            #showSelect
+          >
             <ion-select-option value="delete">Löschen</ion-select-option>
             <!--<ion-select-option value="edit">Bearbeiten</ion-select-option>-->
           </ion-select>
