@@ -178,4 +178,14 @@ export class AddDropPage implements OnInit {
 
     await alert.present();
   }
+
+    async dropWithoutRequiredLength() {
+        const alert = await this.alertController.create({
+            header: 'Dein Drop hat weniger als 10 Zeichen.',
+        message: 'Schreibe eine Nachricht mit mehr als 10 Zeichen um zu droppen.',
+        buttons: ['OK']
+    });
+
+        await alert.present();
+    }
 }
