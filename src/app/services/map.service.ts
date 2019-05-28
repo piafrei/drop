@@ -51,7 +51,7 @@ export class MapService {
                 minZoom: 13
             }
         ).addTo(this.map);
-        this.loadMarkers(this.dropService.getDrops());
+        this.loadMarkers(this.dropService.getAllDropsFilter());
         this.map.locate({
             setView: true,
             maxZoom: 22,
