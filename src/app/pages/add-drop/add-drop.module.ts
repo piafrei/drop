@@ -8,6 +8,7 @@ import { IonicModule } from '@ionic/angular';
 import { AddDropPage } from './add-drop.page';
 import { Device } from '@ionic-native/device/ngx';
 import { AppComponent } from '../../app.component';
+import {AutosizeModule} from 'ngx-autosize';
 
 const routes: Routes = [
   {
@@ -21,7 +22,8 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    AutosizeModule
   ],
   providers: [
     Device,

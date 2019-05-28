@@ -53,20 +53,18 @@ ion-badge {
   flex-direction: column;
   align-items: flex-end;
 }
-
+::placeholder {
+  font-color: #000;
+}
 .drop-text {
-  &:before {
-    content: '';
-    width: 2px;
-    height: 30px;
-    border-radius: $border-radius;
-    background: $primary;
-    margin-right: 5px;
-  }
+  caret-color: #472ee8;
+  font-family: Nunito;
+  font-weight: 600;
+  font-color: #000;
 }
 
 .category {
-  background: $primary;
+  background: #472ee8;
   border-radius: $border-radius-rounded;
   padding: 10px 16px;
   color: $white;
@@ -166,6 +164,7 @@ ion-badge {
 .select-item, .drop-view {
   display: flex;
   justify-content: space-between;
+  padding-bottom: 30px;
   .select-content {
     width: 100%;
   }
@@ -174,8 +173,10 @@ ion-badge {
 .drop-score {
   display: flex;
   justify-content: flex-end;
-  padding: 10px;
+  padding: 0px;
   p {
+    padding: 0px;
+
   }
 }
 
