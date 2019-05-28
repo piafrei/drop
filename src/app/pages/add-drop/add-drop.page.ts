@@ -105,25 +105,33 @@ export class AddDropPage implements OnInit {
     }
   }
 
-  checkDropContent(drop: Drop) {
-    let dropContent = drop.description;
-    if (dropContent !== '') {
-      return true;
-    } else {
-      this.dropWithoutContentAlert();
-      return false;
+    checkDropContent(drop: Drop) {
+        const dropContent = drop.description;
+        let hasContent = false;
+        console.log('content length: ' + dropContent.length);
+        if (dropContent !== '') {
+            hasContent = true;
+            if (dropContent.length > 10) {
+                return true;
+            } else {
+                this.dropWithoutRequiredLength();
+                return false;
+            }
+        } else {
+            this.dropWithoutContentAlert();
+            return false;
+        }
     }
-  }
 
-  checkDropCategory(drop: Drop) {
-    let dropCat = drop.category;
-    if (dropCat !== '') {
-      return true;
-    } else {
-      this.dropWithoutCategoryAlert();
-      return false;
+    checkDropCategory(drop: Drop) {
+        const dropCat = drop.category;
+        if (dropCat !== '') {
+            return true;
+        } else {
+            this.dropWithoutCategoryAlert();
+            return false;
+        }
     }
-  }
 
   checkDropLocation(drop: Drop) {
     console.log('Latitude:' + drop.latitude);

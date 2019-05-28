@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import {FilterPage} from '../filter/filter.page';
 import {MapService} from '../../services/map.service';
+import {DropService} from '../../services/drop.service';
 
 @Component({
   selector: 'app-home',
@@ -18,7 +19,8 @@ export class HomePage implements OnInit {
         private router: Router,
         private statusBar: StatusBar,
         public filter: FilterPage,
-        private mapService: MapService
+        private mapService: MapService,
+        private dropService: DropService
     ) {}
 
     public static map: any;

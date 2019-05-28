@@ -7,6 +7,7 @@ import {AppComponent} from '../app.component';
 import {UserService} from './user.service';
 import {Router} from '@angular/router';
 import {HomePage} from '../pages/home/home.page';
+import {forEach} from '@angular-devkit/schematics';
 
 @Injectable({
   providedIn: 'root'

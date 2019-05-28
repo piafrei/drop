@@ -23,21 +23,19 @@ export interface Drop {
 })
 
 export class DropService {
-private dropsCollection: AngularFirestoreCollection<Drop>;
-private myDropsCollection: AngularFirestoreCollection<Drop>;
-private kingdropsCollection: AngularFirestoreCollection<Drop>;
+    private dropsCollection: AngularFirestoreCollection<Drop>;
+    private myDropsCollection: AngularFirestoreCollection<Drop>;
 
-private drops: Observable<Drop[]>;
-private myDrops: Observable<Drop[]>;
-private kingDrops: Observable<Drop[]>;
-private _visibleDropsUser;
+    private drops: Observable<Drop[]>;
+    private myDrops: Observable<Drop[]>;
+    private kingDrops: Observable<Drop[]>;
+    private _visibleDropsUser;
 
+    private db;
 
-private db;
+    constructor(db: AngularFirestore, private device: Device, private userService: UserService) {
 
-constructor(db: AngularFirestore, private device: Device, private userService: UserService) {
-
-this.db = db;
+        this.db = db;
 
         this.dropsCollection = db.collection('drops', ref =>
             ref.orderBy('score', 'desc')
@@ -81,39 +79,39 @@ this.db = db;
         return this.myDrops;
     }
 
-  getKingDrops() {
-    return this.kingDrops;
-  }
+    getKingDrops() {
+        return this.kingDrops;
+    }
 
-  getDrop(id) {
-    return this.dropsCollection.doc<Drop>(id).valueChanges();
-  }
+    getDrop(id) {
+        return this.dropsCollection.doc<Drop>(id).valueChanges();
+    }
 
-  getDropsByCat(category) {
-    let dropsPerCat: AngularFirestoreCollection<Drop>;
-    dropsPerCat = this.db.collection('drops', ref =>
-       ref.where('category', '==', category)
-    );
-    return dropsPerCat.snapshotChanges().pipe(
-        map(actions => {
-            return actions.map(a => {
-                const data = a.payload.doc.data();
-                const id = a.payload.doc.id;
-                return {id, ...data};
-            });
-        })
-    );
-  }
+    getDropsByCat(category) {
+        let dropsPerCat: AngularFirestoreCollection<Drop>;
+        dropsPerCat = this.db.collection('drops', ref =>
+           ref.where('category', '==', category)
+        );
+        return dropsPerCat.snapshotChanges().pipe(
+            map(actions => {
+                return actions.map(a => {
+                    const data = a.payload.doc.data();
+                    const id = a.payload.doc.id;
+                    return {id, ...data};
+                });
+            })
+        );
+    }
 
-  updateDrop(drop: Drop, id: string) {
-    return this.dropsCollection.doc(id).update(drop);
-  }
+    updateDrop(drop: Drop, id: string) {
+        return this.dropsCollection.doc(id).update(drop);
+    }
 
-  addDrop(drop: Drop) {
-    console.log('Drop Service id to save' + drop.dropID);
-    this.userService.saveDropToVisibleDrops(drop.dropID);
-    return this.dropsCollection.add(drop);
-  }
+    addDrop(drop: Drop) {
+        // console.log('Drop Service id to save' + drop.dropID);
+        this.userService.saveDropToVisibleDrops(drop.dropID);
+        return this.dropsCollection.add(drop);
+    }
 
     removeDrop(id) {
         return this.dropsCollection.doc(id).delete();
