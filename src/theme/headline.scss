@@ -7,8 +7,15 @@ ion-header {
 }
 
 .header-close {
-  height: 120px;
+  height: auto;
   contain: none;
+  overflow: visible;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  .toolbar-background, .toolbar-container {
+    overflow: visible;
+  }
   .back-button {
     position: relative;
     z-index: 250;
@@ -17,8 +24,8 @@ ion-header {
   ion-icon {
     width: 30px;
     height: 30px;
-    padding: 10px;
-    margin: 20px 0 10px;
+    padding: 41px 20px;
+    box-sizing: padding-box;
     color: #fff;
   }
 
@@ -26,8 +33,9 @@ ion-header {
     position: absolute;
     right: 0;
     top: 0;
-    height: 100%;
-    width: auto;
+    height: auto;
+    width: 100%;
+    z-index: -1;
   }
 }
 
