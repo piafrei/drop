@@ -21,7 +21,9 @@ export class HomePage implements OnInit {
         public filter: FilterPage,
         private mapService: MapService,
         private dropService: DropService
-    ) {}
+    ) {
+        this.mapService.getAndSaveUserData();
+    }
 
     public static map: any;
     public static markersArray = [];
@@ -42,7 +44,6 @@ export class HomePage implements OnInit {
             HomePage.map.off();
             HomePage.map.remove();
         }*/
-        this.mapService.getAndSaveUserData();
         HomePage.map = leaflet.map('map').fitWorld();
         HomePage.map = this.mapService.loadmap(HomePage.map);
     }

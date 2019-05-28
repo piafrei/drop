@@ -59,7 +59,6 @@ export class FilterPage implements OnInit {
   }
 
   submitSelectedFilter() {
-  let rawValue;
   this.clearActiveFilters();
   this.matchingDrops = [];
 
@@ -76,7 +75,6 @@ export class FilterPage implements OnInit {
       this.matchingDrops.push(this.dropService.getDrops());
   } else {
       this.addPreCheckedFilter();
-      rawValue = this.filterFormArray.getRawValue();
       for (let i = 0; i < this.filterFormArray.length; i++) {
           const element = this.filterFormArray.at(i);
           if (element.valid) {
