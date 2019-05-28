@@ -76,7 +76,7 @@ export class DropService {
     }
 
     getMyDrops() {
-        console.log(this.myDrops);
+        // console.log(this.myDrops);
         return this.myDrops;
     }
 
@@ -144,7 +144,7 @@ export class DropService {
 
     getInfo() {
         let deviceId = this.device.uuid;
-        if (deviceId == null) {
+        if (deviceId === null) {
             deviceId = 'DESKTOP';
         }
         return deviceId;

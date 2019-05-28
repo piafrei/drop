@@ -23,14 +23,7 @@ export class FilterPage implements OnInit {
   getActiveFilterNumber() {
         return this._activeFilterNumber;
   }
-    doRefresh(event) {
-        console.log('Begin async operation');
 
-        setTimeout(() => {
-            console.log('Async operation has ended');
-            event.target.complete();
-        }, 2000);
-    }
   ngOnInit() {
     this.filterForm = this.fb.group({
           activeFilter: this.fb.array([])
@@ -67,13 +60,20 @@ export class FilterPage implements OnInit {
 
   submitSelectedFilter() {
   let rawValue;
-
   this.clearActiveFilters();
   this.matchingDrops = [];
 
+  let filterFormArrayLength;
+
   if (this.filterFormArray === undefined) {
-    this.matchingDrops.push(this.dropService.getDrops());
-    HomePage.activeFilters = [];
+      filterFormArrayLength = undefined;
+  } else {
+      filterFormArrayLength = this.filterFormArray.getRawValue().length;
+  }
+
+  if (filterFormArrayLength === undefined || filterFormArrayLength === 0 ) {
+      HomePage.activeFilters = [];
+      this.matchingDrops.push(this.dropService.getDrops());
   } else {
       this.addPreCheckedFilter();
       rawValue = this.filterFormArray.getRawValue();
