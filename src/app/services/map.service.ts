@@ -77,7 +77,7 @@ export class MapService {
             const longitude = this.appComponent.longitude;
             const latitude = this.appComponent.latitude;
 
-            if (longitude !== null && latitude !== null) {
+            if (longitude !== null && longitude !== undefined &&  latitude !== null &&  latitude !== undefined) {
                 console.log('location from appcomponent');
                 const markerGroup = leaflet.featureGroup();
                 const marker: any = leaflet
@@ -119,35 +119,41 @@ export class MapService {
                 console.log('load markers triggered' + singledrop.dropID);
                 if (this.dropService.isDropVisible(singledrop)) {
                     // const dropGroup = leaflet.featureGroup();
-                    if (MapService.visibleDropsUser.indexOf(singledrop.dropID) > -1) {
+                    if (MapService.visibleDropsUser === undefined) {
+                        this.triggerDropLoad(singledrop, index, counter);
+                    } else if (MapService.visibleDropsUser.indexOf(singledrop.dropID) > -1) {
                         if (index < counter) {
                             this.setKingDropVisible(singledrop);
                         } else {
                             this.setDropVisible(singledrop);
                         }
                     } else {
-                        const dist = this.checkDropDistance(singledrop);
-                        if (dist < 150 && singledrop.score > -10) {
-                            this.userService.saveDropToVisibleDrops(singledrop.dropID);
-                        }
-                        if (index < counter) {
-                            if (dist < 150 && singledrop.score > -10) {
-                                this.setKingDropVisible(singledrop);
-                            } else if (singledrop.score > -10) {
-                                this.addOutOfRangeKingDrop(singledrop);
-                            }
-                        } else {
-                            if (dist < 150 && singledrop.score > -10) {
-                                this.setDropVisible(singledrop);
-                            } else if (singledrop.score > -10) {
-                                this.addOutOfRangeDrop(singledrop);
-                            }
-                        }
+                        this.triggerDropLoad(singledrop, index, counter);
                     }
                 }
             });
         });
     }
+    triggerDropLoad(singledrop, index, counter) {
+        const dist = this.checkDropDistance(singledrop);
+        if (dist < 150 && singledrop.score > -10) {
+            this.userService.saveDropToVisibleDrops(singledrop.dropID);
+        }
+        if (index < counter) {
+            if (dist < 150 && singledrop.score > -10) {
+                this.setKingDropVisible(singledrop);
+            } else if (singledrop.score > -10) {
+                this.addOutOfRangeKingDrop(singledrop);
+            }
+        } else {
+            if (dist < 150 && singledrop.score > -10) {
+                this.setDropVisible(singledrop);
+            } else if (singledrop.score > -10) {
+                this.addOutOfRangeDrop(singledrop);
+            }
+        }
+    }
+
     checkDropDistance(drop) {
         const dist = Geolib.getDistance(
             {
