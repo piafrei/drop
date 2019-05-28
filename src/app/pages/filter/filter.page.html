@@ -12,7 +12,7 @@
   <form [formGroup]="filterForm" class="filter">
     <label *ngFor="let filter of filters">
       <div class="filterelement">
-        <input type="checkbox" (change)="saveFilterToFilterFormArray(filter.name, $event.target.checked)"><span class="filtertext">{{filter.name}}</span><br>
+        <input type="checkbox" [(ngModel)]=filter.checked (ngModelChange)="testMethod($event)" [ngModelOptions]="{standalone: true}" (change)="saveFilterToFilterFormArray(filter.name, $event.target.checked)"><span class="filtertext">{{filter.name}}</span><br>
       </div>
     </label>
   </form>
