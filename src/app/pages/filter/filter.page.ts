@@ -68,7 +68,7 @@ export class FilterPage implements OnInit {
 
   if (filterFormArrayLength === undefined || filterFormArrayLength === 0 ) {
       HomePage.activeFilters = [];
-      this.matchingDrops.push(this.dropService.getDrops());
+      this.matchingDrops.push(this.dropService.getAllDropsFilter());
   } else {
       this.addPreCheckedFilter();
       for (let i = 0; i < this.filterFormArray.length; i++) {

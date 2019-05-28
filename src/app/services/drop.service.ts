@@ -88,6 +88,20 @@ export class DropService {
         return this.dropsCollection.doc<Drop>(id).valueChanges();
     }
 
+    getAllDropsFilter() {
+        let allDrops: AngularFirestoreCollection<Drop>;
+        allDrops = this.db.collection('drops');
+        return allDrops.snapshotChanges().pipe(
+            map(actions => {
+                return actions.map(a => {
+                    const data = a.payload.doc.data();
+                    const id = a.payload.doc.id;
+                    return {id, ...data};
+                });
+            })
+        );
+    }
+
     getDropsByCat(category) {
         let dropsPerCat: AngularFirestoreCollection<Drop>;
         dropsPerCat = this.db.collection('drops', ref =>
