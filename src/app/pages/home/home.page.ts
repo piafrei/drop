@@ -37,8 +37,6 @@ export class HomePage implements OnInit {
 
         // set status bar to white
         this.statusBar.backgroundColorByHexString('#7633FF');
-
-        this.dropService.getLatestDropFromUser();
     }
     ionViewDidEnter() {
         this.mapService.getAndSaveUserData();

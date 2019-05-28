@@ -21,7 +21,7 @@
         {{ drop.description }}
       </div>
       <ion-item class="more-button">
-        <ion-icon name="more" class="edit-icon" (click)="openSelect(drop)"></ion-icon>
+        <ion-icon name="more" class="edit-icon" (click)="openSelect()"></ion-icon>
         <ion-select class="select-field" interface="action-sheet" (ionChange)="showMore(drop, $event)" #showSelect>
           <ion-select-option (click)="disableReport()" [disabled]="disableButton" value="report">Melden</ion-select-option>
         </ion-select>
@@ -42,7 +42,3 @@
     </div>
   </div>
 </ion-content>
-
-<ion-footer>
-  <ion-progress-bar color="primary" value="0.5"></ion-progress-bar>
-</ion-footer>
