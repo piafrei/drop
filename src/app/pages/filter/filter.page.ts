@@ -12,9 +12,10 @@ import {HomePage} from '../home/home.page';
 })
 export class FilterPage implements OnInit {
 
-  filters = [{ name: 'Essen & Trinken' }, { name: 'Kultur' }, { name: 'Unterhaltung & Spaß' }, { name: 'Einkaufen' }, { name: 'Schöner Ort' }, { name: 'Verstecktes Juwel' }, { name: 'Überraschung' }];
+  filters = [{ name: 'Essen & Trinken', checked: false }, { name: 'Kultur' , checked: false}, { name: 'Unterhaltung & Spaß' , checked: false}, { name: 'Einkaufen', checked: false }, { name: 'Schöner Ort', checked: false }, { name: 'Verstecktes Juwel', checked: false }, { name: 'Überraschung', checked: false }];
   filterForm: FormGroup;
   filterFormArray;
+  filteredBoolean = false;
   private matchingDrops: any[];
   private _activeFilterNumber = 0;
 
@@ -26,11 +27,22 @@ export class FilterPage implements OnInit {
 
   ngOnInit() {
     this.filterForm = this.fb.group({
-      activeFilter: this.fb.array([])
-    });
-    console.log('Active Filters' + HomePage.activeFilters);
+          activeFilter: this.fb.array([])
+      });
+
+    this.setActiveFilters();
   }
 
+  setActiveFilters() {
+      for (const activeFilter of HomePage.activeFilters) {
+          for (const filterElement of this.filters) {
+              if (filterElement.name === activeFilter) {
+                  console.log('Filter match found - set value to true');
+                  filterElement.checked = true;
+              }
+          }
+      }
+  }
   saveFilterToFilterFormArray(filter: string, isChecked: boolean) {
     this.filterFormArray = <FormArray>this.filterForm.controls.activeFilter;
     if (isChecked) {
@@ -41,10 +53,18 @@ export class FilterPage implements OnInit {
     }
   }
 
+  testMethod($event) {
+     console.log('NG Model changed' + $event);
+  }
+
+  clearActiveFilters() {
+      HomePage.activeFilters = [];
+  }
+
   submitSelectedFilter() {
   let rawValue;
-  HomePage.activeFilters = [];
 
+  this.clearActiveFilters();
   this.matchingDrops = [];
 
   if (this.filterFormArray === undefined) {
