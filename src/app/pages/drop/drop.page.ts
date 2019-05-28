@@ -22,6 +22,8 @@ export class DropPage implements OnInit {
     disableUpVoteBtn = false;
     disableDownVoteBtn = false;
     allowedtovote = true;
+    userUpvoted = false;
+    userDownvoted = false;
 
     upVoteBtnPick: string;
     downVoteBtnPick: string;
@@ -81,10 +83,14 @@ export class DropPage implements OnInit {
         this.downVoteBtnPick = 'assets/icon/downvoted.svg';
         this.upVoteBtnPick = 'assets/icon/upvote_disabled.svg';
     }
+    setNewDisabledIcon() {
+        this.downVoteBtnPick = 'assets/icon/downvote_disabled.svg';
+        this.upVoteBtnPick = 'assets/icon/upvote_disabled.svg';
+    }
 
     getInfo() {
         let deviceId = this.device.uuid;
-        if (deviceId == null) {
+        if (deviceId === null) {
             deviceId = 'DESKTOP';
         }
         return deviceId;
@@ -122,6 +128,12 @@ export class DropPage implements OnInit {
         for (const uuid of votedBy) {
             if (uuid === currentUuid) {
                 allowedtovoteVar = false;
+                if(this.userUpvoted === true) {
+                    this.setNewUpIcon();
+                }
+                if(this.userDownvoted === true) {
+                    this.setNewDownIcon();
+                }
                 console.log('bereits gevotet');
             }
         }
@@ -130,6 +142,7 @@ export class DropPage implements OnInit {
             this.allowedtovote = false;
             console.log('allowedtoVote is set: ' + this.allowedtovote);
             this.dropIsVoted();
+            this.setNewDisabledIcon();
         } else {
         }
     }
@@ -145,6 +158,7 @@ export class DropPage implements OnInit {
             this.dropService.updateDrop(this.drop, this.dropId);
             this.dropIsVoted();
             this.setNewUpIcon();
+            this.userUpvoted = true;
             this.allowedtovote = false;
         }
     }
@@ -160,6 +174,7 @@ export class DropPage implements OnInit {
             this.dropService.updateDrop(this.drop, this.dropId);
             this.dropIsVoted();
             this.setNewDownIcon();
+            this.userDownvoted = true;
             this.allowedtovote = false;
         }
     }
