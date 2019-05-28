@@ -76,7 +76,19 @@ export class DropService {
     }
 
     getMyDrops() {
-        // console.log(this.myDrops);
+        let myDrops: AngularFirestoreCollection<Drop>;
+        myDrops = this.db.collection('drops', ref =>
+            ref.where('deviceID', '==', this.getInfo()).orderBy('score', 'desc')
+        );
+        return myDrops.snapshotChanges().pipe(
+            map(actions => {
+                return actions.map(a => {
+                    const data = a.payload.doc.data();
+                    const id = a.payload.doc.id;
+                    return {id, ...data};
+                });
+            })
+        );
         return this.myDrops;
     }
 
