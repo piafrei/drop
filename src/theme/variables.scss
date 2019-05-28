@@ -29,6 +29,10 @@ $border-radius: 13px;
 $border-radius-rounded: 99em;
 $button-padding: 10px 30px;
 
+$refresher-icon-color: #472ee8;
+$refresher-icon-font-size: #472ee8;
+$refresher-text-color: #472ee8;
+
 :root {
   /** primary **/
   --ion-color-primary: $primary;
@@ -101,6 +105,7 @@ $button-padding: 10px 30px;
   --ion-color-light-contrast-rgb: 0, 0, 0;
   --ion-color-light-shade: #d7d8da;
   --ion-color-light-tint: #f5f6f9;
+
 }
 
 

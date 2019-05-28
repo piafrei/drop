@@ -28,7 +28,13 @@ export class HomePage implements OnInit {
     @ViewChild('map') public static mapContainer: ElementRef;
 
     myDrops: Drop[];
-
+    doRefresh(event) {
+        console.log('Begin async operation');
+        setTimeout(() => {
+            console.log('Async operation has ended');
+            event.target.complete();
+        }, 2000);
+    }
     ngOnInit() {
         // let status bar overlay webview
         this.statusBar.overlaysWebView(true);
