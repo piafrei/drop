@@ -173,7 +173,7 @@ export class DropPage implements OnInit {
 
     showMore(drop, event) {
         if (event.detail.value === 'report') {
-            const baseUrl = 'https://us-central1-dropdb-55efa.cloudfunctions.net';
+            const baseUrl = 'https://us-central1-newdrop-eaa98.cloudfunctions.net';
             const url = baseUrl.concat('/sendMail?dest=reportdropapp@gmail.com&dropId=', drop.dropID, '&reporterId=', this.getInfo(), '&dropDescription=', drop.description, '&userId=', drop.deviceId);
             console.log('Drop ID ist: ' + drop.dropID + 'Device ID ist: ' + drop.deviceId + 'Info ist: ' + this.getInfo());
             this.outOfRangeAlert();
