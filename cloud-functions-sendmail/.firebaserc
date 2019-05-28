@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "dropdb-55efa"
+    "default": "dropdb-55efa",
+    "drop": "newdrop-eaa98"
   }
 }

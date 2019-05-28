@@ -40,6 +40,11 @@ export class HomePage implements OnInit {
         this.statusBar.backgroundColorByHexString('#7633FF');
     }
     ionViewDidEnter() {
+        /*if (HomePage.map) {
+            HomePage.map.off();
+            HomePage.map.remove();
+        }*/
+        this.mapService.getAndSaveUserData();
         HomePage.map = leaflet.map('map').fitWorld();
         HomePage.map = this.mapService.loadmap(HomePage.map);
     }

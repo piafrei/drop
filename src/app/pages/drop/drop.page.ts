@@ -48,14 +48,7 @@ export class DropPage implements OnInit {
         dropID: 0,
         votedBy: []
     };
-    doRefresh(event) {
-        console.log('Begin async operation');
 
-        setTimeout(() => {
-            console.log('Async operation has ended');
-            event.target.complete();
-        }, 2000);
-    }
 
     @ViewChild('showSelect') selectRef: IonSelect;
 
@@ -82,10 +75,10 @@ export class DropPage implements OnInit {
     }
     setNewUpIcon() {
         this.downVoteBtnPick = 'assets/icon/downvote_disabled.svg';
-        this.upVoteBtnPick = 'assets/icon/upvote.svg';
+        this.upVoteBtnPick = 'assets/icon/upvoted.svg';
     }
     setNewDownIcon() {
-        this.downVoteBtnPick = 'assets/icon/downvote.svg';
+        this.downVoteBtnPick = 'assets/icon/downvoted.svg';
         this.upVoteBtnPick = 'assets/icon/upvote_disabled.svg';
     }
 
@@ -173,7 +166,7 @@ export class DropPage implements OnInit {
 
     showMore(drop, event) {
         if (event.detail.value === 'report') {
-            const baseUrl = 'https://us-central1-dropdb-55efa.cloudfunctions.net';
+            const baseUrl = 'https://us-central1-newdrop-eaa98.cloudfunctions.net';
             const url = baseUrl.concat('/sendMail?dest=reportdropapp@gmail.com&dropId=', drop.dropID, '&reporterId=', this.getInfo(), '&dropDescription=', drop.description, '&userId=', drop.deviceId);
             console.log('Drop ID ist: ' + drop.dropID + 'Device ID ist: ' + drop.deviceId + 'Info ist: ' + this.getInfo());
             this.outOfRangeAlert();
