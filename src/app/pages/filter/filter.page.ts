@@ -55,11 +55,7 @@ export class FilterPage implements OnInit {
     }
   }
 
-  clearActiveFilters() {
-  }
-
   submitSelectedFilter() {
-  this.clearActiveFilters();
   this.matchingDrops = [];
 
   let filterFormArrayLength;
