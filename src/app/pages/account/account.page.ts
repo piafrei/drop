@@ -43,11 +43,11 @@ export class AccountPage implements OnInit {
   }
   doRefresh(event) {
     console.log('Begin async operation');
-
+    location.reload();
     setTimeout(() => {
       console.log('Async operation has ended');
       event.target.complete();
-    }, 2000);
+    }, 2);
   }
   ngOnInit() {
     this.dropService.getDrops().subscribe(res => {
