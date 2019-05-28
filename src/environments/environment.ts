@@ -5,13 +5,13 @@
 export const environment = {
   production: false,
   firebase: {
-    apiKey: 'AIzaSyDyakcD554pDz35Nv4RyFq2_T6_1J7nrQk',
-    authDomain: 'dropdb-55efa.firebaseapp.com',
-    databaseURL: 'https://dropdb-55efa.firebaseio.com',
-    projectId: 'dropdb-55efa',
-    storageBucket: 'dropdb-55efa.appspot.com',
-    messagingSenderId: '363011226158',
-    appId: '1:363011226158:web:50a17e26ed305c62'
+    apiKey: "AIzaSyDkYSUZ2eyUqW2peAKIZs5trrQQrQEc9Tk",
+    authDomain: "newdrop-eaa98.firebaseapp.com",
+    databaseURL: "https://newdrop-eaa98.firebaseio.com",
+    projectId: "newdrop-eaa98",
+    storageBucket: "newdrop-eaa98.appspot.com",
+    messagingSenderId: "608682742352",
+    appId: "1:608682742352:web:55954fd4a104563c"
   }
 };
 

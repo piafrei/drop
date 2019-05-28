@@ -36,7 +36,7 @@ exports.sendMail = functions.https.onRequest((req, res) => {
                     <p><strong>Inhalt</strong></p><p> `+dropDescription+`</p></br>
                     </div>
                     <p>Der drop soll entfernt werden? Du kannst den drop direkt in Firebase löschen:</p></br></br>
-                    <a href="https://console.firebase.google.com/u/0/project/dropdb-55efa/database/firestore/data~2Fdrops"><img src="https://img.icons8.com/color/420/firebase.png" width="50" height="50" title="Link to Firebase" alt="Link to Firebase"></a></br></br>
+                    <a href="https://console.firebase.google.com/project/newdrop-eaa98/overview"><img src="https://img.icons8.com/color/420/firebase.png" width="50" height="50" title="Link to Firebase" alt="Link to Firebase"></a></br></br>
                     <p>Liebe Grüße,</p></br>
                     <p>Dein drop-Team</p></br>
                     </div>
