@@ -8,87 +8,87 @@ import { v4 as uuid } from 'uuid';
 import { UserService } from '../../services/user.service';
 
 @Component({
-  selector: 'app-add-drop',
-  templateUrl: './add-drop.page.html',
-  styleUrls: ['./add-drop.page.scss']
+    selector: 'app-add-drop',
+    templateUrl: './add-drop.page.html',
+    styleUrls: ['./add-drop.page.scss']
 })
 export class AddDropPage implements OnInit {
-  dropId = null;
+    dropId = null;
 
-  constructor(
-    private route: ActivatedRoute,
-    private nav: NavController,
-    private dropService: DropService,
-    private loadingController: LoadingController,
-    private device: Device,
-    private appComponent: AppComponent,
-    private userService: UserService,
-    private alertController: AlertController,
-  ) {}
-  drop: Drop = {
-    createdAt: new Date().getTime(),
-    description: '',
-    category: '',
-    latitude: this.appComponent.latitude,
-    longitude: this.appComponent.longitude,
-    score: 0,
-    deviceID: this.getInfo(),
-    votedBy: [],
-    dropID: uuid()
-  };
+    constructor(
+        private route: ActivatedRoute,
+        private nav: NavController,
+        private dropService: DropService,
+        private loadingController: LoadingController,
+        private device: Device,
+        private appComponent: AppComponent,
+        private userService: UserService,
+        private alertController: AlertController,
+    ) {}
+    drop: Drop = {
+        createdAt: new Date().getTime(),
+        description: '',
+        category: '',
+        latitude: this.appComponent.latitude,
+        longitude: this.appComponent.longitude,
+        score: 0,
+        deviceID: this.getInfo(),
+        votedBy: [],
+        dropID: uuid()
+    };
 
-  ngOnInit() {
-    this.dropId = this.route.snapshot.params['id'];
-    if (this.dropId) {
-      this.loadDrop();
+    ngOnInit() {
+        this.dropId = this.route.snapshot.params['id'];
+        if (this.dropId) {
+            this.loadDrop();
+        }
     }
-  }
 
-  getInfo() {
-    let deviceId = this.device.uuid;
-    if (deviceId == null) {
-      deviceId = 'DESKTOP';
+    getInfo() {
+        let deviceId = this.device.uuid;
+        if (deviceId == null) {
+            deviceId = 'DESKTOP';
+        }
+        return deviceId;
     }
-    return deviceId;
-  }
 
-  async loadDrop() {
-    const loading = await this.loadingController.create({
-      message: 'Lädt...'
-    });
-    await loading.present();
-
-    this.dropService.getDrop(this.dropId).subscribe(res => {
-      loading.dismiss();
-      this.drop = res;
-    });
-  }
-
-  async saveDrop() {
-    if (this.checkDropLocation(this.drop) === true) {
-    const loading = await this.loadingController.create({
-      message: 'Speichern...'
-    });
-    await loading.present();
-
-    if (this.dropId) {
-      if (this.drop.score <= -10) {
-        this.dropService.removeDrop(this.dropId);
-      } else {
-        this.dropService.updateDrop(this.drop, this.dropId).then(() => {
-          loading.dismiss();
-          this.nav.back();
+    async loadDrop() {
+        const loading = await this.loadingController.create({
+            message: 'Lädt...'
         });
-      }
-    } else {
-      this.userService.improveUserScore(20);
-      this.dropService.addDrop(this.drop).then(() => {
-        loading.dismiss();
-        this.nav.back();
-      });
+        await loading.present();
+
+        this.dropService.getDrop(this.dropId).subscribe(res => {
+            loading.dismiss();
+            this.drop = res;
+        });
     }
+
+    async saveDrop() {
+        if (this.checkDropLocation(this.drop) === true) {
+            const loading = await this.loadingController.create({
+                message: 'Speichern...'
+            });
+            await loading.present();
+
+            if (this.dropId) {
+                if (this.drop.score <= -10) {
+                    this.dropService.removeDrop(this.dropId);
+                } else {
+                    this.dropService.updateDrop(this.drop, this.dropId).then(() => {
+                        loading.dismiss();
+                        this.nav.back();
+                    });
+                }
+            } else {
+                this.userService.improveUserScore(20);
+                this.dropService.addDrop(this.drop).then(() => {
+                    loading.dismiss();
+                    this.nav.back();
+                });
+            }
+        }
     }
-  }
 
     checkDropLocation(drop: Drop) {
         console.log('Latitude:' + drop.latitude);
