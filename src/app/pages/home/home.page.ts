@@ -21,7 +21,9 @@ export class HomePage implements OnInit {
         public filter: FilterPage,
         private mapService: MapService,
         private dropService: DropService
-    ) {}
+    ) {
+        this.mapService.getAndSaveUserData();
+    }
 
     public static map: any;
     public static markersArray = [];
@@ -38,7 +40,6 @@ export class HomePage implements OnInit {
         this.statusBar.backgroundColorByHexString('#7633FF');
     }
     ionViewDidEnter() {
-        this.mapService.getAndSaveUserData();
         HomePage.map = leaflet.map('map').fitWorld();
         HomePage.map = this.mapService.loadmap(HomePage.map);
     }

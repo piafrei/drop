@@ -51,6 +51,7 @@ export class MapService {
                 minZoom: 13
             }
         ).addTo(this.map);
+        this.loadMarkers(this.dropService.getDrops());
         this.map.locate({
             setView: true,
             maxZoom: 22,
@@ -70,7 +71,7 @@ export class MapService {
             });
             markerGroup.addLayer(marker);
             this.map.addLayer(markerGroup);
-            this.loadMarkers(this.dropService.getDrops());
+            // this.loadMarkers(this.dropService.getDrops());
         })
         .on('locationerror', err => {
             const longitude = this.appComponent.longitude;
@@ -89,7 +90,7 @@ export class MapService {
                     });
                 markerGroup.addLayer(marker);
                 this.map.addLayer(markerGroup);
-                this.loadMarkers(this.dropService.getDrops());
+                // this.loadMarkers(this.dropService.getDrops());
             } else {
                 console.log(err.message);
                 this.locationErrorAlert();
@@ -110,9 +111,12 @@ export class MapService {
     }
 
     loadMarkers(dropsToShow) {
+        console.log('loadMarkers triggered' + dropsToShow.subscribe());
         dropsToShow.subscribe((drops: any) => {
             const counter = Math.floor(drops.length * 0.2);
+            console.log('drops to show length ' + drops.length);
             drops.forEach((singledrop, index) => {
+                console.log('load markers triggered' + singledrop.dropID);
                 if (this.dropService.isDropVisible(singledrop)) {
                     // const dropGroup = leaflet.featureGroup();
                     if (MapService.visibleDropsUser.indexOf(singledrop.dropID) > -1) {
