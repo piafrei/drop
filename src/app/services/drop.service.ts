@@ -31,6 +31,8 @@ export class DropService {
     private kingDrops: Observable<Drop[]>;
     private _visibleDropsUser;
 
+    dropJustSaved;
+
     private db;
 
     constructor(db: AngularFirestore, private device: Device, private userService: UserService) {
@@ -111,6 +113,13 @@ export class DropService {
         // console.log('Drop Service id to save' + drop.dropID);
         this.userService.saveDropToVisibleDrops(drop.dropID);
         return this.dropsCollection.add(drop);
+    }
+
+    justCreatedDrop() {
+        let newCreatedDrop: AngularFirestoreCollection<Drop>;
+        newCreatedDrop = this.db.collection('drops', ref =>
+            ref.orderBy('creadtedAt', 'desc').limit(1)
+        );
     }
 
     removeDrop(id) {
