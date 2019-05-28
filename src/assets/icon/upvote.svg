@@ -1,14 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="46" height="46" viewBox="0 0 46 46">
-  <defs>
-    <clipPath id="clip-path">
-      <rect width="46" height="46" fill="none"/>
-    </clipPath>
-  </defs>
-  <g id="Symbol_9_1" data-name="Symbol 9 – 1" clip-path="url(#clip-path)">
-    <g id="Gruppe_27" data-name="Gruppe 27" transform="translate(240 -543)">
-      <path id="Pfad_58" data-name="Pfad 58" d="M23,0A23,23,0,1,1,0,23,23,23,0,0,1,23,0Z" transform="translate(-240 543)" fill="#472ee8"/>
-      <rect id="Rechteck_10" data-name="Rechteck 10" width="8.122" height="17.868" rx="3" transform="translate(-221.127 559.132)" fill="#fff"/>
-      <path id="Pfad_43" data-name="Pfad 43" d="M1800.33-92.227l-8.2,9.283a.849.849,0,0,0,.769,1.373h16.4a.849.849,0,0,0,.769-1.373l-8.2-9.283A1.059,1.059,0,0,0,1800.33-92.227Z" transform="translate(-2017.927 646.841)" fill="#fff"/>
-    </g>
-  </g>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="46" height="46" viewBox="0 0 46 46"><defs><clipPath id="a"><rect width="46" height="46" fill="none"/></clipPath></defs><g clip-path="url(#a)"><g transform="translate(240 -543)"><path d="M23,0A23,23,0,1,1,0,23,23,23,0,0,1,23,0Z" transform="translate(-240 543)" fill="#472ee8"/><rect width="8.122" height="17.868" rx="3" transform="translate(-221.127 559.132)" fill="#fff"/><path d="M1800.33-92.227l-8.2,9.283a.849.849,0,0,0-.078.946.849.849,0,0,0,.847.427h16.4a.849.849,0,0,0,.847-.427.849.849,0,0,0-.078-.946l-8.2-9.283a1.058,1.058,0,0,0-.769-.331,1.059,1.059,0,0,0-.769.331Z" transform="translate(-2017.927 646.841)" fill="#fff"/></g></g></svg>

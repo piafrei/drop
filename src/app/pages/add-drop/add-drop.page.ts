@@ -42,14 +42,7 @@ export class AddDropPage implements OnInit {
         votedBy: [],
         dropID: uuid()
     };
-    doRefresh(event) {
-        console.log('Begin async operation');
 
-        setTimeout(() => {
-            console.log('Async operation has ended');
-            event.target.complete();
-        }, 2000);
-    }
     ngOnInit() {
         this.dropId = this.route.snapshot.params['id'];
         if (this.dropId) {

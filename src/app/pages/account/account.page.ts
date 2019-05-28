@@ -41,14 +41,6 @@ export class AccountPage implements OnInit {
       this.user = val.data();
     });
   }
-  doRefresh(event) {
-    console.log('Begin async operation');
-    location.reload();
-    setTimeout(() => {
-      console.log('Async operation has ended');
-      event.target.complete();
-    }, 2);
-  }
   ngOnInit() {
     this.dropService.getDrops().subscribe(res => {
       this.allDrops = res;
@@ -57,7 +49,7 @@ export class AccountPage implements OnInit {
     this.dropService.getMyDrops().subscribe(res => {
       this.myDrops = res;
     });
-    console.log(this.myDrops);
+    console.log('meine Drops sind: ' + this.myDrops);
   }
 
   showMore(item, event) {

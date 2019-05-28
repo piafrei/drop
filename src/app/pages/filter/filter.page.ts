@@ -23,14 +23,7 @@ export class FilterPage implements OnInit {
   getActiveFilterNumber() {
         return this._activeFilterNumber;
   }
-    doRefresh(event) {
-        console.log('Begin async operation');
 
-        setTimeout(() => {
-            console.log('Async operation has ended');
-            event.target.complete();
-        }, 2000);
-    }
   ngOnInit() {
     this.filterForm = this.fb.group({
           activeFilter: this.fb.array([])
