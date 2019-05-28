@@ -19,16 +19,17 @@
   <h2 *ngIf="myDrops">Deine drops</h2>
   <ion-list>
     <ng-container *ngIf="!myDrops || myDrops.length == 0">
-      <p>Ups! Hier ist nichts.</p>
-      <br />
+      <div class="centered-text">
+      <h4>Ups! Hier ist nichts. </h4>
       <ion-text class="textlink" (click)="reloadPage()"
-        ><p>Nochmal versuchen?</p>
+        ><h4>Nochmal versuchen?</h4>
         <br />
         <img
-          src="../../../assets/images/undraw_empty_xct9.svg"
-          class="img-info"
+                src="../../../assets/images/undraw_empty_xct9.svg"
+                class="img-info"
         />
       </ion-text>
+      </div>
     </ng-container>
 
     <div class="account-drop-wrapper" *ngFor="let item of myDrops">
