@@ -1,4 +1,11 @@
 <ion-content>
+  <div class="refresher">
+    <ion-refresher (ionRefresh)="doRefresh($event)" color="#472ee8" slot="fixed" pullFactor="0.5" pullMin="100" pullMax="200">
+      <ion-refresher-content
+              refreshingSpinner="crescent">
+      </ion-refresher-content>
+    </ion-refresher>
+  </div>
   <div class="header">
     <ion-toolbar class="headline" color="transparent">
       <img src="assets/images/drop-logo.svg" alt="Logo Drop" id="drop-logo" />
@@ -6,7 +13,6 @@
       <img src="assets/images/headline-bg.svg" alt="Drop Background" id="header-bg" />
     </ion-toolbar>
   </div>
-
   <div class="home-button" (click)="centerMap()">
     <img src="assets/icon/location-icon.svg" alt="Location Icon"/>
   </div>

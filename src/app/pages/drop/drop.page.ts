@@ -48,6 +48,14 @@ export class DropPage implements OnInit {
         dropID: 0,
         votedBy: []
     };
+    doRefresh(event) {
+        console.log('Begin async operation');
+
+        setTimeout(() => {
+            console.log('Async operation has ended');
+            event.target.complete();
+        }, 2000);
+    }
 
     @ViewChild('showSelect') selectRef: IonSelect;
 

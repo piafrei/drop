@@ -52,6 +52,7 @@ ion-badge {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+  background: $white;
 }
 ::placeholder {
   font-color: #000;
@@ -304,4 +305,19 @@ p {
 }
 .custom-button {
   text-align: center;
+}
+
+.privacy-button {
+  padding: 0px;
+}
+
+.refresher {
+background: $white;
+}
+ion-refresher{
+  disabled: false;
+}
+
+.refresher-pulling-icon, .refresher-refreshing-icon, .refreshingSpinner, .refreshingText, ion-refresher-content{
+  color: #472ee8;
 }

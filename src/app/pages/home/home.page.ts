@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import {FilterPage} from '../filter/filter.page';
 import {MapService} from '../../services/map.service';
+import {DropService} from '../../services/drop.service';
 
 @Component({
   selector: 'app-home',
@@ -18,7 +19,8 @@ export class HomePage implements OnInit {
         private router: Router,
         private statusBar: StatusBar,
         public filter: FilterPage,
-        private mapService: MapService
+        private mapService: MapService,
+        private dropService: DropService
     ) {}
 
     public static map: any;
@@ -28,7 +30,13 @@ export class HomePage implements OnInit {
     @ViewChild('map') public static mapContainer: ElementRef;
 
     myDrops: Drop[];
-
+    doRefresh(event) {
+        console.log('Begin async operation');
+        setTimeout(() => {
+            console.log('Async operation has ended');
+            event.target.complete();
+        }, 2000);
+    }
     ngOnInit() {
         // let status bar overlay webview
         this.statusBar.overlaysWebView(true);

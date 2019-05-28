@@ -40,7 +40,14 @@ export class AddDropPage implements OnInit {
     votedBy: [],
     dropID: uuid()
   };
+  doRefresh(event) {
+    console.log('Begin async operation');
 
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      event.target.complete();
+    }, 2000);
+  }
   ngOnInit() {
     this.dropId = this.route.snapshot.params['id'];
     if (this.dropId) {
@@ -98,33 +105,33 @@ export class AddDropPage implements OnInit {
     }
   }
 
-  checkDropContent(drop: Drop) {
-    let dropContent = drop.description;
-    let hasContent = false;
-    console.log('content length: ' + dropContent.length);
-    if (dropContent !== '') {
-      hasContent = true;
-      if (dropContent.length > 10) {
-        return true;
-      } else {
-        this.dropWithoutRequiredLength();
-        return false;
-      }
-    } else {
-      this.dropWithoutContentAlert();
-      return false;
+    checkDropContent(drop: Drop) {
+        const dropContent = drop.description;
+        let hasContent = false;
+        console.log('content length: ' + dropContent.length);
+        if (dropContent !== '') {
+            hasContent = true;
+            if (dropContent.length > 10) {
+                return true;
+            } else {
+                this.dropWithoutRequiredLength();
+                return false;
+            }
+        } else {
+            this.dropWithoutContentAlert();
+            return false;
+        }
     }
-  }
 
-  checkDropCategory(drop: Drop) {
-    let dropCat = drop.category;
-    if (dropCat !== '') {
-      return true;
-    } else {
-      this.dropWithoutCategoryAlert();
-      return false;
+    checkDropCategory(drop: Drop) {
+        const dropCat = drop.category;
+        if (dropCat !== '') {
+            return true;
+        } else {
+            this.dropWithoutCategoryAlert();
+            return false;
+        }
     }
-  }
 
   checkDropLocation(drop: Drop) {
     console.log('Latitude:' + drop.latitude);
@@ -155,16 +162,6 @@ export class AddDropPage implements OnInit {
   async dropWithoutContentAlert() {
     const alert = await this.alertController.create({
       header: 'Dein Drop ist leer.',
-      message: 'Schreibe eine Nachricht mit mehr als 10 Zeichen um zu droppen.',
-      buttons: ['OK']
-    });
-
-    await alert.present();
-  }
-
-  async dropWithoutRequiredLength() {
-    const alert = await this.alertController.create({
-      header: 'Dein Drop hat weniger als 10 Zeichen.',
       message: 'Schreibe eine Nachricht mit mehr als 10 Zeichen um zu droppen.',
       buttons: ['OK']
     });

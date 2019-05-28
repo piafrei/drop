@@ -23,7 +23,6 @@ export class AppComponent {
   ) {
     this.initializeApp();
   }
-
   initializeApp() {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
@@ -41,7 +40,6 @@ export class AppComponent {
     addUser() {
       this.userService.addUser();
     }
-
     get longitude(): number {
         return AppComponent._longitude;
     }

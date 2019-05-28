@@ -41,7 +41,14 @@ export class AccountPage implements OnInit {
       this.user = val.data();
     });
   }
-
+  doRefresh(event) {
+    console.log('Begin async operation');
+    location.reload();
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      event.target.complete();
+    }, 2);
+  }
   ngOnInit() {
     this.dropService.getDrops().subscribe(res => {
       this.allDrops = res;
