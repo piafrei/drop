@@ -4,6 +4,7 @@ import {FormArray, FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {MapService} from '../../services/map.service';
 import {NavController} from '@ionic/angular';
 import {HomePage} from '../home/home.page';
+import {el} from '@angular/platform-browser/testing/src/browser_util';
 
 @Component({
   selector: 'app-filter',
@@ -57,13 +58,17 @@ export class FilterPage implements OnInit {
 
   submitSelectedFilter() {
   this.matchingDrops = [];
-
   let filterFormArrayLength;
 
   if (this.filterFormArray === undefined) {
       filterFormArrayLength = undefined;
   } else {
-      filterFormArrayLength = this.filterFormArray.getRawValue().length;
+      const ffL = this.filterFormArray.getRawValue().length;
+      if (ffL === 0) {
+        filterFormArrayLength = HomePage.activeFilters.length;
+       } else {
+      filterFormArrayLength = ffL;
+      }
   }
 
   if (filterFormArrayLength === undefined || filterFormArrayLength === 0 ) {
