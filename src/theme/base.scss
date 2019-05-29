@@ -250,24 +250,27 @@ ion-badge {
   margin: 0px 0px -20px 0px;
 }
 
-.img-info {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 60%;
-  margin-top: 40px;
-  margin-bottom: 40px;
+.img-wrapper {
+  display: flex;
+  align-items: center;
+  margin-bottom: 30px;
+  width: 100%;
+  flex-direction: column;
+  .img-info {
+    max-width: 75%;
+    height: auto;
+  }
 }
 
-.info-list {
-  height: calc(100% - 110px - 70px);
+
+.settinglist {
   display: flex;
-  justify-content: flex-end;
+  flex-flow: row wrap;
+  justify-content: space-around;
   flex-direction: column;
+  height: 100%;
 }
-.info-item {
-  padding-bottom: 20px;
-}
+
 .icon-about {
   color: #472ee8;
 }
