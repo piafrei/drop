@@ -12,11 +12,14 @@
 </ion-header>
 
 <ion-content padding class="maincontent">
-
-  <img src="../../../assets/icon/img-info-screen.png" class="img-info">
-  <ion-list class="info-list">
-    <ion-item class="info-item" detail="false" routerDirection="forward" routerLink="about" lines="none">Über drop.</ion-item>
-    <ion-item class="info-item" detail="false" routerDirection="forward" routerLink="impressum" lines="none">Impressum</ion-item>
-    <ion-item class="info-item" detail="false" routerDirection="forward" routerLink="privacy" lines="none">Datenschutz</ion-item>
-  </ion-list>
+  <div class="settinglist">
+    <div class="img-wrapper">
+      <img src="../../../assets/icon/img-info-screen.png" class="img-info" alt="Settings image">
+    </div>
+    <ion-list class="info-list">
+      <ion-item class="info-item" detail="false" routerDirection="forward" routerLink="about" lines="none">Über drop.</ion-item>
+      <ion-item class="info-item" detail="false" routerDirection="forward" routerLink="impressum" lines="none">Impressum</ion-item>
+      <ion-item class="info-item" detail="false" routerDirection="forward" routerLink="privacy" lines="none">Datenschutz</ion-item>
+    </ion-list>
+  </div>
 </ion-content>
