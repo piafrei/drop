@@ -157,7 +157,7 @@ export class AddDropPage implements OnInit {
     async dropWithoutContentAlert() {
         const alert = await this.alertController.create({
             header: 'Dein Drop ist leer.',
-            message: 'Schreibe eine Nachricht mit mehr als 10 Zeichen um zu droppen.',
+            message: 'Schreibe eine Nachricht mit mehr als 10 Zeichen um zu dropen.',
             buttons: ['OK']
         });
 
@@ -177,7 +177,7 @@ export class AddDropPage implements OnInit {
     async dropWithoutRequiredLength() {
         const alert = await this.alertController.create({
             header: 'Dein Drop hat weniger als 10 Zeichen.',
-            message: 'Schreibe eine Nachricht mit mehr als 10 Zeichen um zu droppen.',
+            message: 'Schreibe eine Nachricht mit mehr als 10 Zeichen um zu dropen.',
             buttons: ['OK']
         });
         await alert.present();
