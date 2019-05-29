@@ -51,7 +51,7 @@ export class MapService {
                 minZoom: 13
             }
         ).addTo(this.map);
-        this.loadMarkers(this.dropService.getAllDropsFilter());
+        // this.loadMarkers(this.dropService.getAllDropsFilter());
         this.map.locate({
             setView: true,
             maxZoom: 22,
@@ -71,7 +71,7 @@ export class MapService {
             });
             markerGroup.addLayer(marker);
             this.map.addLayer(markerGroup);
-            // this.loadMarkers(this.dropService.getDrops());
+            this.loadMarkers(this.dropService.getDrops());
         })
         .on('locationerror', err => {
             const longitude = this.appComponent.longitude;
@@ -90,7 +90,7 @@ export class MapService {
                     });
                 markerGroup.addLayer(marker);
                 this.map.addLayer(markerGroup);
-                // this.loadMarkers(this.dropService.getDrops());
+                this.loadMarkers(this.dropService.getDrops());
             } else {
                 console.log(err.message);
                 this.locationErrorAlert();
